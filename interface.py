@@ -87,8 +87,110 @@ class FlavorTextApp(QWidget):
         self.current_index = (self.current_index + 1) % len(self.texts)
         self.text_label.setText(self.texts[self.current_index])
 
+from PySide6.QtCore import QPropertyAnimation, QPoint, QSize, QTimer, Qt
+
+
+class MovingWidget(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Smooth Move Example")
+        self.setFixedSize(400, 200)
+
+        layout = QVBoxLayout(self)
+
+        self.button = QPushButton("Move left")
+        self.button.clicked.connect(self.move_left)
+
+        layout.addWidget(self.button)
+
+        # Keep a reference to the animation
+        self.animation = QPropertyAnimation(self, b"pos")
+        self.animation.setDuration(600)  # milliseconds
+
+    def move_left(self):
+        start_pos = self.pos()
+        end_pos = QPoint(start_pos.x() - 100, start_pos.y())
+
+        self.animation.stop()
+        self.animation.setStartValue(start_pos)
+        self.animation.setEndValue(end_pos)
+        self.animation.start()
+
+class ResizingWidget(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Smooth Resize Example")
+        self.resize(300, 200)  # ← allow resizing
+
+        layout = QVBoxLayout(self)
+
+        self.button = QPushButton("Grow")
+        self.button.clicked.connect(self.resize_widget)
+        layout.addWidget(self.button)
+
+        self.animation = QPropertyAnimation(self, b"size")
+        self.animation.setDuration(600)
+
+        self.expanded = False
+
+    def resize_widget(self):
+        start_size = self.size()
+
+        if not self.expanded:
+            end_size = QSize(2560, 1)
+            self.button.setText("Shrink")
+        else:
+            end_size = QSize(300, 200)
+            self.button.setText("Grow")
+
+        self.expanded = not self.expanded
+
+        self.animation.stop()
+        self.animation.setStartValue(start_size)
+        self.animation.setEndValue(end_size)
+        self.animation.start()
+
+class DvdBounce(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("DVD Bounce")
+        self.resize(200, 100)
+
+        layout = QVBoxLayout(self)
+        label = QLabel("DVD")
+        label.setAlignment(Qt.AlignCenter)
+        label.setStyleSheet("font-size: 32px; font-weight: bold;")
+        layout.addWidget(label)
+
+        # Movement vector (pixels per tick)
+        self.velocity = QPoint(3, 3)
+
+        # Timer for animation
+        self.timer = QTimer(self)
+        self.timer.timeout.connect(self.update_position)
+        self.timer.start(16)  # ~60 FPS
+
+    def update_position(self):
+        screen = QApplication.primaryScreen().availableGeometry()
+        pos = self.pos()
+        size = self.size()
+
+        next_x = pos.x() + self.velocity.x()
+        next_y = pos.y() + self.velocity.y()
+
+        # Bounce horizontally
+        if next_x <= screen.left() or next_x + size.width() >= screen.right():
+            self.velocity.setX(-self.velocity.x())
+
+        # Bounce vertically
+        if next_y <= screen.top() or next_y + size.height() >= screen.bottom():
+            self.velocity.setY(-self.velocity.y())
+
+        self.move(pos + self.velocity)
+
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    window = FlavorTextApp()
+    window = DvdBounce()
     window.show()
     sys.exit(app.exec())
