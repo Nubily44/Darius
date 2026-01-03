@@ -1,7 +1,7 @@
 import sys
-from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QLabel, QStackedWidget
-from PySide6.QtCore import Qt, QPropertyAnimation, QPoint, QSize, QTimer
+from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QLabel, QStackedWidget, QHBoxLayout, QGridLayout
 
+from PySide6.QtCore import Qt, QPropertyAnimation, QPoint, QSize, QTimer
 class CounterApp(QWidget):
     def __init__(self):
         super().__init__()
@@ -86,7 +86,6 @@ class FlavorTextApp(QWidget):
     def change_text(self):
         self.current_index = (self.current_index + 1) % len(self.texts)
         self.text_label.setText(self.texts[self.current_index])
-
 
 class MovingWidget(QWidget):
     def __init__(self):
@@ -228,8 +227,63 @@ class MainWindow(QWidget):
         main_layout = QVBoxLayout(self)
         main_layout.addWidget(self.stack)
 
+class LayoutExample(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("VBox + HBox Example")
+        self.resize(400, 250)
+
+        # Main vertical layout
+        main_layout = QVBoxLayout(self)
+
+        # ----- Top horizontal bar -----
+        top_bar = QHBoxLayout()
+
+        btn1 = QPushButton("File")
+        btn2 = QPushButton("Edit")
+        btn3 = QPushButton("Help")
+
+        top_bar.addWidget(btn1)
+        top_bar.addWidget(btn2)
+        top_bar.addWidget(btn3)
+        top_bar.addStretch()  # pushes buttons to the left
+
+        # ----- Main vertical content -----
+        content = QLabel("Main content area")
+        content.setAlignment(Qt.AlignCenter)
+        content.setStyleSheet("border: 1px dashed gray;")
+
+        # Assemble layouts
+        main_layout.addLayout(top_bar)
+        main_layout.addWidget(content, stretch=4)
+
+class test(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Test Window")
+        self.setFixedSize(1200, 800)
+        
+        self.layout = QVBoxLayout(self)
+        top_bar = QHBoxLayout()
+        
+        btn_1 = QPushButton("BOTÃO 1 :D")
+        btn_2 = QPushButton("BOTÃO 2 :D")
+        
+        top_bar.addWidget(btn_1)
+        top_bar.addWidget(btn_2)
+        
+        self.layout.addLayout(top_bar)
+        
+        quadrado = QGridLayout()
+        for i in range(3):
+            for j in range(3):
+                btn = QPushButton(f"Botão {i},{j} :D")
+                quadrado.addWidget(btn, i, j)
+                
+        self.layout.addLayout(quadrado)
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    window = MainWindow()
+    window = test()
     window.show()
     sys.exit(app.exec())
