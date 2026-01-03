@@ -1,6 +1,6 @@
 import sys
-from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QLabel
-from PySide6.QtCore import Qt
+from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QLabel, QStackedWidget
+from PySide6.QtCore import Qt, QPropertyAnimation, QPoint, QSize, QTimer
 
 class CounterApp(QWidget):
     def __init__(self):
@@ -86,8 +86,6 @@ class FlavorTextApp(QWidget):
     def change_text(self):
         self.current_index = (self.current_index + 1) % len(self.texts)
         self.text_label.setText(self.texts[self.current_index])
-
-from PySide6.QtCore import QPropertyAnimation, QPoint, QSize, QTimer, Qt
 
 
 class MovingWidget(QWidget):
@@ -188,9 +186,50 @@ class DvdBounce(QWidget):
 
         self.move(pos + self.velocity)
 
+class MainWindow(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Multiple Interfaces")
+        self.resize(400, 250)
+
+        self.stack = QStackedWidget(self)
+
+        # --- Screen 1 ---
+        screen1 = QWidget()
+        layout1 = QVBoxLayout(screen1)
+
+        label1 = QLabel("This is the first screen")
+        label1.setAlignment(Qt.AlignCenter)
+
+        to_screen2 = QPushButton("Go to second screen")
+        to_screen2.clicked.connect(lambda: self.stack.setCurrentIndex(1))
+
+        layout1.addWidget(label1)
+        layout1.addWidget(to_screen2)
+
+        # --- Screen 2 ---
+        screen2 = QWidget()
+        layout2 = QVBoxLayout(screen2)
+
+        label2 = QLabel("Second screen ♡")
+        label2.setAlignment(Qt.AlignCenter)
+
+        back_button = QPushButton("Back")
+        back_button.clicked.connect(lambda: self.stack.setCurrentIndex(0))
+
+        layout2.addWidget(label2)
+        layout2.addWidget(back_button)
+
+        # Add screens to stack
+        self.stack.addWidget(screen1)
+        self.stack.addWidget(screen2)
+
+        # Main layout
+        main_layout = QVBoxLayout(self)
+        main_layout.addWidget(self.stack)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    window = DvdBounce()
+    window = MainWindow()
     window.show()
     sys.exit(app.exec())
