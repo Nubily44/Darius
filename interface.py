@@ -1,5 +1,5 @@
 import sys
-from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QLabel, QStackedWidget, QHBoxLayout, QGridLayout
+from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QLabel, QStackedWidget, QHBoxLayout, QGridLayout, QSlider
 
 from PySide6.QtCore import Qt, QPropertyAnimation, QPoint, QSize, QTimer
 class CounterApp(QWidget):
@@ -282,8 +282,32 @@ class test(QWidget):
                 
         self.layout.addLayout(quadrado)
 
+class ScaleExample(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Scale Example")
+        self.resize(300, 200)
+
+        layout = QVBoxLayout(self)
+
+        self.label = QLabel("Value: 50")
+        self.label.setAlignment(Qt.AlignCenter)
+
+        self.slider = QSlider(Qt.Horizontal)
+        self.slider.setMinimum(0)
+        self.slider.setMaximum(100)
+        self.slider.setValue(50)
+
+        self.slider.valueChanged.connect(self.update_label)
+
+        layout.addWidget(self.label)
+        layout.addWidget(self.slider)
+
+    def update_label(self, value):
+        self.label.setText(f"Value: {value}")
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    window = test()
+    window = ScaleExample()
     window.show()
     sys.exit(app.exec())
