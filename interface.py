@@ -306,8 +306,56 @@ class ScaleExample(QWidget):
     def update_label(self, value):
         self.label.setText(f"Value: {value}")
 
+class ScaledButtonWindow(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("UI Scale Example")
+        self.resize(300, 200)
+
+        layout = QVBoxLayout(self)
+
+        # Label
+        self.scale_label = QLabel("UI Scale: 100%")
+        self.scale_label.setAlignment(Qt.AlignCenter)
+
+        # Button
+        self.button = QPushButton("Scaled Button")
+
+        # Slider (50% → 200%)
+        self.slider = QSlider(Qt.Horizontal)
+        self.slider.setRange(50, 200)
+        self.slider.setValue(100)
+        self.slider.valueChanged.connect(self.apply_scale)
+
+        layout.addWidget(self.scale_label)
+        layout.addWidget(self.button)
+        layout.addWidget(self.slider)
+
+        # Base sizes (design size)
+        self.base_width = 140
+        self.base_height = 40
+        self.base_font_size = 10
+
+        self.apply_scale(100)
+
+    def apply_scale(self, value):
+        scale = value / 100.0
+
+        self.scale_label.setText(f"UI Scale: {value}%")
+
+        # Scale button size
+        self.button.setMinimumSize(
+            int(self.base_width * scale),
+            int(self.base_height * scale)
+        )
+
+        # Scale font
+        font = self.button.font()
+        font.setPointSizeF(self.base_font_size * scale)
+        self.button.setFont(font)
+        
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    window = ScaleExample()
+    window = ScaledButtonWindow()
     window.show()
     sys.exit(app.exec())
