@@ -15,8 +15,14 @@ class ImageButtonExample(QWidget):
         button = QPushButton()
         button.setText("")
         button.setIcon(QIcon("Kojima.png"))  # path to your PNG
-        button.setIconSize(QSize(600, 600))  # size of the image
-        button.setFixedSize(800, 800)        # size of the button
+        button.setIconSize(QSize(300, 300))  # size of the image
+        button.setFixedSize(400, 400)        # size of the button
+
+        button.setStyleSheet("""
+            QPushButton {
+                padding: 8px;
+            }
+        """)
 
         layout.addWidget(button)
 
