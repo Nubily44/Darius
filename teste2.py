@@ -18,6 +18,9 @@ class ImageButtonExample(QWidget):
         button.setIconSize(QSize(300, 300))  # size of the image
         button.setFixedSize(400, 400)        # size of the button
 
+
+        # Alinhamento central
+        
         button.setStyleSheet("""
             QPushButton {
                 padding: 8px;
