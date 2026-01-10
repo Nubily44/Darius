@@ -1,7 +1,7 @@
 import sys
-from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout
+from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QLabel
 from PySide6.QtGui import QIcon, QFont, QColor
-from PySide6.QtCore import QSize
+from PySide6.QtCore import QSize, Signal
 
 class StyledButton(QPushButton):
     def __init__(self, width, height, text, color, image_path=None):
@@ -33,14 +33,25 @@ class StyledButton(QPushButton):
             self.setIconSize(QSize(height - 20, height - 20))
         
 class Window(QWidget):
+    
+    increment_clicked = Signal()
+    
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Darius 0.1")
         self.resize(1000, 800)
         self.layout = QVBoxLayout(self)
+        self.label = QLabel("Value: 0")
         
-        btn1 = StyledButton(200, 60, "Start Game", "#4CAF50", "../contents/Kojima.png")
-        self.layout.addWidget(btn1)
+        
+        self.btn1 = StyledButton(200, 60, "Increment", "#cc5632", "../contents/Kojima.png")
+        self.layout.addWidget(self.btn1)
+        self.layout.addWidget(self.label)
+        
+        self.btn1.clicked.connect(self.increment_clicked)
+        
+    def setValue(self, value):
+        self.label.setText(f"Value: {value}")
         
         
 if __name__ == "__main__":
