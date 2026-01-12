@@ -1,6 +1,6 @@
 import random
 
-def dice(n: int, advantage: int) -> int:
+def dice(n: int, advantage: int = 1) -> int:
     if n < 1:
         raise ValueError("n must be >= 1")
     
@@ -8,8 +8,8 @@ def dice(n: int, advantage: int) -> int:
     
     for _ in range(advantage):
         dices.append(random.randint(1, n))
-        print(f"Rolled a d{n}: {dices[-1]}")
-    return max(dices)
+        print(f"d{n}: {dices[-1]}")
+    return min(dices)
 
 if __name__ == "__main__":
     
