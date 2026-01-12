@@ -2,7 +2,7 @@ import sys
 
 from PySide6.QtWidgets import QApplication
 
-from objects import Personagem
+from objects.objects import Personagem
 from interface import Window
 
 def handle_vida(personagem, vida):

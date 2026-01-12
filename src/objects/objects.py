@@ -1,8 +1,18 @@
+import sys
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent
+sys.path.insert(0, str(BASE_DIR.parent))
+
 from functions import dice
 
 class Personagem():
-    def __init__(self, vida, sanidade):
-        self.vida = vida
+    def __init__(self, vida, sanidade, nivel):
+        self.BlocoVida = BlocoAtributo("Vida", vida)
+        self.BlocoSanidade = BlocoAtributo("Sanidade", sanidade)
+        self.BlocoEsforco = BlocoAtributo("Esforço", nivel)
+        
+        self.BlocoCorpo_Fisico = BlocoPericia("Corpo Físico", Pericia("Força", 50), Pericia("Destreza", 50), Pericia("Constituição", 50))
         
     def getVida(self):
         return self.vida
@@ -10,7 +20,6 @@ class Personagem():
     def setVida(self, vida): 
         print(dice(6))
         self.vida = vida
-        
 
 class BlocoPericia():
     def __init__(self, nome, p1, p2, p3):
@@ -18,8 +27,22 @@ class BlocoPericia():
         self.p1 = p1
         self.p2 = p2
         self.p3 = p3
+
+#Sempre criar com quantidade máxima
+class BlocoAtributo():
+    def __init__(self, nome,a1):
+        self.nome = nome
+        self.a1 = a1
+        self.am1 = a1
         
+    def getAtributo(self):
+        return self.a1
+    
+    def setAtributo(self, a1):
+        self.a1 = a1
         
+
+                
 class Pericia():
     def __init__(self, nome, valor):
         self.nome = nome
