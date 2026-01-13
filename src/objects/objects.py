@@ -7,20 +7,42 @@ sys.path.insert(0, str(BASE_DIR.parent))
 from functions import dice
 
 class Personagem():
-    def __init__(self, vida, sanidade, nivel):
+    def __init__(self, vida, sanidade, nivel, classe):
         self.BlocoVida = BlocoAtributo("Vida", vida)
         self.BlocoSanidade = BlocoAtributo("Sanidade", sanidade)
         self.BlocoEsforco = BlocoAtributo("Esforço", nivel)
+        self.Classe = classe
         
-        self.BlocoCorpo_Fisico = BlocoPericia("Corpo Físico", Pericia("Força", 50), Pericia("Destreza", 50), Pericia("Constituição", 50))
+        self.pericias = [] # Array de BlocoPericia
         
+    def addPericia(self, BlocoPericia):
+        self.pericias.append(BlocoPericia)    
+                    
     def getVida(self):
-        return self.vida
+        return self.BlocoVida.getAtributo()
     
     def setVida(self, vida): 
         print(dice(6))
-        self.vida = vida
-
+        self.BlocoVida.setAtributo(vida)
+        
+    def getSanidade(self):
+        return self.BlocoSanidade.getAtributo()
+    
+    def setSanidade(self, sanidade):
+        self.BlocoSanidade.setAtributo(sanidade)
+        
+    def refreshEsforco(self):
+        self.BlocoEsforco.setAtributo(self.BlocoEsforco.am1)
+        
+    def useEsforco(self):
+        current = self.BlocoEsforco.getAtributo()
+        if current > 0:
+            self.BlocoEsforco.setAtributo(current - 1)
+            return True
+        else:
+            return False
+    
+    
 class BlocoPericia():
     def __init__(self, nome, p1, p2, p3):
         self.nome = nome
