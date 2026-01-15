@@ -17,8 +17,9 @@ class Pipe():
         
 
     def execute(self, input_data):
-        self.func1(self.unpacker(input_data))
-        self.func2(self.unpacker(input_data))
+        values = self.unpacker(input_data)
+        self.func1(*values)
+        self.func2(*values)
     
     
 if __name__ == "__main__":
@@ -29,5 +30,5 @@ if __name__ == "__main__":
         print(f"Function 2: {a * 2}, {b * 2}")
 
     pipe = Pipe(f1, f2, 2)
-    --pipe.execute((3, 5))
+    pipe.execute((3, 5))
     pipe.execute(([7, 9]))
