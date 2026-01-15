@@ -11,6 +11,7 @@ def dice(n: int, advantage: int = 1) -> int:
         print(f"d{n}: {dices[-1]}")
     return min(dices)
 
+
 if __name__ == "__main__":
     
     # Example usage
