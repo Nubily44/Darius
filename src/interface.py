@@ -1,5 +1,5 @@
 import sys
-from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QLabel
+from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QLabel, QLineEdit
 from PySide6.QtGui import QIcon, QFont, QColor
 from PySide6.QtCore import QSize, Signal
 
@@ -34,7 +34,7 @@ class StyledButton(QPushButton):
         
 class Window(QWidget):
     
-    increment_clicked = Signal()
+    set_vida = Signal()
     
     def __init__(self):
         super().__init__()
@@ -44,14 +44,24 @@ class Window(QWidget):
         self.label = QLabel("Value: 0")
         
         
-        self.btn1 = StyledButton(200, 60, "Increment", "#cc5632", "../contents/Kojima.png")
+        self.btn1 = StyledButton(200, 60, "Increment", "#cc5632", "../../contents/Kojima.png")
         self.layout.addWidget(self.btn1)
         self.layout.addWidget(self.label)
         
-        self.btn1.clicked.connect(self.increment_clicked)
+        self.input1 = QLineEdit()
+        self.input1.setPlaceholderText("Enter something...")
+        self.input1.setFixedWidth(200)
+        self.layout.addWidget(self.input1)
+        
+        self.input1.returnPressed.connect(self.set_vida)
+        
+        self.btn1.clicked.connect(self.set_vida)
         
     def setValue(self, value):
         self.label.setText(f"Value: {value}")
+        text = self.input1.text()
+        self.input1.clear()
+        return text
         
         
 if __name__ == "__main__":
