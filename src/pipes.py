@@ -5,6 +5,10 @@ class Pipe():
         self.par_count = par_count
 
     def unpacker(self, args):
+        if type(args) is not tuple:
+            args = (args,)        
+            return args
+        
         if len(args) == self.par_count:
             return args
 
@@ -18,7 +22,8 @@ class Pipe():
 
     def execute(self, input_data):
         values = self.unpacker(input_data)
-        self.func1(*values)
+        input = self.func1(*values)
+        values = values + (input,)
         self.func2(*values)
     
     

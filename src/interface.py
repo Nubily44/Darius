@@ -42,11 +42,11 @@ class Window(QWidget):
         self.resize(1000, 800)
         self.layout = QVBoxLayout(self)
         self.label = QLabel("Value: 0")
-        
-        
-        self.btn1 = StyledButton(200, 60, "Increment", "#cc5632", "../../contents/Kojima.png")
-        self.layout.addWidget(self.btn1)
         self.layout.addWidget(self.label)
+        
+        
+        #self.btn1 = StyledButton(200, 60, "Increment", "#cc5632", "../../contents/Kojima.png")
+        #self.layout.addWidget(self.btn1)
         
         self.input1 = QLineEdit()
         self.input1.setPlaceholderText("Enter something...")
@@ -55,7 +55,7 @@ class Window(QWidget):
         
         self.input1.returnPressed.connect(self.set_vida)
         
-        self.btn1.clicked.connect(self.set_vida)
+        #self.btn1.clicked.connect(self.set_vida)
         
     def setValue(self, value):
         self.label.setText(f"Value: {value}")
