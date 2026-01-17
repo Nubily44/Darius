@@ -21,10 +21,11 @@ class Pipe():
         
 
     def execute(self, input_data):
-        values = self.unpacker(input_data)
-        input = self.func1(*values)
-        values = values + (input,)
-        self.func2(*values)
+        values_start = self.unpacker(input_data)
+        input = self.func1(*values_start)
+        values_to_exit = values_start + (input,)
+        self.func2(*values_to_exit)
+        self.func1(*values_start)
     
     
 if __name__ == "__main__":
