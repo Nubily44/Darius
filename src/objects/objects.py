@@ -22,7 +22,7 @@ class Personagem():
         return self.BlocoVida.getAtributo()
     
     def setVida(self, vida): 
-        print(dice(6))
+        print("Set Vida:", vida)
         self.BlocoVida.setAtributo(vida)
         
     def getSanidade(self):

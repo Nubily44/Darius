@@ -6,10 +6,6 @@ from objects.objects import Personagem
 from interface import Window
 from pipes import Pipe
 
-def handle_vida(personagem, vida):
-    personagem.setVida(vida)
-    window.setValue(personagem.getVida())
-
 def handle_vida2(personagem, vida):
     Pipe(
         lambda p, v: p.setVida(v),
