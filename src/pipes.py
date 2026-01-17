@@ -21,11 +21,11 @@ class Pipe():
         
 
     def execute(self, input_data):
-        values_start = self.unpacker(input_data)
-        input = self.func1(*values_start)
-        values_to_exit = values_start + (input,)
-        self.func2(*values_to_exit)
-        self.func1(*values_start)
+        values_start = self.unpacker(input_data) # Unpacker
+        input = self.func1(*values_start)        # Input from interface
+        values_to_exit = values_start + (input,) # Values to exit
+        self.func2(*values_to_exit)              # Exit to objects
+        self.func1(*values_start)                # Update interface
     
     
 if __name__ == "__main__":
