@@ -35,33 +35,45 @@ class StyledButton(QPushButton):
 class Window(QWidget):
     
     set_vida = Signal()
+    set_sanidade = Signal()
     
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Darius 0.1")
-        self.resize(1000, 800)
+        self.resize(400, 200)
+        
         self.layout = QVBoxLayout(self)
-        self.label = QLabel("Value: 0")
-        self.layout.addWidget(self.label)
         
         
-        #self.btn1 = StyledButton(200, 60, "Increment", "#cc5632", "../../contents/Kojima.png")
-        #self.layout.addWidget(self.btn1)
+        self.label1 = QLabel("Vida: 0")
+        self.layout.addWidget(self.label1)
         
         self.input1 = QLineEdit()
-        self.input1.setPlaceholderText("Enter something...")
+        self.input1.setPlaceholderText("...")
         self.input1.setFixedWidth(200)
         self.layout.addWidget(self.input1)
         
-        self.input1.returnPressed.connect(self.set_vida)
+        self.label2 = QLabel("Sanidade: 0")
+        self.layout.addWidget(self.label2)
         
+        self.input2 = QLineEdit()
+        self.input2.setPlaceholderText("...")
+        self.input2.setFixedWidth(200)
+        self.layout.addWidget(self.input2)
+        
+        self.input1.returnPressed.connect(self.set_vida)
+        self.input2.returnPressed.connect(self.set_sanidade)
+        
+        #self.btn1 = StyledButton(200, 60, "Increment", "#cc5632", "../../contents/Kojima.png")
+        #self.layout.addWidget(self.btn1)
         #self.btn1.clicked.connect(self.set_vida)
         
-    def setValue(self, value):
-        self.label.setText(f"Value: {value}")
-        text = self.input1.text()
-        self.input1.clear()
+    def setValue(self, label: QLabel, input_field: QLineEdit, value):
+        label.setText(f"{label.text().split(':')[0]}: {value}")
+        text = input_field.text()
+        input_field.clear()
         return text
+
         
         
 if __name__ == "__main__":
