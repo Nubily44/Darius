@@ -45,24 +45,24 @@ class Window(QWidget):
         self.layout = QVBoxLayout(self)
         
         
-        self.label1 = QLabel("Vida: 0")
-        self.layout.addWidget(self.label1)
+        self.label_vida = QLabel("Vida: 0")
+        self.layout.addWidget(self.label_vida)
         
-        self.input1 = QLineEdit()
-        self.input1.setPlaceholderText("...")
-        self.input1.setFixedWidth(200)
-        self.layout.addWidget(self.input1)
+        self.input_vida = QLineEdit()
+        self.input_vida.setPlaceholderText("...")
+        self.input_vida.setFixedWidth(200)
+        self.layout.addWidget(self.input_vida)
         
-        self.label2 = QLabel("Sanidade: 0")
-        self.layout.addWidget(self.label2)
+        self.label_sanidade = QLabel("Sanidade: 0")
+        self.layout.addWidget(self.label_sanidade)
         
-        self.input2 = QLineEdit()
-        self.input2.setPlaceholderText("...")
-        self.input2.setFixedWidth(200)
-        self.layout.addWidget(self.input2)
+        self.input_sanidade = QLineEdit()
+        self.input_sanidade.setPlaceholderText("...")
+        self.input_sanidade.setFixedWidth(200)
+        self.layout.addWidget(self.input_sanidade)
         
-        self.input1.returnPressed.connect(self.set_vida)
-        self.input2.returnPressed.connect(self.set_sanidade)
+        self.input_vida.returnPressed.connect(self.set_vida)
+        self.input_sanidade.returnPressed.connect(self.set_sanidade)
         
         #self.btn1 = StyledButton(200, 60, "Increment", "#cc5632", "../../contents/Kojima.png")
         #self.layout.addWidget(self.btn1)

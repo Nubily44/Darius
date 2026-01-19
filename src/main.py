@@ -8,14 +8,14 @@ from pipes import Pipe
 
 def handle_vida(personagem):
     Pipe(
-        lambda p: window.setValue(window.label1, window.input1, p.getVida()),
+        lambda p: window.setValue(window.label_vida, window.input_vida, p.getVida()),
         lambda p, v: p.setVida(v),
         2
     ).execute((personagem))
 
 def handle_sanidade(personagem):
     Pipe(
-        lambda p: window.setValue(window.label2, window.input2, p.getSanidade()),
+        lambda p: window.setValue(window.label_sanidade, window.input_sanidade, p.getSanidade()),
         lambda p, v: p.setSanidade(v),
         2
     ).execute((personagem))

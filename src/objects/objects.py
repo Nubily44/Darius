@@ -29,6 +29,7 @@ class Personagem():
         return self.BlocoSanidade.getAtributo()
     
     def setSanidade(self, sanidade):
+        print ("Set Sanidade:", sanidade)
         self.BlocoSanidade.setAtributo(sanidade)
         
     def refreshEsforco(self):
