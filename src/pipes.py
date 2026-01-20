@@ -1,3 +1,5 @@
+from functions import Wrapper
+
 class Pipe():
     def __init__(self, func1, func2, par_count):
         self.func1 = func1
@@ -19,14 +21,16 @@ class Pipe():
 
         raise TypeError(f"Expected {self.par_count} values or one iterable of {self.par_count} values")
         
-
+    @Wrapper
     def execute(self, input_data):
         values_start = self.unpacker(input_data) # Unpacker
         input = self.func1(*values_start)        # Input from interface
-        values_to_exit = values_start + (input,) # Values to exit
+        print("Pipe Input:", input)
+        if input is not None:
+            values_to_exit = values_start + (input,) # Values to exit
+        else:
+            values_to_exit = values_start
         self.func2(*values_to_exit)              # Exit to objects
-        self.func1(*values_start)                # Update interface
-    
     
 if __name__ == "__main__":
     def f1(a, b):

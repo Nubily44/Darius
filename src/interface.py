@@ -2,6 +2,7 @@ import sys
 from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QLabel, QLineEdit
 from PySide6.QtGui import QIcon, QFont, QColor
 from PySide6.QtCore import QSize, Signal
+from functions import Wrapper
 
 class StyledButton(QPushButton):
     def __init__(self, width, height, text, color, image_path=None):
@@ -36,8 +37,10 @@ class Window(QWidget):
     
     set_vida = Signal()
     set_sanidade = Signal()
+    set_esforco = Signal()
+    refresh_esforco = Signal()
     
-    def __init__(self):
+    def __init__(self, vida, sanidade, esforco):
         super().__init__()
         self.setWindowTitle("Darius 0.1")
         self.resize(400, 200)
@@ -45,7 +48,7 @@ class Window(QWidget):
         self.layout = QVBoxLayout(self)
         
         
-        self.label_vida = QLabel("Vida: 0")
+        self.label_vida = QLabel(f"Vida: {vida}")
         self.layout.addWidget(self.label_vida)
         
         self.input_vida = QLineEdit()
@@ -53,7 +56,7 @@ class Window(QWidget):
         self.input_vida.setFixedWidth(200)
         self.layout.addWidget(self.input_vida)
         
-        self.label_sanidade = QLabel("Sanidade: 0")
+        self.label_sanidade = QLabel(f"Sanidade: {sanidade}")
         self.layout.addWidget(self.label_sanidade)
         
         self.input_sanidade = QLineEdit()
@@ -64,20 +67,33 @@ class Window(QWidget):
         self.input_vida.returnPressed.connect(self.set_vida)
         self.input_sanidade.returnPressed.connect(self.set_sanidade)
         
-        #self.btn1 = StyledButton(200, 60, "Increment", "#cc5632", "../../contents/Kojima.png")
-        #self.layout.addWidget(self.btn1)
-        #self.btn1.clicked.connect(self.set_vida)
+        self.label_esforco = QLabel(f"Esforço: {esforco}")
+        self.layout.addWidget(self.label_esforco)
         
-    def setValue(self, label: QLabel, input_field: QLineEdit, value):
-        label.setText(f"{label.text().split(':')[0]}: {value}")
+        self.esforco_deduct = StyledButton(200, 60, "Esforço Gastar", "#cc5632")
+        self.layout.addWidget(self.esforco_deduct)
+        self.esforco_deduct.clicked.connect(self.set_esforco)
+        
+        self.esforco_refresh = StyledButton(200, 60, "Esforço Renovar", "#32cc6a")
+        self.layout.addWidget(self.esforco_refresh)
+        self.esforco_refresh.clicked.connect(self.refresh_esforco)
+        
+    @Wrapper
+    def setValue(self, label: QLabel, input_field: QLineEdit):
         text = input_field.text()
+        label.setText(f"{label.text().split(':')[0]}: {text}")
         input_field.clear()
         return text
+    
+    def deductValue(self, label: QLabel):
+        current = int(label.text().split(':')[1].strip())
+        label.setText(f"{label.text().split(':')[0]}: {current - 1}")
+
 
         
         
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    window = Window()
+    window = Window(0, 0, 0)
     window.show()
     sys.exit(app.exec())

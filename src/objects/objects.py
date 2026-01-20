@@ -1,5 +1,6 @@
 import sys
 from pathlib import Path
+from functions import Wrapper
 
 BASE_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(BASE_DIR.parent))
@@ -15,33 +16,44 @@ class Personagem():
         
         self.pericias = [] # Array de BlocoPericia
         
+    @Wrapper
     def addPericia(self, BlocoPericia):
         self.pericias.append(BlocoPericia)    
-                    
+    
+    @Wrapper             
     def getVida(self):
         return self.BlocoVida.getAtributo()
     
+    @Wrapper
     def setVida(self, vida): 
         print("Set Vida:", vida)
         self.BlocoVida.setAtributo(vida)
-        
+    
+    @Wrapper 
     def getSanidade(self):
         return self.BlocoSanidade.getAtributo()
-    
+
+    @Wrapper
     def setSanidade(self, sanidade):
         print ("Set Sanidade:", sanidade)
         self.BlocoSanidade.setAtributo(sanidade)
-        
-    def refreshEsforco(self):
-        self.BlocoEsforco.setAtributo(self.BlocoEsforco.am1)
-        
+    
+    @Wrapper
     def useEsforco(self):
+        print(f"Usando Esforço: {self.BlocoEsforco.getAtributo()-1} / {self.BlocoEsforco.am1}")
         current = self.BlocoEsforco.getAtributo()
         if current > 0:
             self.BlocoEsforco.setAtributo(current - 1)
             return True
         else:
             return False
+    
+    @Wrapper
+    def refreshEsforco(self):
+        print(f"Renovando Esforço: {self.BlocoEsforco.getAtributo()} / {self.BlocoEsforco.am1}")
+        self.BlocoEsforco.setAtributo(self.BlocoEsforco.am1)
+        
+    
     
     
 class BlocoPericia():
@@ -63,6 +75,9 @@ class BlocoAtributo():
     
     def setAtributo(self, a1):
         self.a1 = a1
+
+    def getMaxAtributo(self):
+        return self.am1
         
 
                 

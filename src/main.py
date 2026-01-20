@@ -6,26 +6,16 @@ from objects.objects import Personagem
 from interface import Window
 from pipes import Pipe
 
-def handle_vida(personagem):
-    Pipe(
-        lambda p: window.setValue(window.label_vida, window.input_vida, p.getVida()),
-        lambda p, v: p.setVida(v),
-        2
-    ).execute((personagem))
-
-def handle_sanidade(personagem):
-    Pipe(
-        lambda p: window.setValue(window.label_sanidade, window.input_sanidade, p.getSanidade()),
-        lambda p, v: p.setSanidade(v),
-        2
-    ).execute((personagem))
+from connectors import handle_esforco_deduct, handle_esforco_refresh, handle_vida, handle_sanidade
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     Personagem1 = Personagem(vida=100, sanidade=100, nivel=10, classe="Classe")
-    window = Window()
-    window.set_vida.connect(lambda: handle_vida(Personagem1))
-    window.set_sanidade.connect(lambda: handle_sanidade(Personagem1))
+    window = Window(Personagem1.getVida(), Personagem1.getSanidade(), Personagem1.BlocoEsforco.getAtributo())
+    window.set_vida.connect(lambda: handle_vida(Personagem1, window))
+    window.set_sanidade.connect(lambda: handle_sanidade(Personagem1, window))
+    window.set_esforco.connect(lambda: handle_esforco_deduct(Personagem1, window))
+    window.refresh_esforco.connect(lambda: handle_esforco_refresh(Personagem1, window))
     
     window.show()
     sys.exit(app.exec())
