@@ -36,8 +36,9 @@ class Personagem():
 
     @Wrapper
     def setSanidade(self, sanidade):
-        print ("Set Sanidade:", sanidade)
-        self.BlocoSanidade.setAtributo(sanidade)
+        nova = self.getSanidade() - int(sanidade)
+        print ("Set Sanidade:", nova)
+        self.BlocoSanidade.setAtributo(nova)
     
     @Wrapper
     def useEsforco(self):
