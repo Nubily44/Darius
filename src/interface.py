@@ -81,7 +81,8 @@ class Window(QWidget):
     @Wrapper
     def setValue(self, label: QLabel, input_field: QLineEdit):
         text = input_field.text()
-        label.setText(f"{label.text().split(':')[0]}: {text}")
+        before_value = label.text().split(':')[1].strip()
+        label.setText(f"{label.text().split(':')[0]}: {int(before_value) - int(text)}")
         input_field.clear()
         return text
     

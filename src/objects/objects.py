@@ -25,9 +25,10 @@ class Personagem():
         return self.BlocoVida.getAtributo()
     
     @Wrapper
-    def setVida(self, vida): 
-        print("Set Vida:", vida)
-        self.BlocoVida.setAtributo(vida)
+    def setVida(self, vida):
+        nova = self.getVida() - int(vida)
+        print("Set Vida:", nova)
+        self.BlocoVida.setAtributo(nova)
     
     @Wrapper 
     def getSanidade(self):
