@@ -1,5 +1,5 @@
 import sys
-from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QLabel, QLineEdit
+from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit
 from PySide6.QtGui import QIcon, QFont, QColor
 from PySide6.QtCore import QSize, Signal
 from functions import Wrapper
@@ -45,37 +45,46 @@ class Window(QWidget):
         self.setWindowTitle("Darius 0.1")
         self.resize(400, 200)
         
-        self.layout = QVBoxLayout(self)
+        self.total = QVBoxLayout(self)
+        
+        self.bar = QHBoxLayout()
+        
+        self.container1 = QVBoxLayout()
+        self.container2 = QVBoxLayout()
         
         
         self.label_vida = QLabel(f"Vida: {vida}")
-        self.layout.addWidget(self.label_vida)
+        self.container1.addWidget(self.label_vida)
         
         self.input_vida = QLineEdit()
         self.input_vida.setPlaceholderText("...")
         self.input_vida.setFixedWidth(200)
-        self.layout.addWidget(self.input_vida)
+        self.container1.addWidget(self.input_vida)
         
         self.label_sanidade = QLabel(f"Sanidade: {sanidade}")
-        self.layout.addWidget(self.label_sanidade)
+        self.container2.addWidget(self.label_sanidade)
         
         self.input_sanidade = QLineEdit()
         self.input_sanidade.setPlaceholderText("...")
         self.input_sanidade.setFixedWidth(200)
-        self.layout.addWidget(self.input_sanidade)
+        self.container2.addWidget(self.input_sanidade)
+        
+        self.bar.addLayout(self.container1)
+        self.bar.addLayout(self.container2)
+        self.total.addLayout(self.bar)
         
         self.input_vida.returnPressed.connect(self.set_vida)
         self.input_sanidade.returnPressed.connect(self.set_sanidade)
         
         self.label_esforco = QLabel(f"Esforço: {esforco}")
-        self.layout.addWidget(self.label_esforco)
+        self.total.addWidget(self.label_esforco)
         
         self.esforco_deduct = StyledButton(200, 60, "Esforço Gastar", "#cc5632")
-        self.layout.addWidget(self.esforco_deduct)
+        self.total.addWidget(self.esforco_deduct)
         self.esforco_deduct.clicked.connect(self.set_esforco)
         
         self.esforco_refresh = StyledButton(200, 60, "Esforço Renovar", "#32cc6a")
-        self.layout.addWidget(self.esforco_refresh)
+        self.total.addWidget(self.esforco_refresh)
         self.esforco_refresh.clicked.connect(self.refresh_esforco)
         
     @Wrapper
