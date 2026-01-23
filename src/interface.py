@@ -43,9 +43,10 @@ class Window(QWidget):
     def __init__(self, vida, sanidade, esforco):
         super().__init__()
         self.setWindowTitle("Darius 0.1")
-        self.resize(400, 300)
+        self.resize(600, 400)
         
-        self.font = QFont("Times", 25)
+        self.font = QFont("Times", 20)
+        self.smallfont = QFont("Times", 14)
         
         self.total = QVBoxLayout(self)
         
@@ -59,8 +60,9 @@ class Window(QWidget):
         self.label_vida.setFont(self.font)
         
         self.input_vida = QLineEdit()
-        self.input_vida.setPlaceholderText("...")
-        self.input_vida.setFixedWidth(200)
+        self.input_vida.setPlaceholderText("Digite o dano sofrido...")
+        self.input_vida.setFixedWidth(300)
+        self.input_vida.setFont(self.smallfont)
         
         self.container1.addWidget(self.label_vida, alignment=Qt.AlignCenter | Qt.AlignCenter)
         self.container1.addWidget(self.input_vida, alignment=Qt.AlignCenter | Qt.AlignCenter)
@@ -68,8 +70,9 @@ class Window(QWidget):
         self.label_sanidade = QLabel(f"Sanidade: {sanidade}")
         self.label_sanidade.setFont(self.font)
         self.input_sanidade = QLineEdit()
-        self.input_sanidade.setPlaceholderText("...")
-        self.input_sanidade.setFixedWidth(200)
+        self.input_sanidade.setPlaceholderText("Digite o dano sofrido...")
+        self.input_sanidade.setFixedWidth(300)
+        self.input_sanidade.setFont(self.smallfont)
         
         self.container2.addWidget(self.label_sanidade, alignment=Qt.AlignCenter | Qt.AlignCenter)
         self.container2.addWidget(self.input_sanidade, alignment=Qt.AlignCenter | Qt.AlignCenter)
