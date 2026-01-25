@@ -45,7 +45,7 @@ class Window(QWidget):
         self.setWindowTitle("Darius 0.1")
         self.resize(600, 400)
         
-        self.font = QFont("Times", 20)
+        self.font = QFont("Times", 18)
         self.smallfont = QFont("Times", 14)
         
         self.total = QVBoxLayout(self)
