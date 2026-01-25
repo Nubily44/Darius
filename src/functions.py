@@ -13,6 +13,17 @@ def dice(n: int, advantage: int = 1) -> int:
         print(f"d{n}: {dices[-1]}")
     return min(dices)
 
+def rolagem_sum(n: int, advantage: int = 1) -> int:
+    
+    if n < 1:
+        raise ValueError("n must be >= 1")
+    
+    dices = []
+    
+    for _ in range(advantage):
+        dices.append(random.randint(1, n))
+        print(f"d{n}: {dices[-1]}")
+    return sum(dices)
 
 def Wrapper(func):
     def wrapper(*args, **kwargs):
