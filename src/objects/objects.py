@@ -59,11 +59,13 @@ class Personagem():
             if bp.nome == bloco_pericia.nome:
                 return
         self.pericias.append(bloco_pericia)
+        
     @Wrapper
-    def usarPericia(self, nome_pericia, vantagem):
+    def usarPericia(self, nome_pericia, p_num, vantagem):
         for bloco in self.pericias:
-            if bloco.nome == nome_pericia:
-                return bloco.p1.roll(vantagem)
+            for pericia in [bloco.p1, bloco.p2, bloco.p3]:
+                if pericia.nome == nome_pericia:
+                    return pericia.roll(vantagem)
         return None
 
         
@@ -134,4 +136,4 @@ if __name__ == "__main__":
     Personagem1 = Personagem(vida=100, sanidade=100, nivel=10, classe="Classe")
     Personagem1.addPericia(bp)
     Personagem1.addPericia(bp)
-    Personagem1.usarPericia("Teste", 2)
+    Personagem1.usarPericia("Força", 2, 2)
