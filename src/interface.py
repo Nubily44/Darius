@@ -48,14 +48,15 @@ class Window(QWidget):
         self.font = QFont("Times", 18)
         self.smallfont = QFont("Times", 14)
         
+        # (TOTAL (BAR (C1, C2), C3))    
         self.total = QVBoxLayout(self)
         
         self.bar = QHBoxLayout()
         
-        self.container1 = QVBoxLayout()
-        self.container2 = QVBoxLayout()
+        self.c1 = QVBoxLayout()
+        self.c2 = QVBoxLayout()
         
-        
+        #### CONTAINERR 1 - VIDA ####
         self.label_vida = QLabel(f"Vida: {vida}")
         self.label_vida.setFont(self.font)
         
@@ -64,9 +65,11 @@ class Window(QWidget):
         self.input_vida.setFixedWidth(300)
         self.input_vida.setFont(self.smallfont)
         
-        self.container1.addWidget(self.label_vida, alignment=Qt.AlignCenter | Qt.AlignCenter)
-        self.container1.addWidget(self.input_vida, alignment=Qt.AlignCenter | Qt.AlignCenter)
+        self.c1.addWidget(self.label_vida, alignment=Qt.AlignCenter | Qt.AlignCenter)
+        self.c1.addWidget(self.input_vida, alignment=Qt.AlignCenter | Qt.AlignCenter)
+        ################################
         
+        #### CONTAINER 2 - SANIDADE ####
         self.label_sanidade = QLabel(f"Sanidade: {sanidade}")
         self.label_sanidade.setFont(self.font)
         self.input_sanidade = QLineEdit()
@@ -74,27 +77,34 @@ class Window(QWidget):
         self.input_sanidade.setFixedWidth(300)
         self.input_sanidade.setFont(self.smallfont)
         
-        self.container2.addWidget(self.label_sanidade, alignment=Qt.AlignCenter | Qt.AlignCenter)
-        self.container2.addWidget(self.input_sanidade, alignment=Qt.AlignCenter | Qt.AlignCenter)
+        self.c2.addWidget(self.label_sanidade, alignment=Qt.AlignCenter | Qt.AlignCenter)
+        self.c2.addWidget(self.input_sanidade, alignment=Qt.AlignCenter | Qt.AlignCenter)
+        ################################
         
-        self.bar.addLayout(self.container1)
-        self.bar.addLayout(self.container2)
+        
+        
+        self.bar.addLayout(self.c1)
+        self.bar.addLayout(self.c2)
         self.total.addLayout(self.bar)
+        
+        self.c3 = QHBoxLayout()
         
         self.input_vida.returnPressed.connect(self.set_vida)
         self.input_sanidade.returnPressed.connect(self.set_sanidade)
         
         self.label_esforco = QLabel(f"Esforço: {esforco}")
         self.label_esforco.setFont(self.font)
-        self.total.addWidget(self.label_esforco)
+        self.c3.addWidget(self.label_esforco)
         
         self.esforco_deduct = StyledButton(200, 60, "Esforço Gastar", "#cc5632")
-        self.total.addWidget(self.esforco_deduct)
+        self.c3.addWidget(self.esforco_deduct)
         self.esforco_deduct.clicked.connect(self.set_esforco)
         
         self.esforco_refresh = StyledButton(200, 60, "Esforço Renovar", "#32cc6a")
-        self.total.addWidget(self.esforco_refresh)
+        self.c3.addWidget(self.esforco_refresh)
         self.esforco_refresh.clicked.connect(self.refresh_esforco)
+        
+        self.total.addLayout(self.c3)
         
     @Wrapper
     def setValue(self, label: QLabel, input_field: QLineEdit):
