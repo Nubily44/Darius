@@ -40,7 +40,7 @@ class Window(QWidget):
     set_esforco = Signal()
     refresh_esforco = Signal()
     
-    def __init__(self, vida, sanidade, esforco):
+    def __init__(self, vida, sanidade, esforco, pericias=None):
         super().__init__()
         self.setWindowTitle("Darius 0.1")
         self.resize(600, 400)
@@ -48,7 +48,11 @@ class Window(QWidget):
         self.font = QFont("Times", 18)
         self.smallfont = QFont("Times", 14)
         
-        # (TOTAL (BAR (C1, C2), C3))    
+        # (TOTAL (BAR (C1, C2), C3, C4))
+        # C1: Vida
+        # C2: Sanidade
+        # C3: Esforço
+        # C4: Pericias    
         self.total = QVBoxLayout(self)
         
         self.bar = QHBoxLayout()
@@ -65,8 +69,8 @@ class Window(QWidget):
         self.input_vida.setFixedWidth(300)
         self.input_vida.setFont(self.smallfont)
         
-        self.c1.addWidget(self.label_vida, alignment=Qt.AlignCenter | Qt.AlignCenter)
-        self.c1.addWidget(self.input_vida, alignment=Qt.AlignCenter | Qt.AlignCenter)
+        self.c1.addWidget(self.label_vida, alignment=Qt.AlignCenter)
+        self.c1.addWidget(self.input_vida, alignment=Qt.AlignCenter)
         ################################
         
         #### CONTAINER 2 - SANIDADE ####
@@ -77,8 +81,8 @@ class Window(QWidget):
         self.input_sanidade.setFixedWidth(300)
         self.input_sanidade.setFont(self.smallfont)
         
-        self.c2.addWidget(self.label_sanidade, alignment=Qt.AlignCenter | Qt.AlignCenter)
-        self.c2.addWidget(self.input_sanidade, alignment=Qt.AlignCenter | Qt.AlignCenter)
+        self.c2.addWidget(self.label_sanidade, alignment=Qt.AlignCenter)
+        self.c2.addWidget(self.input_sanidade, alignment=Qt.AlignCenter)
         ################################
         
         
@@ -94,7 +98,7 @@ class Window(QWidget):
         
         self.label_esforco = QLabel(f"Esforço: {esforco}")
         self.label_esforco.setFont(self.font)
-        self.c3.addWidget(self.label_esforco)
+        self.c3.addWidget(self.label_esforco, alignment=Qt.AlignCenter)
         
         self.esforco_deduct = StyledButton(200, 60, "Esforço Gastar", "#cc5632")
         self.c3.addWidget(self.esforco_deduct)
@@ -105,6 +109,24 @@ class Window(QWidget):
         self.esforco_refresh.clicked.connect(self.refresh_esforco)
         
         self.total.addLayout(self.c3)
+        
+        self.c4 = QHBoxLayout()
+        for bloco in pericias or []:
+            self.temp_layout = QVBoxLayout()
+            label_bloco = QLabel(f"{bloco.nome}")
+            label_bloco.setFont(self.font)
+            self.temp_layout.addWidget(label_bloco, alignment=Qt.AlignCenter)
+            for pericia in [bloco.p1, bloco.p2, bloco.p3]:
+                self.temp_label_pericia = QLabel(f"{pericia.nome} ({pericia.valor}%)")
+                self.temp_label_pericia.setFont(self.smallfont)
+                self.temp_layout.addWidget(self.temp_label_pericia, alignment=Qt.AlignCenter)
+            self.c4.addLayout(self.temp_layout)
+
+        
+        self.total.addLayout(self.c4)
+        
+        
+        self.adjustSize()
         
     @Wrapper
     def setValue(self, label: QLabel, input_field: QLineEdit):
