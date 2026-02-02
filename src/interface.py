@@ -39,6 +39,7 @@ class Window(QWidget):
     set_sanidade = Signal()
     set_esforco = Signal()
     refresh_esforco = Signal()
+    use_pericia = Signal(str)
     
     def __init__(self, vida, sanidade, esforco, pericias=None):
         super().__init__()
@@ -117,8 +118,11 @@ class Window(QWidget):
             label_bloco.setFont(self.font)
             self.temp_layout.addWidget(label_bloco, alignment=Qt.AlignCenter)
             for pericia in [bloco.p1, bloco.p2, bloco.p3]:
-                self.temp_label_pericia = QLabel(f"{pericia.nome} ({pericia.valor}%)")
+                self.temp_label_pericia = QLabel(f"{pericia.nome} ({pericia.valor})")
                 self.temp_label_pericia.setFont(self.smallfont)
+                self.temp_button_pericia = StyledButton(150, 40, "Usar", "#327bcc")
+                self.temp_button_pericia.clicked.connect(lambda checked, n=pericia.nome: self.use_pericia.emit(n))
+                self.temp_layout.addWidget(self.temp_button_pericia, alignment=Qt.AlignCenter)
                 self.temp_layout.addWidget(self.temp_label_pericia, alignment=Qt.AlignCenter)
             self.c4.addLayout(self.temp_layout)
 
