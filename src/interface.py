@@ -50,6 +50,26 @@ class AttributeObject:
     
     def getLayout(self):
         return self.container
+    
+class UsableObject:
+    def __init__(self, name, value, font, smallfont):
+        self.container = QHBoxLayout()
+        
+
+        
+        self.label = QLabel(f"{name}: {value}")
+        self.label.setFont(font)
+        
+        self.deduct = StyledButton(200, 60, "Esforço Gastar", "#cc5632")
+        self.refresh = StyledButton(200, 60, "Esforço Renovar", "#32cc6a")
+        
+        self.container.addWidget(self.label, alignment=Qt.AlignCenter)
+        self.container.addWidget(self.deduct)
+        self.container.addWidget(self.refresh)
+        
+        
+    def getLayout(self):
+        return self.container
         
 
 class Window(QWidget):
@@ -67,65 +87,30 @@ class Window(QWidget):
         
         self.font = QFont("Times", 18)
         self.smallfont = QFont("Times", 14)
-        
-        # (TOTAL (BAR (C1, C2), C3, Pericias(C4, C5)))
-        # C1: Vida
-        # C2: Sanidade
-        # C3: Esforço
-        # C4: Pericias    
+         
         self.total = QVBoxLayout(self)
         
+        ######## Vida e Sanidade ########
         self.bar = QHBoxLayout()
         
-        self.c1 = QVBoxLayout()
-        self.c2 = QVBoxLayout()
+        self.interface_vida = AttributeObject("Vida", vida, self.font, self.smallfont)      
+        self.interface_sanidade = AttributeObject("Sanidade", sanidade, self.font, self.smallfont)
         
-        #### CONTAINERR 1 - VIDA ####
-        #self.label_vida = QLabel(f"Vida: {vida}")
-        #self.label_vida.setFont(self.font)
-        #
-        #self.input_vida = QLineEdit()
-        #self.input_vida.setPlaceholderText("Digite o dano sofrido...")
-        #self.input_vida.setFixedWidth(300)
-        #self.input_vida.setFont(self.smallfont)
-        
-        self.interface_vida = AttributeObject("Vida", vida, self.font, self.smallfont)
-        ################################
-        
-        #### CONTAINER 2 - SANIDADE ####
-        self.label_sanidade = QLabel(f"Sanidade: {sanidade}")
-        self.label_sanidade.setFont(self.font)
-        self.input_sanidade = QLineEdit()
-        self.input_sanidade.setPlaceholderText("Digite o dano sofrido...")
-        self.input_sanidade.setFixedWidth(300)
-        self.input_sanidade.setFont(self.smallfont)
-        
-        self.c2.addWidget(self.label_sanidade, alignment=Qt.AlignCenter)
-        self.c2.addWidget(self.input_sanidade, alignment=Qt.AlignCenter)
-        ################################
+        self.interface_vida.input.returnPressed.connect(self.set_vida)
+        self.interface_sanidade.input.returnPressed.connect(self.set_sanidade)
         
         self.bar.addLayout(self.interface_vida.getLayout())
-        self.bar.addLayout(self.c2)
+        self.bar.addLayout(self.interface_sanidade.getLayout())
+        
         self.total.addLayout(self.bar)
+        #################################
         
-        self.c3 = QHBoxLayout()
+        self.interface_esforco = UsableObject("Esforço", esforco, self.font, self.smallfont)
         
-        self.input_vida.returnPressed.connect(self.set_vida)
-        self.input_sanidade.returnPressed.connect(self.set_sanidade)
+        self.interface_esforco.refresh.clicked.connect(self.refresh_esforco)
+        self.interface_esforco.deduct.clicked.connect(self.set_esforco)
         
-        self.label_esforco = QLabel(f"Esforço: {esforco}")
-        self.label_esforco.setFont(self.font)
-        self.c3.addWidget(self.label_esforco, alignment=Qt.AlignCenter)
-        
-        self.esforco_deduct = StyledButton(200, 60, "Esforço Gastar", "#cc5632")
-        self.c3.addWidget(self.esforco_deduct)
-        self.esforco_deduct.clicked.connect(self.set_esforco)
-        
-        self.esforco_refresh = StyledButton(200, 60, "Esforço Renovar", "#32cc6a")
-        self.c3.addWidget(self.esforco_refresh)
-        self.esforco_refresh.clicked.connect(self.refresh_esforco)
-        
-        self.total.addLayout(self.c3)
+        self.total.addLayout(self.interface_esforco.getLayout())
         
         self.pericias_total = QVBoxLayout()
         self.c4 = QHBoxLayout()
