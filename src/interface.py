@@ -49,7 +49,7 @@ class Window(QWidget):
         self.font = QFont("Times", 18)
         self.smallfont = QFont("Times", 14)
         
-        # (TOTAL (BAR (C1, C2), C3, C4))
+        # (TOTAL (BAR (C1, C2), C3, Pericias(C4, C5)))
         # C1: Vida
         # C2: Sanidade
         # C3: Esforço
@@ -111,24 +111,36 @@ class Window(QWidget):
         
         self.total.addLayout(self.c3)
         
+        self.pericias_total = QVBoxLayout()
         self.c4 = QHBoxLayout()
+        self.c5 = QHBoxLayout()
+        
         for bloco in pericias or []:
-            self.temp_layout = QVBoxLayout()
-            label_bloco = QLabel(f"{bloco.nome}")
-            label_bloco.setFont(self.font)
-            self.temp_layout.addWidget(label_bloco, alignment=Qt.AlignCenter)
-            for pericia in [bloco.p1, bloco.p2, bloco.p3]:
-                self.temp_label_pericia = QLabel(f"{pericia.nome} ({pericia.valor})")
-                self.temp_label_pericia.setFont(self.smallfont)
-                self.temp_button_pericia = StyledButton(150, 40, "Usar", "#327bcc")
-                self.temp_button_pericia.clicked.connect(lambda checked, n=pericia.nome: self.use_pericia.emit(n))
-                self.temp_layout.addWidget(self.temp_button_pericia, alignment=Qt.AlignCenter)
-                self.temp_layout.addWidget(self.temp_label_pericia, alignment=Qt.AlignCenter)
-            self.c4.addLayout(self.temp_layout)
+            bloco_layout = QVBoxLayout()
 
+            bloco_label = QLabel(bloco.nome)
+            bloco_label.setFont(self.font)
+            
+            bloco_layout.addWidget(bloco_label, alignment=Qt.AlignCenter)
+            
+            for pericia in [bloco.p1, bloco.p2, bloco.p3]:
+                
+                pericia_button = StyledButton(150, 50, f"{pericia.nome} ({pericia.valor}%)", "#3465d9")
+                pericia_label = QLabel(f"{pericia.nome}: 0")
+                pericia_label.setFont(self.smallfont)
+                #pericia_button.clicked.connect(lambda checked, n=pericia.nome: self.use_pericia.emit(n))
+                bloco_layout.addWidget(pericia_label, alignment=Qt.AlignCenter)
+                bloco_layout.addWidget(pericia_button, alignment=Qt.AlignCenter)
+                
+            if len(self.c4.children()) < 3:
+                self.c4.addLayout(bloco_layout)
+            else:
+                self.c5.addLayout(bloco_layout)
+                
+        self.pericias_total.addLayout(self.c4)
+        self.pericias_total.addLayout(self.c5)
         
-        self.total.addLayout(self.c4)
-        
+        self.total.addLayout(self.pericias_total)
         
         self.adjustSize()
         
