@@ -24,7 +24,9 @@ class Pipe():
     @Wrapper
     def execute(self, input_data):
         values_start = self.unpacker(input_data) # Unpacker
+        
         input = self.func1(*values_start)        # Input from interface
+        
         print("Pipe Input:", input)
         if input is not None:
             values_to_exit = values_start + (input,) # Values to exit

@@ -32,7 +32,26 @@ class StyledButton(QPushButton):
             icon = QIcon(image_path)
             self.setIcon(icon)
             self.setIconSize(QSize(height - 20, height - 20))
+
+class AttributeObject:
+    def __init__(self, name, value, font, smallfont):
+        self.container = QVBoxLayout()
         
+        self.label = QLabel(f"{name}: {value}")
+        self.label.setFont(font)
+        
+        self.input = QLineEdit()
+        self.input.setPlaceholderText("Digite o dano sofrido...")
+        self.input.setFixedWidth(300)
+        self.input.setFont(smallfont)
+        
+        self.container.addWidget(self.label, alignment=Qt.AlignCenter)
+        self.container.addWidget(self.input, alignment=Qt.AlignCenter)
+    
+    def getLayout(self):
+        return self.container
+        
+
 class Window(QWidget):
     
     set_vida = Signal()
@@ -62,16 +81,15 @@ class Window(QWidget):
         self.c2 = QVBoxLayout()
         
         #### CONTAINERR 1 - VIDA ####
-        self.label_vida = QLabel(f"Vida: {vida}")
-        self.label_vida.setFont(self.font)
+        #self.label_vida = QLabel(f"Vida: {vida}")
+        #self.label_vida.setFont(self.font)
+        #
+        #self.input_vida = QLineEdit()
+        #self.input_vida.setPlaceholderText("Digite o dano sofrido...")
+        #self.input_vida.setFixedWidth(300)
+        #self.input_vida.setFont(self.smallfont)
         
-        self.input_vida = QLineEdit()
-        self.input_vida.setPlaceholderText("Digite o dano sofrido...")
-        self.input_vida.setFixedWidth(300)
-        self.input_vida.setFont(self.smallfont)
-        
-        self.c1.addWidget(self.label_vida, alignment=Qt.AlignCenter)
-        self.c1.addWidget(self.input_vida, alignment=Qt.AlignCenter)
+        self.interface_vida = AttributeObject("Vida", vida, self.font, self.smallfont)
         ################################
         
         #### CONTAINER 2 - SANIDADE ####
@@ -86,9 +104,7 @@ class Window(QWidget):
         self.c2.addWidget(self.input_sanidade, alignment=Qt.AlignCenter)
         ################################
         
-        
-        
-        self.bar.addLayout(self.c1)
+        self.bar.addLayout(self.interface_vida.getLayout())
         self.bar.addLayout(self.c2)
         self.total.addLayout(self.bar)
         
@@ -115,6 +131,8 @@ class Window(QWidget):
         self.c4 = QHBoxLayout()
         self.c5 = QHBoxLayout()
         
+        self.pericias_interface_objects = {}
+        
         for bloco in pericias or []:
             bloco_layout = QVBoxLayout()
 
@@ -126,11 +144,11 @@ class Window(QWidget):
             for pericia in [bloco.p1, bloco.p2, bloco.p3]:
                 
                 pericia_button = StyledButton(150, 50, f"{pericia.nome} ({pericia.valor}%)", "#3465d9")
-                pericia_label = QLabel(f"{pericia.nome}: 0")
+                pericia_label = QLabel(f"Resultado: 0")
                 pericia_label.setFont(self.smallfont)
-                #pericia_button.clicked.connect(lambda checked, n=pericia.nome: self.use_pericia.emit(n))
-                bloco_layout.addWidget(pericia_label, alignment=Qt.AlignCenter)
+                pericia_button.clicked.connect(lambda n=pericia.nome: self.use_pericia.emit(n))
                 bloco_layout.addWidget(pericia_button, alignment=Qt.AlignCenter)
+                bloco_layout.addWidget(pericia_label, alignment=Qt.AlignCenter)
                 
             if len(self.c4.children()) < 3:
                 self.c4.addLayout(bloco_layout)

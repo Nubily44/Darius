@@ -7,7 +7,7 @@ from functions import Wrapper
 @Wrapper
 def handle_vida(personagem, window):
     Pipe(
-        lambda p: window.setValue(window.label_vida, window.input_vida),
+        lambda p: window.setValue(window.label_vida, window.vida),
         lambda p, v: p.setVida(v),
         2
     ).execute((personagem))
@@ -35,3 +35,11 @@ def handle_esforco_refresh(personagem, window):
         lambda p: p.refreshEsforco(),
         1
     ).execute((personagem))
+    
+    
+#def handle_pericia_use(personagem, window, pericia_name):
+#    Pipe(
+#        lambda p: window.
+#        lambda p, n: p.usePericia(n),
+#        2
+#    ).execute((personagem, pericia_name))
