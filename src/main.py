@@ -15,6 +15,8 @@ if __name__ == "__main__":
     Personagem1.addPericia(BlocoPericia("Outro Teste", Pericia("Carisma", 40), Pericia("Sabedoria", 55), Pericia("Constituição", 65)))
     Personagem1.addPericia(BlocoPericia("Terceiro Teste", Pericia("Percepção", 70), Pericia("Vontade", 80), Pericia("Agilidade", 90)))
     Personagem1.addPericia(BlocoPericia("Quarto Teste", Pericia("Lábia", 30), Pericia("Furtividade", 45), Pericia("Atletismo", 75)))
+    Personagem1.addPericia(BlocoPericia("Quinto Teste", Pericia("Medicina", 60), Pericia("Tecnologia", 50), Pericia("Ciência", 40)))
+    Personagem1.addPericia(BlocoPericia("Sexto Teste", Pericia("Sobrevivência", 55), Pericia("Intuição", 65), Pericia("Armas", 85)))
     window = Window(Personagem1.getVida(), Personagem1.getSanidade(), Personagem1.BlocoEsforco.getAtributo(), Personagem1.getPericias())
     window.set_vida.connect(lambda: handle_vida(Personagem1, window))
     window.set_sanidade.connect(lambda: handle_sanidade(Personagem1, window))

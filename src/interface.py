@@ -36,13 +36,14 @@ class StyledButton(QPushButton):
 class AttributeObject:
     def __init__(self, name, value, font, smallfont):
         self.container = QVBoxLayout()
+        self.container.setSpacing(20)
         
         self.label = QLabel(f"{name}: {value}")
         self.label.setFont(font)
         
         self.input = QLineEdit()
         self.input.setPlaceholderText("Digite o dano sofrido...")
-        self.input.setFixedWidth(300)
+        self.input.setFixedWidth(200)
         self.input.setFont(smallfont)
         
         self.container.addWidget(self.label, alignment=Qt.AlignCenter)
@@ -54,8 +55,6 @@ class AttributeObject:
 class UsableObject:
     def __init__(self, name, value, font, smallfont):
         self.container = QHBoxLayout()
-        
-
         
         self.label = QLabel(f"{name}: {value}")
         self.label.setFont(font)
@@ -71,6 +70,41 @@ class UsableObject:
     def getLayout(self):
         return self.container
         
+class PericiaObject:
+    def __init__(self, name, value, font, smallfont):
+        self.container = QVBoxLayout()
+        #self.container.setSpacing(30)
+        self.subcontainer = QHBoxLayout()
+        self.btn = StyledButton(150, 50, f"{name} ({value}%)", "#3465d9")
+        
+        self.label = QLabel(f"Resultado: 0")
+        self.label.setFont(font)
+        
+        self.input = QLineEdit()
+        self.input.setPlaceholderText("Vantagem")
+        self.input.setFixedWidth(100)
+
+        self.container.addWidget(self.btn, alignment=Qt.AlignCenter)
+        self.subcontainer.addWidget(self.input)
+        self.subcontainer.addWidget(self.label)
+        self.container.addLayout(self.subcontainer)
+    
+    def getLayout(self):
+        return self.container
+    
+class BlocoPericiasObject:
+    def __init__(self, nome, font, smallfont):
+        self.container = QVBoxLayout()
+        self.label = QLabel(nome)
+        self.label.setFont(font)
+        self.container.addWidget(self.label, alignment=Qt.AlignCenter)
+    
+    def addPericia(self, pericia_obj: PericiaObject):
+        self.container.addLayout(pericia_obj.getLayout())
+    
+    def getLayout(self):
+        return self.container
+    
 
 class Window(QWidget):
     
@@ -83,15 +117,16 @@ class Window(QWidget):
     def __init__(self, vida, sanidade, esforco, pericias=None):
         super().__init__()
         self.setWindowTitle("Darius 0.1")
-        self.resize(600, 400)
         
         self.font = QFont("Times", 18)
         self.smallfont = QFont("Times", 14)
          
         self.total = QVBoxLayout(self)
         
+        
         ######## Vida e Sanidade ########
         self.bar = QHBoxLayout()
+        self.bar.setContentsMargins(50, 20, 50, 20)
         
         self.interface_vida = AttributeObject("Vida", vida, self.font, self.smallfont)      
         self.interface_sanidade = AttributeObject("Sanidade", sanidade, self.font, self.smallfont)
@@ -105,35 +140,40 @@ class Window(QWidget):
         self.total.addLayout(self.bar)
         #################################
         
+        ############ Esforço ############
+        self.esforco_layout = QHBoxLayout()
+        self.esforco_layout.setContentsMargins(120, 20, 120, 20)
         self.interface_esforco = UsableObject("Esforço", esforco, self.font, self.smallfont)
         
         self.interface_esforco.refresh.clicked.connect(self.refresh_esforco)
         self.interface_esforco.deduct.clicked.connect(self.set_esforco)
         
-        self.total.addLayout(self.interface_esforco.getLayout())
+        self.esforco_layout.addLayout(self.interface_esforco.getLayout())
         
+        self.total.addLayout(self.esforco_layout)
+        #################################
+        
+        ########### Perícias ############
         self.pericias_total = QVBoxLayout()
+        
         self.c4 = QHBoxLayout()
         self.c5 = QHBoxLayout()
         
-        self.pericias_interface_objects = {}
+        self.c4.setContentsMargins(0, 20, 0, 0)
+        self.c5.setContentsMargins(0, 20, 0, 0)
         
-        for bloco in pericias or []:
-            bloco_layout = QVBoxLayout()
-
-            bloco_label = QLabel(bloco.nome)
-            bloco_label.setFont(self.font)
+        
+        self.interface_pericias = {}
+        
+        for bloco in pericias:
             
-            bloco_layout.addWidget(bloco_label, alignment=Qt.AlignCenter)
+            bloco_layout = BlocoPericiasObject(bloco.nome, self.font, self.smallfont).getLayout()
+            bloco_layout.setContentsMargins(20, 0, 20, 0)
             
             for pericia in [bloco.p1, bloco.p2, bloco.p3]:
-                
-                pericia_button = StyledButton(150, 50, f"{pericia.nome} ({pericia.valor}%)", "#3465d9")
-                pericia_label = QLabel(f"Resultado: 0")
-                pericia_label.setFont(self.smallfont)
-                pericia_button.clicked.connect(lambda n=pericia.nome: self.use_pericia.emit(n))
-                bloco_layout.addWidget(pericia_button, alignment=Qt.AlignCenter)
-                bloco_layout.addWidget(pericia_label, alignment=Qt.AlignCenter)
+                pericia_obj = PericiaObject(pericia.nome, pericia.valor, self.font, self.smallfont)
+                bloco_layout.addLayout(pericia_obj.getLayout())
+                self.interface_pericias[pericia.nome] = pericia_obj
                 
             if len(self.c4.children()) < 3:
                 self.c4.addLayout(bloco_layout)
