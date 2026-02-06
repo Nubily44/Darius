@@ -75,17 +75,6 @@ class Personagem():
                     return pericia.roll(vantagem)
         return None
 
-        
-    
-    
-    
-class BlocoPericia():
-    def __init__(self, nome, p1, p2, p3):
-        self.nome = nome
-        self.p1 = p1
-        self.p2 = p2
-        self.p3 = p3
-
 #Sempre criar com quantidade máxima
 class BlocoAtributo():
     def __init__(self, nome,a1):
@@ -102,7 +91,13 @@ class BlocoAtributo():
     def getMaxAtributo(self):
         return self.am1
         
-
+    
+class BlocoPericia():
+    def __init__(self, nome, p1, p2, p3):
+        self.nome = nome
+        self.p1 = p1
+        self.p2 = p2
+        self.p3 = p3
                 
 class Pericia():
     def __init__(self, nome, valor):

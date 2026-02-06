@@ -1,7 +1,7 @@
 import sys
 from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit
 from PySide6.QtGui import QIcon, QFont, QColor
-from PySide6.QtCore import QSize, Signal, Qt
+from PySide6.QtCore import QSize, Signal, Qt, QObject
 from functions import Wrapper
 
 class StyledButton(QPushButton):
@@ -33,8 +33,12 @@ class StyledButton(QPushButton):
             self.setIcon(icon)
             self.setIconSize(QSize(height - 20, height - 20))
 
-class AttributeObject:
-    def __init__(self, name, value, font, smallfont):
+class AttributeObject(QObject):
+    
+    att_signal = Signal(int)
+    
+    def __init__(self, name, value, font, smallfont, parent):
+        super().__init__(parent)
         self.container = QVBoxLayout()
         self.container.setSpacing(20)
         
@@ -46,21 +50,38 @@ class AttributeObject:
         self.input.setFixedWidth(200)
         self.input.setFont(smallfont)
         
+        self.input.returnPressed.connect(self._emit)
+        
         self.container.addWidget(self.label, alignment=Qt.AlignCenter)
         self.container.addWidget(self.input, alignment=Qt.AlignCenter)
+
+    def _emit(self):
+        value = int(self.input.text())
+        self.att_signal.emit(value)
+        self.input.clear()
     
     def getLayout(self):
         return self.container
     
-class UsableObject:
-    def __init__(self, name, value, font, smallfont):
+class UsableObject(QObject):
+
+    usb_use_signal = Signal(int)
+    usb_refresh_signal = Signal(int)
+    
+    def __init__(self, name, value, font, smallfont, parent, maxCount):
+        super().__init__(parent)
         self.container = QHBoxLayout()
+        
+        self.maxCount = maxCount
         
         self.label = QLabel(f"{name}: {value}")
         self.label.setFont(font)
         
         self.deduct = StyledButton(200, 60, "Esforço Gastar", "#cc5632")
         self.refresh = StyledButton(200, 60, "Esforço Renovar", "#32cc6a")
+        
+        self.deduct.clicked.connect(self._emit_deduct)
+        self.refresh.clicked.connect(self._emit_refresh)
         
         self.container.addWidget(self.label, alignment=Qt.AlignCenter)
         self.container.addWidget(self.deduct)
@@ -69,6 +90,15 @@ class UsableObject:
         
     def getLayout(self):
         return self.container
+    
+    def _emit_deduct(self):
+        value = -1
+        self.usb_use_signal.emit(value)
+        
+    def _emit_refresh(self):
+        value = self.maxCount
+        self.usb_refresh_signal.emit(value)
+        
         
 class PericiaObject:
     def __init__(self, name, value, font, smallfont):
@@ -108,11 +138,12 @@ class BlocoPericiasObject:
 
 class Window(QWidget):
     
-    set_vida = Signal()
-    set_sanidade = Signal()
-    set_esforco = Signal()
-    refresh_esforco = Signal()
-    use_pericia = Signal(str)
+    #set_vida = Signal()
+    #set_sanidade = Signal()
+    #set_esforco = Signal()
+    #refresh_esforco = Signal()
+    use_pericia = Signal()
+    use_pericia_with_advantage = Signal()
     
     def __init__(self, vida, sanidade, esforco, pericias=None):
         super().__init__()
@@ -128,11 +159,11 @@ class Window(QWidget):
         self.bar = QHBoxLayout()
         self.bar.setContentsMargins(50, 20, 50, 20)
         
-        self.interface_vida = AttributeObject("Vida", vida, self.font, self.smallfont)      
-        self.interface_sanidade = AttributeObject("Sanidade", sanidade, self.font, self.smallfont)
+        self.interface_vida = AttributeObject("Vida", vida, self.font, self.smallfont, parent=self)      
+        self.interface_sanidade = AttributeObject("Sanidade", sanidade, self.font, self.smallfont, parent=self)
         
-        self.interface_vida.input.returnPressed.connect(self.set_vida)
-        self.interface_sanidade.input.returnPressed.connect(self.set_sanidade)
+        #self.interface_vida.input.returnPressed.connect(self.set_vida)
+        #self.interface_sanidade.input.returnPressed.connect(self.set_sanidade)
         
         self.bar.addLayout(self.interface_vida.getLayout())
         self.bar.addLayout(self.interface_sanidade.getLayout())
@@ -143,10 +174,10 @@ class Window(QWidget):
         ############ Esforço ############
         self.esforco_layout = QHBoxLayout()
         self.esforco_layout.setContentsMargins(120, 20, 120, 20)
-        self.interface_esforco = UsableObject("Esforço", esforco, self.font, self.smallfont)
+        self.interface_esforco = UsableObject("Esforço", esforco, self.font, self.smallfont, parent=self, maxCount=esforco)
         
-        self.interface_esforco.refresh.clicked.connect(self.refresh_esforco)
-        self.interface_esforco.deduct.clicked.connect(self.set_esforco)
+        #self.interface_esforco.refresh.clicked.connect(self.refresh_esforco)
+        #self.interface_esforco.deduct.clicked.connect(self.set_esforco)
         
         self.esforco_layout.addLayout(self.interface_esforco.getLayout())
         
@@ -186,19 +217,21 @@ class Window(QWidget):
         self.total.addLayout(self.pericias_total)
         
         self.adjustSize()
-        
-    @Wrapper
-    def setValue(self, label: QLabel, input_field: QLineEdit):
-        text = input_field.text()
-        before_value = label.text().split(':')[1].strip()
-        label.setText(f"{label.text().split(':')[0]}: {int(before_value) - int(text)}")
-        input_field.clear()
-        return text
     
-    def deductValue(self, label: QLabel):
-        current = int(label.text().split(':')[1].strip())
-        if current > 0:
-            label.setText(f"{label.text().split(':')[0]}: {current - 1}")
+    @Wrapper
+    def setValue(self, label: QLabel, value):
+        print("Setting value:", value)
+        before_value = label.text().split(':')[1].strip()
+        label.setText(f"{label.text().split(':')[0]}: {int(value)}")
+        return
+    
+    
+    @Wrapper
+    def setValuediff(self, label: QLabel, value):
+        print("Setting value:", value)
+        before_value = label.text().split(':')[1].strip()
+        label.setText(f"{label.text().split(':')[0]}: {int(before_value) - int(value)}")
+        return
 
 
         

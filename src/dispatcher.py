@@ -1,9 +1,9 @@
 from functions import Wrapper
 
-class Pipe():
+class Dispatcher():
     def __init__(self, func1, func2, par_count):
-        self.func1 = func1
-        self.func2 = func2
+        self.OBFunc = func1
+        self.UIfunc = func2
         self.par_count = par_count
 
     def unpacker(self, args):
@@ -23,16 +23,11 @@ class Pipe():
         
     @Wrapper
     def execute(self, input_data):
-        values_start = self.unpacker(input_data) # Unpacker
+        values = self.unpacker(input_data) # Unpacker
         
-        input = self.func1(*values_start)        # Input from interface
-        
-        print("Pipe Input:", input)
-        if input is not None:
-            values_to_exit = values_start + (input,) # Values to exit
-        else:
-            values_to_exit = values_start
-        self.func2(*values_to_exit)              # Exit to objects
+        print("Dispatcher info:", input_data)
+        self.OBFunc(*values)
+        self.UIfunc(*values)
     
 if __name__ == "__main__":
     def f1(a, b):
@@ -41,6 +36,6 @@ if __name__ == "__main__":
     def f2(a, b):
         print(f"Function 2: {a * 2}, {b * 2}")
 
-    pipe = Pipe(f1, f2, 2)
+    pipe = Dispatcher(f1, f2, 2)
     pipe.execute((3, 5))
     pipe.execute(([7, 9]))

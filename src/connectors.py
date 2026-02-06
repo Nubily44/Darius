@@ -1,38 +1,37 @@
-from pipes import Pipe
+from dispatcher import Dispatcher
 from objects.objects import Personagem
 from interface import Window
-from pipes import Pipe
 from functions import Wrapper
 
 @Wrapper
-def handle_vida(personagem, window):
-    Pipe(
-        lambda p: window.setValue(window.interface_vida.label, window.interface_vida.input),
-        lambda p, v: p.setVida(v),
+def handle_vida(personagem, window, value):
+    Dispatcher(
+        lambda p: p.setVida(value),
+        lambda p: window.setValuediff(window.interface_vida.label, value),
         2
     ).execute((personagem))
 
 @Wrapper
-def handle_sanidade(personagem, window):
-    Pipe(
-        lambda p: window.setValue(window.interface_sanidade.label, window.interface_sanidade.input),
-        lambda p, v: p.setSanidade(v),
+def handle_sanidade(personagem, window, value):
+    Dispatcher(
+        lambda p: p.setSanidade(value),
+        lambda p: window.setValuediff(window.interface_sanidade.label, value),
         2
     ).execute((personagem))
 
 @Wrapper 
-def handle_esforco_deduct(personagem, window):
-    Pipe(
-        lambda p: window.deductValue(window.interface_esforco.label),
+def handle_esforco_deduct(personagem, window, value):
+    Dispatcher(
         lambda p: p.useEsforco(),
+        lambda p: window.setValue(window.interface_esforco.label, personagem.BlocoEsforco.getAtributo()),
         2
     ).execute((personagem))
 
 @Wrapper
-def handle_esforco_refresh(personagem, window):
-    Pipe(
-        lambda p: window.interface_esforco.label.setText(f"Esforço: {p.BlocoEsforco.getMaxAtributo()}"),
+def handle_esforco_refresh(personagem, window, value):
+    Dispatcher(
         lambda p: p.refreshEsforco(),
+        lambda p: window.interface_esforco.label.setText(f"Esforço: {value}"),
         1
     ).execute((personagem))
     
