@@ -41,7 +41,7 @@ def Wrapper(func):
             else:
                 arg_list.append(f"{k}: {v}")
 
-        print(f"Executando <{func.__name__}>\n({'\n'.join(arg_list)})\n")
+        #print(f"Executando <{func.__name__}>\n({'\n'.join(arg_list)})\n")
 
         # Measure execution time
         start = time.perf_counter()

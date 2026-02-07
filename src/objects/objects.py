@@ -67,12 +67,20 @@ class Personagem():
         self.pericias.append(bloco_pericia)
         
     @Wrapper
-    def usarPericia(self, nome_pericia, vantagem):
+    def usePericia(self, nome_pericia, vantagem):
         for bloco in self.pericias:
             for pericia in [bloco.p1, bloco.p2, bloco.p3]:
                 if pericia.nome == nome_pericia:
                     print("Usando Perícia:", nome_pericia)
                     return pericia.roll(vantagem)
+        return None
+    
+    @Wrapper
+    def searchPericia(self, nome_pericia):
+        for bloco in self.pericias:
+            for pericia in [bloco.p1, bloco.p2, bloco.p3]:
+                if pericia.nome == nome_pericia:
+                    return pericia
         return None
 
 #Sempre criar com quantidade máxima
@@ -103,9 +111,13 @@ class Pericia():
     def __init__(self, nome, valor):
         self.nome = nome
         self.valor = valor
+        self.last_roll = None
         
     def getValue(self):
         return self.valor
+    
+    def getLastRoll(self):
+        return self.last_roll
     
     def setValue(self, valor):
         self.valor = valor
@@ -115,21 +127,28 @@ class Pericia():
         print(result)
         if result == 1:
             print("Sucesso Crítico")
-            return 4
+            self.last_roll = "Crítico"
+            return "Crítico"
         if result <= self.valor/10:
             print("Sucesso Extremo")
-            return 3
+            self.last_roll = "Extremo"
+            return "Extremo"
         elif result <= self.valor/2:
             print("Sucesso Bom")
-            return 2
+            self.last_roll = "Bom"
+            return "Bom"
         elif result <= self.valor:
             print("Sucesso Normal")
-            return 1
+            self.last_roll = "Normal"
+            return "Normal"
         elif result >= 95:
             print("Desastre")
-            return -1
+            self.last_roll = "Desastre"
+            return "Desastre"
         else:
-            return 0
+            print("Falha")
+            self.last_roll = "Falha"
+            return "Falha"
         
         
 if __name__ == "__main__":

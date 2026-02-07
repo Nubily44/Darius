@@ -8,7 +8,7 @@ def handle_vida(personagem, window, value):
     Dispatcher(
         lambda p: p.setVida(value),
         lambda p: window.setValuediff(window.interface_vida.label, value),
-        2
+        1
     ).execute((personagem))
 
 @Wrapper
@@ -16,7 +16,7 @@ def handle_sanidade(personagem, window, value):
     Dispatcher(
         lambda p: p.setSanidade(value),
         lambda p: window.setValuediff(window.interface_sanidade.label, value),
-        2
+        1
     ).execute((personagem))
 
 @Wrapper 
@@ -24,7 +24,7 @@ def handle_esforco_deduct(personagem, window, value):
     Dispatcher(
         lambda p: p.useEsforco(),
         lambda p: window.setValue(window.interface_esforco.label, personagem.BlocoEsforco.getAtributo()),
-        2
+        1
     ).execute((personagem))
 
 @Wrapper
@@ -35,10 +35,20 @@ def handle_esforco_refresh(personagem, window, value):
         1
     ).execute((personagem))
     
+
+@Wrapper
+def handle_pericia_use(personagem, window, value):
+    Dispatcher(
+        lambda p: p.usePericia(value, 1),
+        lambda p: window.setValue(window.searchPericia(value).label, personagem.searchPericia(value).getLastRoll()),
+        1
+    ).execute((personagem))
     
-#def handle_pericia_use(personagem, window, pericia_name):
-#    Pipe(
-#        lambda p: window.
-#        lambda p, n: p.usePericia(n),
-#        2
-#    ).execute((personagem, pericia_name))
+@Wrapper
+def handle_pericia_use_adv(personagem, window, value, adv):
+    Dispatcher(
+        lambda p: p.usePericia(value, adv),
+        lambda p: window.setValue(window.searchPericia(value).label, personagem.searchPericia(value).getLastRoll()),
+        1
+    ).execute((personagem))
+    

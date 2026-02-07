@@ -100,19 +100,28 @@ class UsableObject(QObject):
         self.usb_refresh_signal.emit(value)
         
         
-class PericiaObject:
-    def __init__(self, name, value, font, smallfont):
+class PericiaObject(QObject):
+    
+    per_use_signal = Signal(str)
+    per_use_adv_signal = Signal(str, int)
+    
+    def __init__(self, name, value, font, smallfont, parent=None):
+        super().__init__(parent)
+        self.name = name
         self.container = QVBoxLayout()
         #self.container.setSpacing(30)
         self.subcontainer = QHBoxLayout()
         self.btn = StyledButton(150, 50, f"{name} ({value}%)", "#3465d9")
         
-        self.label = QLabel(f"Resultado: 0")
+        self.label = QLabel(f"Resultado: 0                ")
         self.label.setFont(font)
         
         self.input = QLineEdit()
         self.input.setPlaceholderText("Vantagem")
         self.input.setFixedWidth(100)
+        
+        self.btn.clicked.connect(self._emit_use)
+        self.input.returnPressed.connect(self._emit_use_adv)
 
         self.container.addWidget(self.btn, alignment=Qt.AlignCenter)
         self.subcontainer.addWidget(self.input)
@@ -121,6 +130,15 @@ class PericiaObject:
     
     def getLayout(self):
         return self.container
+    
+    def _emit_use(self):
+        value = self.name
+        self.per_use_signal.emit(value)
+        
+    def _emit_use_adv(self):
+        value = self.name
+        adv = int(self.input.text()) if self.input.text() else 1
+        self.per_use_adv_signal.emit(value, adv)
     
 class BlocoPericiasObject:
     def __init__(self, nome, font, smallfont):
@@ -162,9 +180,6 @@ class Window(QWidget):
         self.interface_vida = AttributeObject("Vida", vida, self.font, self.smallfont, parent=self)      
         self.interface_sanidade = AttributeObject("Sanidade", sanidade, self.font, self.smallfont, parent=self)
         
-        #self.interface_vida.input.returnPressed.connect(self.set_vida)
-        #self.interface_sanidade.input.returnPressed.connect(self.set_sanidade)
-        
         self.bar.addLayout(self.interface_vida.getLayout())
         self.bar.addLayout(self.interface_sanidade.getLayout())
         
@@ -175,9 +190,6 @@ class Window(QWidget):
         self.esforco_layout = QHBoxLayout()
         self.esforco_layout.setContentsMargins(120, 20, 120, 20)
         self.interface_esforco = UsableObject("Esforço", esforco, self.font, self.smallfont, parent=self, maxCount=esforco)
-        
-        #self.interface_esforco.refresh.clicked.connect(self.refresh_esforco)
-        #self.interface_esforco.deduct.clicked.connect(self.set_esforco)
         
         self.esforco_layout.addLayout(self.interface_esforco.getLayout())
         
@@ -193,8 +205,7 @@ class Window(QWidget):
         self.c4.setContentsMargins(0, 20, 0, 0)
         self.c5.setContentsMargins(0, 20, 0, 0)
         
-        
-        self.interface_pericias = {}
+        self.pericias_array = []
         
         for bloco in pericias:
             
@@ -204,7 +215,7 @@ class Window(QWidget):
             for pericia in [bloco.p1, bloco.p2, bloco.p3]:
                 pericia_obj = PericiaObject(pericia.nome, pericia.valor, self.font, self.smallfont)
                 bloco_layout.addLayout(pericia_obj.getLayout())
-                self.interface_pericias[pericia.nome] = pericia_obj
+                self.pericias_array.append(pericia_obj)
                 
             if len(self.c4.children()) < 3:
                 self.c4.addLayout(bloco_layout)
@@ -221,8 +232,7 @@ class Window(QWidget):
     @Wrapper
     def setValue(self, label: QLabel, value):
         print("Setting value:", value)
-        before_value = label.text().split(':')[1].strip()
-        label.setText(f"{label.text().split(':')[0]}: {int(value)}")
+        label.setText(f"{label.text().split(':')[0]}: {value}")
         return
     
     
@@ -232,6 +242,12 @@ class Window(QWidget):
         before_value = label.text().split(':')[1].strip()
         label.setText(f"{label.text().split(':')[0]}: {int(before_value) - int(value)}")
         return
+    
+    def searchPericia(self, nome):
+        for pericia in self.pericias_array:
+            if pericia.name == nome:
+                return pericia
+        return None
 
 
         
