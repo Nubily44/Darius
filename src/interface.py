@@ -1,8 +1,21 @@
 import sys
+import random
 from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit
-from PySide6.QtGui import QIcon, QFont, QColor
+from PySide6.QtGui import QIcon, QFont, QColor, QGuiApplication
 from PySide6.QtCore import QSize, Signal, Qt, QObject
 from functions import Wrapper
+
+def random_position(window):
+    screens = QGuiApplication.screens()
+    screen = random.choice(screens)
+    geo = screen.availableGeometry()
+
+    x = random.randint(geo.left(), geo.right() - window.width())
+    y = random.randint(geo.top(), geo.bottom() - window.height())
+
+    window.move(x, y)
+
+    window.move(x, y)
 
 class StyledButton(QPushButton):
     def __init__(self, width, height, text, color, image_path=None):
@@ -152,6 +165,26 @@ class BlocoPericiasObject:
     
     def getLayout(self):
         return self.container
+
+class botaoWindow(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Botão")
+        self.layout = QVBoxLayout()
+        
+        self.btn = StyledButton(200, 60, "Botão", "#000000")
+        self.btn.clicked.connect(self.handle_click)
+        
+        self.layout.addWidget(self.btn, alignment=Qt.AlignCenter)
+        self.setLayout(self.layout)
+        
+        self.children = []
+    
+    def handle_click(self):
+        window = botaoWindow()
+        window.show()
+        random_position(window)
+        self.children.append(window)
     
 
 class Window(QWidget):
@@ -160,8 +193,6 @@ class Window(QWidget):
     #set_sanidade = Signal()
     #set_esforco = Signal()
     #refresh_esforco = Signal()
-    use_pericia = Signal()
-    use_pericia_with_advantage = Signal()
     
     def __init__(self, vida, sanidade, esforco, pericias=None):
         super().__init__()
@@ -227,6 +258,13 @@ class Window(QWidget):
         
         self.total.addLayout(self.pericias_total)
         
+        
+        self.botao = StyledButton(200, 60, "Botão", "#000000")
+        self.botao.clicked.connect(self.handle_botao)
+        self.total.addWidget(self.botao, alignment=Qt.AlignCenter)
+        
+        self.botao_save = []
+        
         self.adjustSize()
     
     @Wrapper
@@ -248,6 +286,11 @@ class Window(QWidget):
             if pericia.name == nome:
                 return pericia
         return None
+
+    def handle_botao(self):
+        window = botaoWindow()
+        window.show()
+        self.botao_save.append(window)
 
 
         
