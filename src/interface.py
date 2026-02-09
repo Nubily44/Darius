@@ -90,13 +90,13 @@ class UsableObject(QObject):
         self.label = QLabel(f"{name}: {value}")
         self.label.setFont(font)
         
-        self.deduct = StyledButton(200, 60, "Esforço Gastar", "#cc5632")
-        self.refresh = StyledButton(200, 60, "Esforço Renovar", "#32cc6a")
+        self.deduct = StyledButton(200, 60, "Esforço Gastar", "#c72e00")
+        self.refresh = StyledButton(200, 60, "Esforço Renovar", "#00cf4c")
         
         self.deduct.clicked.connect(self._emit_deduct)
         self.refresh.clicked.connect(self._emit_refresh)
         
-        self.container.addWidget(self.label, alignment=Qt.AlignCenter)
+        self.container.addWidget(self.label)
         self.container.addWidget(self.deduct)
         self.container.addWidget(self.refresh)
         
@@ -121,10 +121,10 @@ class PericiaObject(QObject):
     def __init__(self, name, value, font, smallfont, parent=None):
         super().__init__(parent)
         self.name = name
-        self.container = QVBoxLayout()
+        self.container = QHBoxLayout()
         #self.container.setSpacing(30)
         self.subcontainer = QHBoxLayout()
-        self.btn = StyledButton(150, 50, f"{name} ({value}%)", "#3465d9")
+        self.btn = StyledButton(200, 80, f"{name} ({value}%)", "#055b4e")
         
         self.label = QLabel(f"Resultado: 0                ")
         self.label.setFont(font)
