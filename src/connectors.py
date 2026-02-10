@@ -1,6 +1,4 @@
 from dispatcher import Dispatcher
-from objects.objects import Personagem
-from interface import Window
 from functions import Wrapper
 
 @Wrapper
