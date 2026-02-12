@@ -46,7 +46,7 @@ class Personagem():
     
     @Wrapper
     def useEsforco(self):
-        print(f"[OBJECT]Usando Esforço: {self.BlocoEsforco.getAtributo()-1} / {self.BlocoEsforco.am1}")
+        print(f"[OBJECT]Usando Esforço: {self.BlocoEsforco.getAtributo()-1} / {self.BlocoEsforco.attm}")
         current = self.BlocoEsforco.getAtributo()
         if current > 0:
             self.BlocoEsforco.setAtributo(current - 1)
@@ -56,8 +56,8 @@ class Personagem():
     
     @Wrapper
     def refreshEsforco(self):
-        print(f"[OBJECT]Renovando Esforço: {self.BlocoEsforco.getAtributo()} / {self.BlocoEsforco.am1}")
-        self.BlocoEsforco.setAtributo(self.BlocoEsforco.am1)
+        print(f"[OBJECT]Renovando Esforço: {self.BlocoEsforco.getAtributo()} / {self.BlocoEsforco.attm}")
+        self.BlocoEsforco.setAtributo(self.BlocoEsforco.attm)
     
     @Wrapper 
     def addPericia(self, bloco_pericia):
