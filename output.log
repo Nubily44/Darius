@@ -1,0 +1,36 @@
+-------------------------------------- SETUP DONE
+[DISPATCHER] | Handling Perícia Use: Força
+    [OBJECT] | Usando Perícia: Força
+     [ROLLS] | d100: 48
+    [OBJECT] | Sucesso Bom
+ [INTERFACE] | Setting value: Bom
+[DISPATCHER] | Handling Perícia Use: Força
+    [OBJECT] | Usando Perícia: Força
+     [ROLLS] | d100: 20
+    [OBJECT] | Sucesso Bom
+ [INTERFACE] | Setting value: Bom
+[DISPATCHER] | Handling Perícia Use: Destreza
+    [OBJECT] | Usando Perícia: Destreza
+     [ROLLS] | d100: 80
+    [OBJECT] | Falha
+ [INTERFACE] | Setting value: Falha
+[DISPATCHER] | Handling Perícia Use: Inteligência
+    [OBJECT] | Usando Perícia: Inteligência
+     [ROLLS] | d100: 28
+    [OBJECT] | Sucesso Bom
+ [INTERFACE] | Setting value: Bom
+[DISPATCHER] | Handling Perícia Use: Lábia
+    [OBJECT] | Usando Perícia: Lábia
+     [ROLLS] | d100: 17
+    [OBJECT] | Sucesso Normal
+ [INTERFACE] | Setting value: Normal
+[DISPATCHER] | Handling Perícia Use: Furtividade
+    [OBJECT] | Usando Perícia: Furtividade
+     [ROLLS] | d100: 78
+    [OBJECT] | Falha
+ [INTERFACE] | Setting value: Falha
+[DISPATCHER] | Handling Perícia Use: Atletismo
+    [OBJECT] | Usando Perícia: Atletismo
+     [ROLLS] | d100: 40
+    [OBJECT] | Sucesso Normal
+ [INTERFACE] | Setting value: Normal

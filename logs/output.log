@@ -1,0 +1,26 @@
+-------------------------------------- SETUP DONE
+[DISPATCHER] | Handling Perícia Use: Força
+    [OBJECT] | Usando Perícia: Força
+     [ROLLS] | d100: 69
+    [OBJECT] | Sucesso Normal
+ [INTERFACE] | Setting value: Normal
+[DISPATCHER] | Handling Vida: 11
+    [OBJECT] | Set Vida: 89
+    [OBJECT] | Settando Vida de 100 para 90 (armor: 1)
+ [INTERFACE] | Setting value: 90
+[DISPATCHER] | Handling Sanidade: 44
+    [OBJECT] | Set Sanidade: 56
+    [OBJECT] | Settando Sanidade de 100 para 58 (armor: 2)
+ [INTERFACE] | Setting value: 58
+[DISPATCHER] | Handling Esforço Deduct: -1
+    [OBJECT] | Usando Esforço: 9 / 10
+    [OBJECT] | Settando Esforço de 10 para 9 (armor: 0)
+ [INTERFACE] | Setting value: 9
+[DISPATCHER] | Handling Esforço Refresh: 10
+    [OBJECT] | Renovando Esforço: 9 / 10
+    [OBJECT] | Settando Esforço de 9 para 10 (armor: 0)
+[DISPATCHER] | Handling Perícia Use: Força
+    [OBJECT] | Usando Perícia: Força
+     [ROLLS] | d100: 36
+    [OBJECT] | Sucesso Bom
+ [INTERFACE] | Setting value: Bom

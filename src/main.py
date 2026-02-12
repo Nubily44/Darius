@@ -5,10 +5,10 @@ from PySide6.QtWidgets import QApplication
 from objects.personagem import Personagem
 from objects.components import BlocoPericia, Pericia
 from interface import Window
-
+from functions import Tee
 from connectors import handle_esforco_deduct, handle_esforco_refresh, handle_vida, handle_sanidade, handle_pericia_use, handle_pericia_use_adv
 
-if __name__ == "__main__":
+def main():
     app = QApplication(sys.argv)
     Personagem1 = Personagem(vida=100, armor_vida=1, sanidade=100, armor_sanidade=2, nivel=10, classe="Classe")
     
@@ -32,3 +32,18 @@ if __name__ == "__main__":
     print("-------------------------------------- SETUP DONE")
     window.show()
     sys.exit(app.exec())
+    
+    
+if __name__ == "__main__":
+    with open("output.log", "w", encoding="utf-8") as f:
+        original_stdout = sys.stdout
+        original_stderr = sys.stderr
+
+        sys.stdout = Tee(original_stdout, f)
+        sys.stderr = Tee(original_stderr, f)
+
+        try:
+            main()
+        finally:
+            sys.stdout = original_stdout
+            sys.stderr = original_stderr

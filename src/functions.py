@@ -1,3 +1,4 @@
+import sys
 import random
 import time
 import pandas as pd
@@ -51,6 +52,19 @@ def Wrapper(func):
         #print(f"Tempo de execução: {end - start:.6f} segundos\n")
         return result
     return wrapper
+
+class Tee:
+    def __init__(self, *streams):
+        self.streams = streams
+
+    def write(self, data):
+        for stream in self.streams:
+            stream.write(data)
+            stream.flush()
+
+    def flush(self):
+        for stream in self.streams:
+            stream.flush()
 
 if __name__ == "__main__":
     
