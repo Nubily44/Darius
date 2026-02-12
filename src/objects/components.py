@@ -17,7 +17,7 @@ class BlocoAtributo():
         return self.att
     
     def setAtributo(self, att):
-        self.att = att - self.armor
+        self.att = att + self.armor
         
     def setliteralAtributo(self, att):
         self.att = att

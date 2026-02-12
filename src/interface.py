@@ -33,8 +33,8 @@ class StyledButton(QPushButton):
                 border: none;
                 border-radius: 10px;
                 color: white;
-                font-size: 16px;
-                padding: 8px;
+                font-size: 20px;
+                padding: 10px;
             }}
             QPushButton:hover {{
                 background-color: {hover_color.name()};
@@ -45,6 +45,11 @@ class StyledButton(QPushButton):
             icon = QIcon(image_path)
             self.setIcon(icon)
             self.setIconSize(QSize(height - 20, height - 20))
+
+class LabelObject(QLabel):
+    def __init__(self, text, font):
+        super().__init__(text)
+        self.setFont(font)
 
 class AttributeObject(QObject):
     
@@ -90,8 +95,8 @@ class UsableObject(QObject):
         self.label = QLabel(f"{name}: {value}")
         self.label.setFont(font)
         
-        self.deduct = StyledButton(200, 60, "Esforço Gastar", "#c72e00")
-        self.refresh = StyledButton(200, 60, "Esforço Renovar", "#00cf4c")
+        self.deduct = StyledButton(200, 60, "Esforço Gastar", "#994329")
+        self.refresh = StyledButton(200, 60, "Esforço Renovar", "#1b9146")
         
         self.deduct.clicked.connect(self._emit_deduct)
         self.refresh.clicked.connect(self._emit_refresh)
@@ -208,8 +213,8 @@ class Window(QWidget):
         self.bar = QHBoxLayout()
         self.bar.setContentsMargins(50, 20, 50, 20)
         
-        self.interface_vida = AttributeObject("Vida", vida, self.font, self.smallfont, parent=self)      
-        self.interface_sanidade = AttributeObject("Sanidade", sanidade, self.font, self.smallfont, parent=self)
+        self.interface_vida = AttributeObject(vida.nome, vida.getAtributo(), self.font, self.smallfont, parent=self)      
+        self.interface_sanidade = AttributeObject(sanidade.nome, sanidade.getAtributo(), self.font, self.smallfont, parent=self)
         
         self.bar.addLayout(self.interface_vida.getLayout())
         self.bar.addLayout(self.interface_sanidade.getLayout())
