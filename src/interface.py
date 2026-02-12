@@ -278,7 +278,7 @@ class Window(QWidget):
     
     @Wrapper
     def setValue(self, label: QLabel, value):
-        print("[INTERFACE]Setting value:", value)
+        print(" [INTERFACE] | Setting value:", value)
         label.setText(f"{label.text().split(':')[0]}: {value}")
         return
     
@@ -289,6 +289,7 @@ class Window(QWidget):
         return None
 
     def handle_botao(self):
+        print("...                                         botão")
         window = botaoWindow()
         window.show()
         self.botao_save.append(window)

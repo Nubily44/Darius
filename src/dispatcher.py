@@ -24,8 +24,6 @@ class Dispatcher():
     @Wrapper
     def execute(self, input_data):
         values = self.unpacker(input_data) # Unpacker
-        
-        print("Dispatcher info:", input_data)
         self.OBFunc(*values)
         self.UIfunc(*values)
     

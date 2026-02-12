@@ -10,7 +10,7 @@ def dice(n: int, advantage: int = 1) -> int:
     
     for _ in range(advantage):
         dices.append(random.randint(1, n))
-        print(f"d{n}: {dices[-1]}")
+        print(f"     [ROLLS] | d{n}: {dices[-1]}")
     return min(dices)
 
 def rolagem_sum(n: int, advantage: int = 1) -> int:
@@ -22,7 +22,7 @@ def rolagem_sum(n: int, advantage: int = 1) -> int:
     
     for _ in range(advantage):
         dices.append(random.randint(1, n))
-        print(f"d{n}: {dices[-1]}")
+        print(f"     [ROLLS] | d{n}: {dices[-1]}")
     return sum(dices)
 
 def Wrapper(func):

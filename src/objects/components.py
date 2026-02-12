@@ -17,7 +17,7 @@ class BlocoAtributo():
         return self.att
     
     def setAtributo(self, att):
-        print(f"[OBJECT]Setting {self.nome} from {self.att} to {att} (armor: {self.armor})")
+        print(f"    [OBJECT] | Settando {self.nome} de {self.att} para {att + self.armor} (armor: {self.armor})")
         self.att = att + self.armor
         
     def setliteralAtributo(self, att):
@@ -54,28 +54,27 @@ class Pericia():
         
     def roll(self, vantagem):
         result = dice(100, vantagem)
-        print(result)
         if result == 1:
-            print("[OBJECT]Sucesso Crítico")
+            print("    [OBJECT] | Sucesso Crítico")
             self.last_roll = "Crítico"
             return "Crítico"
         if result <= self.valor/10:
-            print("[OBJECT]Sucesso Extremo")
+            print("    [OBJECT] | Sucesso Extremo")
             self.last_roll = "Extremo"
             return "Extremo"
         elif result <= self.valor/2:
-            print("[OBJECT]Sucesso Bom")
+            print("    [OBJECT] | Sucesso Bom")
             self.last_roll = "Bom"
             return "Bom"
         elif result <= self.valor:
-            print("[OBJECT]Sucesso Normal")
+            print("    [OBJECT] | Sucesso Normal")
             self.last_roll = "Normal"
             return "Normal"
         elif result >= 95:
-            print("[OBJECT]Desastre")
+            print("    [OBJECT] | Desastre")
             self.last_roll = "Desastre"
             return "Desastre"
         else:
-            print("[OBJECT]Falha")
+            print("    [OBJECT] | Falha")
             self.last_roll = "Falha"
             return "Falha"
