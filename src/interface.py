@@ -121,7 +121,7 @@ class PericiaObject(QObject):
     def __init__(self, name, value, font, smallfont, parent=None):
         super().__init__(parent)
         self.name = name
-        self.container = QHBoxLayout()
+        self.container = QVBoxLayout()
         #self.container.setSpacing(30)
         self.subcontainer = QHBoxLayout()
         self.btn = StyledButton(200, 80, f"{name} ({value}%)", "#055b4e")

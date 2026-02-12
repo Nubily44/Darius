@@ -2,7 +2,8 @@ import sys
 
 from PySide6.QtWidgets import QApplication
 
-from objects.objects import Personagem, BlocoPericia, Pericia
+from objects.personagem import Personagem
+from objects.components import BlocoPericia, Pericia
 from interface import Window
 
 from connectors import handle_esforco_deduct, handle_esforco_refresh, handle_vida, handle_sanidade, handle_pericia_use, handle_pericia_use_adv

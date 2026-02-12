@@ -1,9 +1,9 @@
 import sys
 from pathlib import Path
+from objects.components import BlocoAtributo, BlocoPericia, Pericia
 BASE_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(BASE_DIR.parent))
 from functions import Wrapper
-from functions import dice
 
 class Personagem():
     def __init__(self, vida, sanidade, nivel, classe):
@@ -82,79 +82,3 @@ class Personagem():
                 if pericia.nome == nome_pericia:
                     return pericia
         return None
-
-#Sempre criar com quantidade máxima
-class BlocoAtributo():
-    def __init__(self, nome,a1):
-        self.nome = nome
-        self.a1 = a1
-        self.am1 = a1
-        
-    def getAtributo(self):
-        return self.a1
-    
-    def setAtributo(self, a1):
-        self.a1 = a1
-
-    def getMaxAtributo(self):
-        return self.am1
-        
-    
-class BlocoPericia():
-    def __init__(self, nome, p1, p2, p3):
-        self.nome = nome
-        self.p1 = p1
-        self.p2 = p2
-        self.p3 = p3
-                
-class Pericia():
-    def __init__(self, nome, valor):
-        self.nome = nome
-        self.valor = valor
-        self.last_roll = None
-        
-    def getValue(self):
-        return self.valor
-    
-    def getLastRoll(self):
-        return self.last_roll
-    
-    def setValue(self, valor):
-        self.valor = valor
-        
-    def roll(self, vantagem):
-        result = dice(100, vantagem)
-        print(result)
-        if result == 1:
-            print("Sucesso Crítico")
-            self.last_roll = "Crítico"
-            return "Crítico"
-        if result <= self.valor/10:
-            print("Sucesso Extremo")
-            self.last_roll = "Extremo"
-            return "Extremo"
-        elif result <= self.valor/2:
-            print("Sucesso Bom")
-            self.last_roll = "Bom"
-            return "Bom"
-        elif result <= self.valor:
-            print("Sucesso Normal")
-            self.last_roll = "Normal"
-            return "Normal"
-        elif result >= 95:
-            print("Desastre")
-            self.last_roll = "Desastre"
-            return "Desastre"
-        else:
-            print("Falha")
-            self.last_roll = "Falha"
-            return "Falha"
-        
-        
-if __name__ == "__main__":
-
-    bp = BlocoPericia("Teste", Pericia("Força", 50), Pericia("Destreza", 60), Pericia("Inteligência", 70))
-    Personagem1 = Personagem(vida=100, sanidade=100, nivel=10, classe="Classe")
-    Personagem1.addPericia(bp)
-    Personagem1.addPericia(bp)
-    Personagem1.usarPericia("Força", 2)
