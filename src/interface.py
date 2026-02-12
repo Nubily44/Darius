@@ -55,13 +55,16 @@ class AttributeObject(QObject):
     
     att_signal = Signal(int)
     
-    def __init__(self, name, value, font, smallfont, parent):
+    def __init__(self, name, value, armor, font, smallfont, parent):
         super().__init__(parent)
         self.container = QVBoxLayout()
         self.container.setSpacing(20)
         
         self.label = QLabel(f"{name}: {value}")
         self.label.setFont(font)
+        
+        self.armor_label = QLabel(f"Armor: {armor}")
+        self.armor_label.setFont(font)
         
         self.input = QLineEdit()
         self.input.setPlaceholderText("Digite o dano sofrido...")
@@ -71,6 +74,7 @@ class AttributeObject(QObject):
         self.input.returnPressed.connect(self._emit)
         
         self.container.addWidget(self.label, alignment=Qt.AlignCenter)
+        self.container.addWidget(self.armor_label, alignment=Qt.AlignCenter)
         self.container.addWidget(self.input, alignment=Qt.AlignCenter)
 
     def _emit(self):
@@ -213,8 +217,8 @@ class Window(QWidget):
         self.bar = QHBoxLayout()
         self.bar.setContentsMargins(50, 20, 50, 20)
         
-        self.interface_vida = AttributeObject(vida.nome, vida.getAtributo(), self.font, self.smallfont, parent=self)      
-        self.interface_sanidade = AttributeObject(sanidade.nome, sanidade.getAtributo(), self.font, self.smallfont, parent=self)
+        self.interface_vida = AttributeObject(vida.nome, vida.getAtributo(), vida.getArmor(), self.font, self.smallfont, parent=self)      
+        self.interface_sanidade = AttributeObject(sanidade.nome, sanidade.getAtributo(), sanidade.getArmor(), self.font, self.smallfont, parent=self)
         
         self.bar.addLayout(self.interface_vida.getLayout())
         self.bar.addLayout(self.interface_sanidade.getLayout())
@@ -274,16 +278,8 @@ class Window(QWidget):
     
     @Wrapper
     def setValue(self, label: QLabel, value):
-        print("Setting value:", value)
+        print("[INTERFACE]Setting value:", value)
         label.setText(f"{label.text().split(':')[0]}: {value}")
-        return
-    
-    
-    @Wrapper
-    def setValuediff(self, label: QLabel, value):
-        print("Setting value:", value)
-        before_value = label.text().split(':')[1].strip()
-        label.setText(f"{label.text().split(':')[0]}: {int(before_value) - int(value)}")
         return
     
     def searchPericia(self, nome):

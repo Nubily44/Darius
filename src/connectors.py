@@ -5,7 +5,7 @@ from functions import Wrapper
 def handle_vida(personagem, window, value):
     Dispatcher(
         lambda p: p.setVida(value),
-        lambda p: window.setValuediff(window.interface_vida.label, value),
+        lambda p: window.setValue(window.interface_vida.label, personagem.getVida().getAtributo()),
         1
     ).execute((personagem))
 
@@ -13,7 +13,7 @@ def handle_vida(personagem, window, value):
 def handle_sanidade(personagem, window, value):
     Dispatcher(
         lambda p: p.setSanidade(value),
-        lambda p: window.setValuediff(window.interface_sanidade.label, value),
+        lambda p: window.setValue(window.interface_sanidade.label, personagem.getSanidade().getAtributo()),
         1
     ).execute((personagem))
 

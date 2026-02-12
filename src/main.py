@@ -10,7 +10,7 @@ from connectors import handle_esforco_deduct, handle_esforco_refresh, handle_vid
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    Personagem1 = Personagem(vida=100, sanidade=100, nivel=10, classe="Classe")
+    Personagem1 = Personagem(vida=100, armor_vida=1, sanidade=100, armor_sanidade=2, nivel=10, classe="Classe")
     
     Personagem1.addPericia(BlocoPericia("Teste", Pericia("Força", 100), Pericia("Destreza", 60), Pericia("Inteligência", 70)))
     Personagem1.addPericia(BlocoPericia("Outro Teste", Pericia("Carisma", 40), Pericia("Sabedoria", 55), Pericia("Constituição", 65)))

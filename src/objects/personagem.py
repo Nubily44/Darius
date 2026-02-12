@@ -6,9 +6,9 @@ sys.path.insert(0, str(BASE_DIR.parent))
 from functions import Wrapper
 
 class Personagem():
-    def __init__(self, vida, sanidade, nivel, classe):
-        self.BlocoVida = BlocoAtributo("Vida", vida)
-        self.BlocoSanidade = BlocoAtributo("Sanidade", sanidade)
+    def __init__(self, vida, armor_vida, sanidade, armor_sanidade, nivel, classe):
+        self.BlocoVida = BlocoAtributo("Vida", vida, armor=armor_vida)
+        self.BlocoSanidade = BlocoAtributo("Sanidade", sanidade, armor=armor_sanidade)
         self.BlocoEsforco = BlocoAtributo("Esforço", nivel)
         self.Classe = classe
         
@@ -31,7 +31,7 @@ class Personagem():
     @Wrapper
     def setVida(self, vida):
         nova = self.getVida().getAtributo() - int(vida)
-        print("Set Vida:", nova)
+        print("[OBJECT]Set Vida:", nova)
         self.BlocoVida.setAtributo(nova)
     
     @Wrapper 
@@ -41,12 +41,12 @@ class Personagem():
     @Wrapper
     def setSanidade(self, sanidade):
         nova = self.getSanidade().getAtributo() - int(sanidade)
-        print ("Set Sanidade:", nova)
+        print ("[OBJECT]Set Sanidade:", nova)
         self.BlocoSanidade.setAtributo(nova)
     
     @Wrapper
     def useEsforco(self):
-        print(f"Usando Esforço: {self.BlocoEsforco.getAtributo()-1} / {self.BlocoEsforco.am1}")
+        print(f"[OBJECT]Usando Esforço: {self.BlocoEsforco.getAtributo()-1} / {self.BlocoEsforco.am1}")
         current = self.BlocoEsforco.getAtributo()
         if current > 0:
             self.BlocoEsforco.setAtributo(current - 1)
@@ -56,7 +56,7 @@ class Personagem():
     
     @Wrapper
     def refreshEsforco(self):
-        print(f"Renovando Esforço: {self.BlocoEsforco.getAtributo()} / {self.BlocoEsforco.am1}")
+        print(f"[OBJECT]Renovando Esforço: {self.BlocoEsforco.getAtributo()} / {self.BlocoEsforco.am1}")
         self.BlocoEsforco.setAtributo(self.BlocoEsforco.am1)
     
     @Wrapper 
@@ -71,7 +71,7 @@ class Personagem():
         for bloco in self.pericias:
             for pericia in [bloco.p1, bloco.p2, bloco.p3]:
                 if pericia.nome == nome_pericia:
-                    print("Usando Perícia:", nome_pericia)
+                    print("[OBJECT]Usando Perícia:", nome_pericia)
                     return pericia.roll(vantagem)
         return None
     
