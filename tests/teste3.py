@@ -1,4 +1,4 @@
----------------------------------- Ficha Do Personagem ---------------------------------- ( ( Pt 3 ) )
+sheet = """---------------------------------- Ficha Do Personagem ---------------------------------- ( ( Pt 3 ) )
 
                                                              Estado  (Nível: 09)
 
@@ -35,63 +35,66 @@ Constituição: 6/ 60 / 30                                                Cirurg
   Furtividade: 6 / 60/ 30                                                    Inteligência: 9 / 90 / 45
            Crime: 6 / 60 / 30                                                     Lábia: 6 / 60/ 30
     Distração: 2 / 20/ 10                                                     Psicologia: 3 / 30/ 15
+"""
+
+import re
+
+def extract_ficha_data(text: str) -> dict:
+    data = {}
+
+    # ---------- Estado ----------
+    data["Nivel"] = int(re.search(r"Nível:\s*(\d+)", text).group(1))
+
+    vida_atual, vida_max = re.search(
+        r"Vida:\s*\((\d+)\)\s*//\s*\((\d+)\)", text
+    ).groups()
+    data["Vida"] = int(vida_atual)
+    data["Vida_Max"] = int(vida_max)
+
+    san_atual, san_max = re.search(
+        r"Sanidade:\s*\((\d+)\)\s*//\s*\((\d+)\)", text
+    ).groups()
+    data["Sanidade"] = int(san_atual)
+    data["Sanidade_Max"] = int(san_max)
+
+    data["Esforço"] = int(re.search(r"Esforço:\s*(\d+)", text).group(1))
+    data["Armadura"] = int(re.search(r"Armadura:\s*(\d+)", text).group(1))
+
+    arm_s_match = re.search(r"Armadura de sanidade:\s*(\d+)", text)
+    data["Armadura_S"] = int(arm_s_match.group(1)) if arm_s_match else 0
+
+    # ---------- Skill extraction ----------
+    skill_pattern = re.compile(
+        r"([\wÀ-ÿ]+):\s*([\d,]+)\s*/\s*([\d,]+)\s*/\s*([\d,]+)"
+    )
+
+    skills = skill_pattern.findall(text)
+
+    def to_float(v):
+        return float(v.replace(",", "."))
+
+    # Blocks definition (fixed order)
+    blocks = [
+        "BP1", "BP2", "BP3", "BP4", "BP5", "BP6"
+    ]
+
+    skill_index = 0
+
+    for block in blocks:
+        data[f"{block}_N"] = block
+        data[f"{block}_V"] = 3  # each block has 3 skills
+
+        for i in range(1, 4):
+            name, v1, v2, v3 = skills[skill_index]
+
+            data[f"{block}_P{i}_N"] = name
+            data[f"{block}_P{i}_V"] = to_float(v2)
+
+            skill_index += 1
+
+    return data
 
 
+dados = sheet
 
-SEP
-Nivel: 
-Vida: 
-Vida_Max: 
-Sanidade: 
-Sanidade_Max: 
-Esforço:
-Armadura: 
-Armadura_S:
-BP1_N
-BP1_V
-BP1_P1_N
-BP1_P1_V
-BP1_P2_N
-BP1_P2_V
-BP1_P3_N
-BP1_P3_V
-BP2_N
-BP2_V
-BP2_P1_N
-BP2_P1_V
-BP2_P2_N
-BP2_P2_V
-BP2_P3_N
-BP2_P3_V
-BP3_N
-BP3_V
-BP3_P1_N
-BP3_P1_V
-BP3_P2_N
-BP3_P2_V
-BP3_P3_N
-BP3_P3_V
-BP4_N
-BP4_V
-BP4_P1_N
-BP4_P1_V
-BP4_P2_N
-BP4_P2_V
-BP4_P3_N
-BP4_P3_V
-BP5_N
-BP5_V
-BP5_P1_N
-BP5_P1_V
-BP5_P2_N
-BP5_P2_V
-BP5_P3_N
-BP5_P3_V
-BP6_N
-BP6_V
-BP6_P1_N
-BP6_P1_V
-BP6_P2_N
-BP6_P2_V
-BP6_P3_N
-BP6_P3_V
+print(dados["Vida"], dados["BP4_P2_N"], dados["BP4_P2_V"])
