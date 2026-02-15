@@ -39,62 +39,62 @@ Constituição: 6/ 60 / 30                                                Cirurg
 
 import re
 
+import re
+
 def extract_ficha_data(text: str) -> dict:
     data = {}
 
-    # ---------- Estado ----------
+    # -------- Estado --------
     data["Nivel"] = int(re.search(r"Nível:\s*(\d+)", text).group(1))
 
-    vida_atual, vida_max = re.search(
-        r"Vida:\s*\((\d+)\)\s*//\s*\((\d+)\)", text
-    ).groups()
-    data["Vida"] = int(vida_atual)
-    data["Vida_Max"] = int(vida_max)
+    vida_match = re.search(r"Vida:\s*\((\d+)\)\s*//\s*\((\d+)\)", text)
+    data["Vida"] = int(vida_match.group(1))
+    data["Vida_Max"] = int(vida_match.group(2))
 
-    san_atual, san_max = re.search(
-        r"Sanidade:\s*\((\d+)\)\s*//\s*\((\d+)\)", text
-    ).groups()
-    data["Sanidade"] = int(san_atual)
-    data["Sanidade_Max"] = int(san_max)
+    san_match = re.search(r"Sanidade:\s*\((\d+)\)\s*//\s*\((\d+)\)", text)
+    data["Sanidade"] = int(san_match.group(1))
+    data["Sanidade_Max"] = int(san_match.group(2))
 
     data["Esforço"] = int(re.search(r"Esforço:\s*(\d+)", text).group(1))
     data["Armadura"] = int(re.search(r"Armadura:\s*(\d+)", text).group(1))
 
     arm_s_match = re.search(r"Armadura de sanidade:\s*(\d+)", text)
-    data["Armadura_S"] = int(arm_s_match.group(1)) if arm_s_match else 0
+    data["Armadura_S"] = int(arm_s_match.group(1))
 
-    # ---------- Skill extraction ----------
-    skill_pattern = re.compile(
-        r"([\wÀ-ÿ]+):\s*([\d,]+)\s*/\s*([\d,]+)\s*/\s*([\d,]+)"
+    # -------- Perícias --------
+    # Capture all skill lines like:
+    # Agilidade: 8 / 80 / 40
+    skills = re.findall(
+        r"([A-Za-zçÇãÃéÉíÍôÔúÚ]+):\s*([\d,]+)\s*/\s*([\d,]+)\s*/\s*([\d,]+)",
+        text
     )
 
-    skills = skill_pattern.findall(text)
+    # Convert decimal comma to float properly
+    def parse_number(n):
+        return float(n.replace(",", "."))
 
-    def to_float(v):
-        return float(v.replace(",", "."))
-
-    # Blocks definition (fixed order)
-    blocks = [
-        "BP1", "BP2", "BP3", "BP4", "BP5", "BP6"
-    ]
-
-    skill_index = 0
-
-    for block in blocks:
-        data[f"{block}_N"] = block
-        data[f"{block}_V"] = 3  # each block has 3 skills
-
-        for i in range(1, 4):
-            name, v1, v2, v3 = skills[skill_index]
-
-            data[f"{block}_P{i}_N"] = name
-            data[f"{block}_P{i}_V"] = to_float(v2)
-
-            skill_index += 1
+    for i, (name, n1, n2, n3) in enumerate(skills[:6], start=1):
+        data[f"BP{i}_N"] = name
+        data[f"BP{i}_V"] = parse_number(n1)
+        data[f"BP{i}_P1_N"] = parse_number(n2)
+        data[f"BP{i}_P1_V"] = None
+        data[f"BP{i}_P2_N"] = parse_number(n3)
+        data[f"BP{i}_P2_V"] = None
+        data[f"BP{i}_P3_N"] = None
+        data[f"BP{i}_P3_V"] = None
 
     return data
 
 
-dados = sheet
+dados = extract_ficha_data(sheet)
 
-print(dados["Vida"], dados["BP4_P2_N"], dados["BP4_P2_V"])
+print(f"Nivel: {dados['Nivel']}")
+print(f"Vida: {dados['Vida']} {dados['Vida_Max']}")
+print(f"Sanidade: {dados['Sanidade']} {dados['Sanidade_Max']}")
+print(f"Esforço: {dados['Esforço']}")
+print(f"Armadura: {dados['Armadura']}")
+print(f"Armadura de sanidade: {dados['Armadura_S']}")
+
+for i in range(1, 7):
+    print(f"BP{i} - {dados[f'BP{i}_N']}: {dados[f'BP{i}_V']} / {dados[f'BP{i}_P1_N']} / {dados[f'BP{i}_P2_N']}")
+    
