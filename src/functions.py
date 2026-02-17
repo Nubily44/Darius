@@ -2,6 +2,7 @@ import sys
 import random
 import time
 import pandas as pd
+import re
 
 def dice(n: int, advantage: int = 1) -> int:
     if n < 1:
@@ -65,6 +66,50 @@ class Tee:
     def flush(self):
         for stream in self.streams:
             stream.flush()
+
+def extract_ficha_data(text: str) -> dict:
+    data = {}
+
+    # -------- Estado --------
+    data["Nivel"] = int(re.search(r"Nível:\s*(\d+)", text).group(1))
+
+    vida_match = re.search(r"Vida:\s*\((\d+)\)\s*//\s*\((\d+)\)", text)
+    data["Vida"] = int(vida_match.group(1))
+    data["Vida_Max"] = int(vida_match.group(2))
+
+    san_match = re.search(r"Sanidade:\s*\((\d+)\)\s*//\s*\((\d+)\)", text)
+    data["Sanidade"] = int(san_match.group(1))
+    data["Sanidade_Max"] = int(san_match.group(2))
+
+    data["Esforço"] = int(re.search(r"Esforço:\s*(\d+)", text).group(1))
+    data["Armadura"] = int(re.search(r"Armadura:\s*(\d+)", text).group(1))
+
+    arm_s_match = re.search(r"Armadura de sanidade:\s*(\d+)", text)
+    data["Armadura_S"] = int(arm_s_match.group(1))
+
+    # -------- Perícias --------
+    # Capture all skill lines like:
+    # Agilidade: 8 / 80 / 40
+    skills = re.findall(
+        r"([A-Za-zçÇãÃéÉíÍôÔúÚ]+):\s*([\d,]+)\s*/\s*([\d,]+)\s*/\s*([\d,]+)",
+        text
+    )
+
+    # Convert decimal comma to float properly
+    def parse_number(n):
+        return float(n.replace(",", "."))
+
+    for i, (name, n1, n2, n3) in enumerate(skills[:6], start=1):
+        data[f"BP{i}_N"] = name
+        data[f"BP{i}_V"] = parse_number(n1)
+        data[f"BP{i}_P1_N"] = parse_number(n2)
+        data[f"BP{i}_P1_V"] = None
+        data[f"BP{i}_P2_N"] = parse_number(n3)
+        data[f"BP{i}_P2_V"] = None
+        data[f"BP{i}_P3_N"] = None
+        data[f"BP{i}_P3_V"] = None
+
+    return data
 
 if __name__ == "__main__":
     
