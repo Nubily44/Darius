@@ -11,6 +11,10 @@ from connectors import handle_esforco_deduct, handle_esforco_refresh, handle_vid
 from functions import extract_ficha_data
 
 def main():
+    
+    ficha_path = "../contents/sheet_pt3.txt" 
+    
+    
     app = QApplication(sys.argv)
     Personagem1 = Personagem(vida=100, armor_vida=1, sanidade=100, armor_sanidade=2, nivel=10, classe="Classe")
     
