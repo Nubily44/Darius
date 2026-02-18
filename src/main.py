@@ -1,19 +1,24 @@
 import sys
+from pathlib import Path
 
 from PySide6.QtWidgets import QApplication
 
 from objects.personagem import Personagem
 from objects.components import BlocoPericia, Pericia
 from interface import Window
-from functions import Tee
+from functions import Tee, extract_ficha_data
 from connectors import handle_esforco_deduct, handle_esforco_refresh, handle_vida, handle_sanidade, handle_pericia_use, handle_pericia_use_adv
 
-from functions import extract_ficha_data
+BASE_DIR = Path(__file__).resolve().parent
+CONTENTS_DIR = BASE_DIR / "../contents"
+sys.path.append(str(CONTENTS_DIR))
+from sheet_pt3 import sheet
 
 def main():
     
-    ficha_path = "../contents/sheet_pt3.txt" 
-    
+    dados_ficha = extract_ficha_data(sheet)
+    for k, v in dados_ficha.items():
+        print(f"{k}: {v}")
     
     app = QApplication(sys.argv)
     Personagem1 = Personagem(vida=100, armor_vida=1, sanidade=100, armor_sanidade=2, nivel=10, classe="Classe")

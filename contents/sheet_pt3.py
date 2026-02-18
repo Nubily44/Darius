@@ -1,3 +1,5 @@
+sheet = """
+
 ---------------------------------- Ficha Do Personagem ---------------------------------- ( ( Pt 3 ) )
 
                                                              Estado  (Nível: 09)
@@ -35,9 +37,8 @@ Constituição: 6/ 60 / 30                                                Cirurg
   Furtividade: 6 / 60/ 30                                                    Inteligência: 9 / 90 / 45
            Crime: 6 / 60 / 30                                                     Lábia: 6 / 60/ 30
     Distração: 2 / 20/ 10                                                     Psicologia: 3 / 30/ 15
-
-
-
+"""
+"""
 SEP
 Nivel: 
 Vida: 
@@ -95,3 +96,4 @@ BP6_P2_N
 BP6_P2_V
 BP6_P3_N
 BP6_P3_V
+"""
