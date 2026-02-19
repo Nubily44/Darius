@@ -39,62 +39,96 @@ Constituição: 6/ 60 / 30                                                Cirurg
 
 import re
 
-import re
-
-def extract_ficha_data(text: str) -> dict:
+def extract_ficha_data(sheet: str) -> dict:
     data = {}
 
-    # -------- Estado --------
-    data["Nivel"] = int(re.search(r"Nível:\s*(\d+)", text).group(1))
+    # ---------- Estado ----------
+    data["Nivel"] = int(re.search(r"Nível:\s*(\d+)", sheet).group(1))
 
-    vida_match = re.search(r"Vida:\s*\((\d+)\)\s*//\s*\((\d+)\)", text)
-    data["Vida"] = int(vida_match.group(1))
-    data["Vida_Max"] = int(vida_match.group(2))
+    vida = re.search(r"Vida:\s*\((\d+)\)\s*//\s*\((\d+)\)", sheet)
+    data["Vida"] = int(vida.group(1))
+    data["Vida_Max"] = int(vida.group(2))
 
-    san_match = re.search(r"Sanidade:\s*\((\d+)\)\s*//\s*\((\d+)\)", text)
-    data["Sanidade"] = int(san_match.group(1))
-    data["Sanidade_Max"] = int(san_match.group(2))
+    sanidade = re.search(r"Sanidade:\s*\((\d+)\)\s*//\s*\((\d+)\)", sheet)
+    data["Sanidade"] = int(sanidade.group(1))
+    data["Sanidade_Max"] = int(sanidade.group(2))
 
-    data["Esforço"] = int(re.search(r"Esforço:\s*(\d+)", text).group(1))
-    data["Armadura"] = int(re.search(r"Armadura:\s*(\d+)", text).group(1))
+    data["Esforço"] = int(re.search(r"Esforço:\s*(\d+)", sheet).group(1))
+    data["Armadura"] = int(re.search(r"Armadura:\s*(\d+)", sheet).group(1))
+    data["Armadura_S"] = int(re.search(r"Armadura de sanidade:\s*(\d+)", sheet).group(1))
 
-    arm_s_match = re.search(r"Armadura de sanidade:\s*(\d+)", text)
-    data["Armadura_S"] = int(arm_s_match.group(1))
+    # ---------- Blocks ----------
+    block_pattern = r"-\*\*(.*?)\((.*?)\)\*\*-"
+    blocks = re.findall(block_pattern, sheet)
 
-    # -------- Perícias --------
-    # Capture all skill lines like:
-    # Agilidade: 8 / 80 / 40
-    skills = re.findall(
-        r"([A-Za-zçÇãÃéÉíÍôÔúÚ]+):\s*([\d,]+)\s*/\s*([\d,]+)\s*/\s*([\d,]+)",
-        text
-    )
+    for i, (name, values) in enumerate(blocks):
+        nums = [
+            float(x.strip().replace(",", "."))
+            for x in values.split("+")
+        ]
+        data[f"BP{i+1}_N"] = name.strip()
+        data[f"BP{i+1}_V"] = max(nums)
 
-    # Convert decimal comma to float properly
-    def parse_number(n):
-        return float(n.replace(",", "."))
+    # ---------- Skills ----------
+    skill_pattern = r"([A-Za-zÀ-ÿçÇãõéíúêôÁÉÍÓÚÊÔÃÕ]+):\s*([\d,\.]+)\s*/\s*([\d,\.]+)\s*/\s*([\d,\.]+)"
+    skills = re.findall(skill_pattern, sheet)
 
-    for i, (name, n1, n2, n3) in enumerate(skills[:6], start=1):
-        data[f"BP{i}_N"] = name
-        data[f"BP{i}_V"] = parse_number(n1)
-        data[f"BP{i}_P1_N"] = parse_number(n2)
-        data[f"BP{i}_P1_V"] = None
-        data[f"BP{i}_P2_N"] = parse_number(n3)
-        data[f"BP{i}_P2_V"] = None
-        data[f"BP{i}_P3_N"] = None
-        data[f"BP{i}_P3_V"] = None
+    # Assign vertically (pairs of blocks)
+    skill_index = 0
+    for pair_start in range(0, 6, 2):  # (0-1), (2-3), (4-5)
+        left_block = pair_start + 1
+        right_block = pair_start + 2
+
+        for p in range(1, 4):  # 3 skills each
+            # Left column skill
+            name, v1, v2, v3 = skills[skill_index]
+            values = [float(v.replace(",", ".")) for v in (v1, v2, v3)]
+            data[f"BP{left_block}_P{p}_N"] = name.strip()
+            data[f"BP{left_block}_P{p}_V"] = max(values)
+            skill_index += 1
+
+            # Right column skill
+            name, v1, v2, v3 = skills[skill_index]
+            values = [float(v.replace(",", ".")) for v in (v1, v2, v3)]
+            data[f"BP{right_block}_P{p}_N"] = name.strip()
+            data[f"BP{right_block}_P{p}_V"] = max(values)
+            skill_index += 1
 
     return data
 
+def sort_ficha_dict(data: dict) -> dict:
+    def sort_key(key):
+        # Estado fields first
+        estado_order = [
+            "Nivel", "Vida", "Vida_Max",
+            "Sanidade", "Sanidade_Max",
+            "Esforço", "Armadura", "Armadura_S"
+        ]
+
+        if key in estado_order:
+            return (0, estado_order.index(key))
+
+        # Match BP structure
+        match = re.match(r"BP(\d+)(?:_P(\d+))?_(N|V)", key)
+        if match:
+            bp = int(match.group(1))
+            p = match.group(2)
+            nv = match.group(3)
+
+            # Block name/value first
+            if p is None:
+                return (1, bp, 0, 0 if nv == "N" else 1)
+
+            # Then skills ordered
+            return (1, bp, int(p), 0 if nv == "N" else 1)
+
+        # Fallback
+        return (2, key)
+
+    sorted_keys = sorted(data.keys(), key=sort_key)
+    return {k: data[k] for k in sorted_keys}
 
 dados = extract_ficha_data(sheet)
-
-print(f"Nivel: {dados['Nivel']}")
-print(f"Vida: {dados['Vida']} {dados['Vida_Max']}")
-print(f"Sanidade: {dados['Sanidade']} {dados['Sanidade_Max']}")
-print(f"Esforço: {dados['Esforço']}")
-print(f"Armadura: {dados['Armadura']}")
-print(f"Armadura de sanidade: {dados['Armadura_S']}")
-
-for i in range(1, 7):
-    print(f"BP{i} - {dados[f'BP{i}_N']}: {dados[f'BP{i}_V']} / {dados[f'BP{i}_P1_N']} / {dados[f'BP{i}_P2_N']}")
-    
+dados_sort = sort_ficha_dict(dados)
+for k, v in dados_sort.items():
+    print(k, ":", v)
