@@ -39,6 +39,38 @@ Constituição: 6/ 60 / 30                                                Cirurg
 
 import re
 
+def sort_ficha_dict(data: dict) -> dict:
+    def sort_key(key):
+        # Estado fields first
+        estado_order = [
+            "Nivel", "Vida", "Vida_Max",
+            "Sanidade", "Sanidade_Max",
+            "Esforço", "Armadura", "Armadura_S"
+        ]
+
+        if key in estado_order:
+            return (0, estado_order.index(key))
+
+        # Match BP structure
+        match = re.match(r"BP(\d+)(?:_P(\d+))?_(N|V)", key)
+        if match:
+            bp = int(match.group(1))
+            p = match.group(2)
+            nv = match.group(3)
+
+            # Block name/value first
+            if p is None:
+                return (1, bp, 0, 0 if nv == "N" else 1)
+
+            # Then skills ordered
+            return (1, bp, int(p), 0 if nv == "N" else 1)
+
+        # Fallback
+        return (2, key)
+
+    sorted_keys = sorted(data.keys(), key=sort_key)
+    return {k: data[k] for k in sorted_keys}
+
 def extract_ficha_data(sheet: str) -> dict:
     data = {}
 
@@ -94,39 +126,10 @@ def extract_ficha_data(sheet: str) -> dict:
             data[f"BP{right_block}_P{p}_V"] = max(values)
             skill_index += 1
 
-    return data
+    sorted_data = sort_ficha_dict(data)
+    return sorted_data
 
-def sort_ficha_dict(data: dict) -> dict:
-    def sort_key(key):
-        # Estado fields first
-        estado_order = [
-            "Nivel", "Vida", "Vida_Max",
-            "Sanidade", "Sanidade_Max",
-            "Esforço", "Armadura", "Armadura_S"
-        ]
 
-        if key in estado_order:
-            return (0, estado_order.index(key))
-
-        # Match BP structure
-        match = re.match(r"BP(\d+)(?:_P(\d+))?_(N|V)", key)
-        if match:
-            bp = int(match.group(1))
-            p = match.group(2)
-            nv = match.group(3)
-
-            # Block name/value first
-            if p is None:
-                return (1, bp, 0, 0 if nv == "N" else 1)
-
-            # Then skills ordered
-            return (1, bp, int(p), 0 if nv == "N" else 1)
-
-        # Fallback
-        return (2, key)
-
-    sorted_keys = sorted(data.keys(), key=sort_key)
-    return {k: data[k] for k in sorted_keys}
 
 dados = extract_ficha_data(sheet)
 dados_sort = sort_ficha_dict(dados)
