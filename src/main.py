@@ -20,7 +20,7 @@ def main():
     for k, v in dados_ficha.items():
         print(f"{k}: {v}")
         
-    print(dados_ficha["Nivel"])
+    print(dados_ficha["Vida"])
     
     app = QApplication(sys.argv)
     Personagem1 = Personagem(vida=100, armor_vida=1, sanidade=100, armor_sanidade=2, nivel=10, classe="Classe")
