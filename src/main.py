@@ -23,7 +23,7 @@ def main():
     print(dados_ficha["Vida"])
     
     app = QApplication(sys.argv)
-    Personagem1 = Personagem(vida=100, armor_vida=1, sanidade=100, armor_sanidade=2, nivel=10, classe="Classe")
+    Personagem1 = Personagem(vida=dados_ficha["Vida"], armor_vida=dados_ficha["Armadura"], sanidade=dados_ficha["Sanidade"], armor_sanidade=dados_ficha["Armadura_S"], nivel=dados_ficha["Nivel"], classe="Classe")
     
     Personagem1.addPericia(BlocoPericia("Teste", Pericia("Força", 100), Pericia("Destreza", 60), Pericia("Inteligência", 70)))
     Personagem1.addPericia(BlocoPericia("Outro Teste", Pericia("Carisma", 40), Pericia("Sabedoria", 55), Pericia("Constituição", 65)))
