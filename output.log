@@ -56,3 +56,18 @@ BP6_P3_N: Psicologia
 BP6_P3_V: 30.0
 65
 -------------------------------------- SETUP DONE
+[DISPATCHER] | Handling Esforço Deduct: -1
+    [OBJECT] | Usando Esforço: 8 / 9
+    [OBJECT] | Settando Esforço de 9 para 8 (armor: 0)
+ [INTERFACE] | Setting value: 8
+[DISPATCHER] | Handling Esforço Deduct: -1
+    [OBJECT] | Usando Esforço: 7 / 9
+    [OBJECT] | Settando Esforço de 8 para 7 (armor: 0)
+ [INTERFACE] | Setting value: 7
+[DISPATCHER] | Handling Esforço Deduct: -1
+    [OBJECT] | Usando Esforço: 6 / 9
+    [OBJECT] | Settando Esforço de 7 para 6 (armor: 0)
+ [INTERFACE] | Setting value: 6
+[DISPATCHER] | Handling Esforço Refresh: 9
+    [OBJECT] | Renovando Esforço: 6 / 9
+    [OBJECT] | Settando Esforço de 6 para 9 (armor: 0)

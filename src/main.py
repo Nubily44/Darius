@@ -25,13 +25,57 @@ def main():
     app = QApplication(sys.argv)
     Personagem1 = Personagem(vida=dados_ficha["Vida"], armor_vida=dados_ficha["Armadura"], sanidade=dados_ficha["Sanidade"], armor_sanidade=dados_ficha["Armadura_S"], nivel=dados_ficha["Nivel"], classe="Classe")
     
-    Personagem1.addPericia(BlocoPericia(str(dados_ficha["BP1_N"]), Pericia(dados_ficha["BP1_P1_N"], dados_ficha["BP1_P1_V"]), Pericia("Destreza", 60), Pericia("Inteligência", 70)))
+    Personagem1.addPericia(
+        BlocoPericia(
+            str(dados_ficha["BP1_N"]), 
+            Pericia(dados_ficha["BP1_P1_N"], dados_ficha["BP1_P1_V"]), 
+            Pericia(dados_ficha["BP1_P2_N"], dados_ficha["BP1_P2_V"]), 
+            Pericia(dados_ficha["BP1_P3_N"], dados_ficha["BP1_P3_V"])))
+    
+    Personagem1.addPericia(
+        BlocoPericia(
+            str(dados_ficha["BP2_N"]), 
+            Pericia(dados_ficha["BP2_P1_N"], dados_ficha["BP2_P1_V"]), 
+            Pericia(dados_ficha["BP2_P2_N"], dados_ficha["BP2_P2_V"]), 
+            Pericia(dados_ficha["BP2_P3_N"], dados_ficha["BP2_P3_V"])))
+    
+    Personagem1.addPericia(
+        BlocoPericia(
+            str(dados_ficha["BP3_N"]), 
+            Pericia(dados_ficha["BP3_P1_N"], dados_ficha["BP3_P1_V"]), 
+            Pericia(dados_ficha["BP3_P2_N"], dados_ficha["BP3_P2_V"]), 
+            Pericia(dados_ficha["BP3_P3_N"], dados_ficha["BP3_P3_V"])))
+    
+    Personagem1.addPericia(
+        BlocoPericia(
+            str(dados_ficha["BP4_N"]), 
+            Pericia(dados_ficha["BP4_P1_N"], dados_ficha["BP4_P1_V"]), 
+            Pericia(dados_ficha["BP4_P2_N"], dados_ficha["BP4_P2_V"]), 
+            Pericia(dados_ficha["BP4_P3_N"], dados_ficha["BP4_P3_V"])))
+    
+    Personagem1.addPericia(
+        BlocoPericia(
+            str(dados_ficha["BP5_N"]), 
+            Pericia(dados_ficha["BP5_P1_N"], dados_ficha["BP5_P1_V"]), 
+            Pericia(dados_ficha["BP5_P2_N"], dados_ficha["BP5_P2_V"]), 
+            Pericia(dados_ficha["BP5_P3_N"], dados_ficha["BP5_P3_V"])))
+    
+    Personagem1.addPericia(
+        BlocoPericia(
+            str(dados_ficha["BP6_N"]), 
+            Pericia(dados_ficha["BP6_P1_N"], dados_ficha["BP6_P1_V"]), 
+            Pericia(dados_ficha["BP6_P2_N"], dados_ficha["BP6_P2_V"]), 
+            Pericia(dados_ficha["BP6_P3_N"], dados_ficha["BP6_P3_V"])))
+    
+    
+    
+    
     Personagem1.addPericia(BlocoPericia(str(dados_ficha["BP2_N"]), Pericia("Carisma", 40), Pericia("Sabedoria", 55), Pericia("Constituição", 65)))
     Personagem1.addPericia(BlocoPericia(str(dados_ficha["BP3_N"]), Pericia("Percepção", 70), Pericia("Vontade", 80), Pericia("Agilidade", 90)))
     Personagem1.addPericia(BlocoPericia(str(dados_ficha["BP4_N"]), Pericia("Lábia", 30), Pericia("Furtividade", 45), Pericia("Atletismo", 75)))
     Personagem1.addPericia(BlocoPericia(str(dados_ficha["BP5_N"]), Pericia("Medicina", 60), Pericia("Tecnologia", 50), Pericia("Ciência", 40)))
     Personagem1.addPericia(BlocoPericia(str(dados_ficha["BP6_N"]), Pericia("Sobrevivência", 55), Pericia("Intuição", 65), Pericia("Armas", 85)))
-    
+    Personagem1.addPericia(BlocoPericia(str(dados_ficha["BP6_N"]), Pericia("Sobrevivênciaaa", 55), Pericia("Intuição", 65), Pericia("Armas", 85)))
     window = Window(Personagem1.getVida(), Personagem1.getSanidade(), Personagem1.BlocoEsforco.getAtributo(), Personagem1.getPericias())
     window.interface_vida.att_signal.connect(lambda value: handle_vida(Personagem1, window, value))
     window.interface_sanidade.att_signal.connect(lambda value: handle_sanidade(Personagem1, window, value))
