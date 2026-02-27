@@ -30,57 +30,16 @@ def main():
     
     # Pericias adicionadas via ficha
     
-    Personagem1.addPericia(
-        BlocoPericia(
-            str(dados_ficha["BP1_N"]+str(dados_ficha["BP1_V"])), 
-            Pericia(dados_ficha["BP1_P1_N"], dados_ficha["BP1_P1_V"]), 
-            Pericia(dados_ficha["BP1_P2_N"], dados_ficha["BP1_P2_V"]), 
-            Pericia(dados_ficha["BP1_P3_N"], dados_ficha["BP1_P3_V"])))
+    for i in range(1, 7):
+        Personagem1.addPericia(
+            BlocoPericia(
+                f"{str(dados_ficha[f"BP{i}_N"])} ({str(dados_ficha[f"BP{i}_V"])})",
+                Pericia(dados_ficha[f"BP{i}_P1_N"], dados_ficha[f"BP{i}_P1_V"]),
+                Pericia(dados_ficha[f"BP{i}_P2_N"], dados_ficha[f"BP{i}_P2_V"]),
+                Pericia(dados_ficha[f"BP{i}_P3_N"], dados_ficha[f"BP{i}_P3_V"]),
+            )
+        )
     
-    Personagem1.addPericia(
-        BlocoPericia(
-            str(dados_ficha["BP2_N"]), 
-            Pericia(dados_ficha["BP2_P1_N"], dados_ficha["BP2_P1_V"]), 
-            Pericia(dados_ficha["BP2_P2_N"], dados_ficha["BP2_P2_V"]), 
-            Pericia(dados_ficha["BP2_P3_N"], dados_ficha["BP2_P3_V"])))
-    
-    Personagem1.addPericia(
-        BlocoPericia(
-            str(dados_ficha["BP3_N"]), 
-            Pericia(dados_ficha["BP3_P1_N"], dados_ficha["BP3_P1_V"]), 
-            Pericia(dados_ficha["BP3_P2_N"], dados_ficha["BP3_P2_V"]), 
-            Pericia(dados_ficha["BP3_P3_N"], dados_ficha["BP3_P3_V"])))
-    
-    Personagem1.addPericia(
-        BlocoPericia(
-            str(dados_ficha["BP4_N"]), 
-            Pericia(dados_ficha["BP4_P1_N"], dados_ficha["BP4_P1_V"]), 
-            Pericia(dados_ficha["BP4_P2_N"], dados_ficha["BP4_P2_V"]), 
-            Pericia(dados_ficha["BP4_P3_N"], dados_ficha["BP4_P3_V"])))
-    
-    Personagem1.addPericia(
-        BlocoPericia(
-            str(dados_ficha["BP5_N"]), 
-            Pericia(dados_ficha["BP5_P1_N"], dados_ficha["BP5_P1_V"]), 
-            Pericia(dados_ficha["BP5_P2_N"], dados_ficha["BP5_P2_V"]), 
-            Pericia(dados_ficha["BP5_P3_N"], dados_ficha["BP5_P3_V"])))
-    
-    Personagem1.addPericia(
-        BlocoPericia(
-            str(dados_ficha["BP6_N"]), 
-            Pericia(dados_ficha["BP6_P1_N"], dados_ficha["BP6_P1_V"]), 
-            Pericia(dados_ficha["BP6_P2_N"], dados_ficha["BP6_P2_V"]), 
-            Pericia(dados_ficha["BP6_P3_N"], dados_ficha["BP6_P3_V"])))
-    
-    
-    
-    
-    Personagem1.addPericia(BlocoPericia(str(dados_ficha["BP2_N"]), Pericia("Carisma", 40), Pericia("Sabedoria", 55), Pericia("Constituição", 65)))
-    Personagem1.addPericia(BlocoPericia(str(dados_ficha["BP3_N"]), Pericia("Percepção", 70), Pericia("Vontade", 80), Pericia("Agilidade", 90)))
-    Personagem1.addPericia(BlocoPericia(str(dados_ficha["BP4_N"]), Pericia("Lábia", 30), Pericia("Furtividade", 45), Pericia("Atletismo", 75)))
-    Personagem1.addPericia(BlocoPericia(str(dados_ficha["BP5_N"]), Pericia("Medicina", 60), Pericia("Tecnologia", 50), Pericia("Ciência", 40)))
-    Personagem1.addPericia(BlocoPericia(str(dados_ficha["BP6_N"]), Pericia("Sobrevivência", 55), Pericia("Intuição", 65), Pericia("Armas", 85)))
-    Personagem1.addPericia(BlocoPericia(str(dados_ficha["BP6_N"]), Pericia("Sobrevivênciaaa", 55), Pericia("Intuição", 65), Pericia("Armas", 85)))
     window = Window(Personagem1.getVida(), Personagem1.getSanidade(), Personagem1.BlocoEsforco.getAtributo(), Personagem1.getPericias())
     window.interface_vida.att_signal.connect(lambda value: handle_vida(Personagem1, window, value))
     window.interface_sanidade.att_signal.connect(lambda value: handle_sanidade(Personagem1, window, value))

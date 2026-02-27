@@ -1,1 +1,41 @@
 -------------------------------------- SETUP DONE
+[DISPATCHER] | Handling Perícia Use: Agilidade
+    [OBJECT] | Usando Perícia: Agilidade
+     [ROLLS] | d100: 73
+    [OBJECT] | Sucesso Normal
+ [INTERFACE] | Setting value: Normal
+[DISPATCHER] | Handling Perícia Use: Constituição
+    [OBJECT] | Usando Perícia: Constituição
+     [ROLLS] | d100: 15
+    [OBJECT] | Sucesso Bom
+ [INTERFACE] | Setting value: Bom
+[DISPATCHER] | Handling Perícia Use: Cirurgia
+    [OBJECT] | Usando Perícia: Cirurgia
+     [ROLLS] | d100: 42
+    [OBJECT] | Sucesso Normal
+ [INTERFACE] | Setting value: Normal
+[DISPATCHER] | Handling Perícia Use: Anatomia
+    [OBJECT] | Usando Perícia: Anatomia
+     [ROLLS] | d100: 2
+    [OBJECT] | Sucesso Extremo
+ [INTERFACE] | Setting value: Extremo
+[DISPATCHER] | Handling Perícia Use: Vigilância
+    [OBJECT] | Usando Perícia: Vigilância
+     [ROLLS] | d100: 95
+    [OBJECT] | Desastre
+ [INTERFACE] | Setting value: Desastre
+[DISPATCHER] | Handling Perícia Use: Inteligência
+    [OBJECT] | Usando Perícia: Inteligência
+     [ROLLS] | d100: 29
+    [OBJECT] | Sucesso Bom
+ [INTERFACE] | Setting value: Bom
+[DISPATCHER] | Handling Perícia Use: Lábia
+    [OBJECT] | Usando Perícia: Lábia
+     [ROLLS] | d100: 95
+    [OBJECT] | Desastre
+ [INTERFACE] | Setting value: Desastre
+[DISPATCHER] | Handling Perícia Use: Psicologia
+    [OBJECT] | Usando Perícia: Psicologia
+     [ROLLS] | d100: 65
+    [OBJECT] | Falha
+ [INTERFACE] | Setting value: Falha
