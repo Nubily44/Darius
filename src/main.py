@@ -9,27 +9,30 @@ from interface import Window
 from functions import Tee, extract_ficha_data
 from connectors import handle_esforco_deduct, handle_esforco_refresh, handle_vida, handle_sanidade, handle_pericia_use, handle_pericia_use_adv
 
-BASE_DIR = Path(__file__).resolve().parent
-CONTENTS_DIR = BASE_DIR / "../contents"
-sys.path.append(str(CONTENTS_DIR))
+import os
+
+from pathlib import Path
+
+sys.path.append(str(Path(__file__).resolve().parent.parent / "contents"))
+
 from sheet_pt3 import sheet
+
 
 def main():
     
     dados_ficha = extract_ficha_data(sheet)
-    for k, v in dados_ficha.items():
-        print(f"{k}: {v}")
+    #for k, v in dados_ficha.items():
+    #    print(f"{k}: {v}")
         
-    print(dados_ficha["Vida"])
     
     app = QApplication(sys.argv)
     Personagem1 = Personagem(vida=dados_ficha["Vida"], armor_vida=dados_ficha["Armadura"], sanidade=dados_ficha["Sanidade"], armor_sanidade=dados_ficha["Armadura_S"], nivel=dados_ficha["Nivel"], classe="Classe")
     
-    # Pericias adicionadas via ficha (eu mereço essas férias)
+    # Pericias adicionadas via ficha
     
     Personagem1.addPericia(
         BlocoPericia(
-            str(dados_ficha["BP1_N"]), 
+            str(dados_ficha["BP1_N"]+str(dados_ficha["BP1_V"])), 
             Pericia(dados_ficha["BP1_P1_N"], dados_ficha["BP1_P1_V"]), 
             Pericia(dados_ficha["BP1_P2_N"], dados_ficha["BP1_P2_V"]), 
             Pericia(dados_ficha["BP1_P3_N"], dados_ficha["BP1_P3_V"])))

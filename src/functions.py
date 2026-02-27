@@ -127,7 +127,7 @@ def extract_ficha_data(sheet: str) -> dict:
             for x in values.split("+")
         ]
         data[f"BP{i+1}_N"] = name.strip()
-        data[f"BP{i+1}_V"] = max(nums)
+        data[f"BP{i+1}_V"] = int(sum(nums))
 
     # ---------- Skills ----------
     skill_pattern = r"([A-Za-zÀ-ÿçÇãõéíúêôÁÉÍÓÚÊÔÃÕ]+):\s*([\d,\.]+)\s*/\s*([\d,\.]+)\s*/\s*([\d,\.]+)"
@@ -144,14 +144,14 @@ def extract_ficha_data(sheet: str) -> dict:
             name, v1, v2, v3 = skills[skill_index]
             values = [float(v.replace(",", ".")) for v in (v1, v2, v3)]
             data[f"BP{left_block}_P{p}_N"] = name.strip()
-            data[f"BP{left_block}_P{p}_V"] = max(values)
+            data[f"BP{left_block}_P{p}_V"] = int(max(values))
             skill_index += 1
 
             # Right column skill
             name, v1, v2, v3 = skills[skill_index]
             values = [float(v.replace(",", ".")) for v in (v1, v2, v3)]
             data[f"BP{right_block}_P{p}_N"] = name.strip()
-            data[f"BP{right_block}_P{p}_V"] = max(values)
+            data[f"BP{right_block}_P{p}_V"] = int(max(values))
             skill_index += 1
 
     sorted_data = sort_ficha_dict(data)
