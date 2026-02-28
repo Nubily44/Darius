@@ -33,7 +33,7 @@ class StyledButton(QPushButton):
                 border: none;
                 border-radius: 10px;
                 color: white;
-                font-size: 20px;
+                font-size: 14px;
                 padding: 10px;
             }}
             QPushButton:hover {{
@@ -63,12 +63,12 @@ class AttributeObject(QObject):
         self.label = QLabel(f"{name}: {value}")
         self.label.setFont(font)
         
-        self.armor_label = QLabel(f"Armor: {armor}")
+        self.armor_label = QLabel(f"Armadura: {armor}")
         self.armor_label.setFont(font)
         
         self.input = QLineEdit()
         self.input.setPlaceholderText("Digite o dano sofrido...")
-        self.input.setFixedWidth(200)
+        self.input.setFixedWidth(150)
         self.input.setFont(smallfont)
         
         self.input.returnPressed.connect(self._emit)
@@ -99,8 +99,8 @@ class UsableObject(QObject):
         self.label = QLabel(f"{name}: {value}")
         self.label.setFont(font)
         
-        self.deduct = StyledButton(200, 60, "Esforço Gastar", "#994329")
-        self.refresh = StyledButton(200, 60, "Esforço Renovar", "#1b9146")
+        self.deduct = StyledButton(120, 40, "Gastar", "#994329")
+        self.refresh = StyledButton(120, 40, "Renovar", "#1b9146")
         
         self.deduct.clicked.connect(self._emit_deduct)
         self.refresh.clicked.connect(self._emit_refresh)
@@ -133,14 +133,14 @@ class PericiaObject(QObject):
         self.container = QVBoxLayout()
         #self.container.setSpacing(30)
         self.subcontainer = QHBoxLayout()
-        self.btn = StyledButton(200, 80, f"{name} ({value}%)", "#055b4e")
+        self.btn = StyledButton(140, 40, f"{name} ({value}%)", "#055b4e")
         
-        self.label = QLabel(f"Resultado: 0                ")
+        self.label = QLabel(f"Resultado: 0         ")
         self.label.setFont(font)
         
         self.input = QLineEdit()
         self.input.setPlaceholderText("Vantagem")
-        self.input.setFixedWidth(100)
+        self.input.setFixedWidth(50)
         
         self.btn.clicked.connect(self._emit_use)
         self.input.returnPressed.connect(self._emit_use_adv)
@@ -207,8 +207,8 @@ class Window(QWidget):
         super().__init__()
         self.setWindowTitle("Darius 0.1")
         
-        self.font = QFont("Times", 18)
-        self.smallfont = QFont("Times", 14)
+        self.font = QFont("Times", 14)
+        self.smallfont = QFont("Times", 10)
          
         self.total = QVBoxLayout(self)
         
