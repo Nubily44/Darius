@@ -1,0 +1,24 @@
+Próximos Passos: 
+
+- Sistema de Combate
+    - Sistema de contagem de rodadas por ação
+
+    - Armas
+        - Munições
+        - Danos
+        - Buffs
+
+    - Rituais
+        - Custo
+
+    - Ações Híbridas
+        - Balanceamento
+        - Cálculos e Integração
+
+    - Condições de Terreno
+
+- Ajustes da Interface
+
+- Integração com Peer to Peer
+
+- Melhorar a Interface visualmente
