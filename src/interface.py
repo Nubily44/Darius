@@ -132,7 +132,7 @@ class PericiaObject(QObject):
         self.name = name
         self.container = QVBoxLayout()
         self.subcontainer = QHBoxLayout()
-        self.btn = StyledButton(140, 40, f"{name} ({value}%)", "#055b4e")
+        self.btn = StyledButton(140, 40, f"{name} ({value}%)", "#1F514A")
         
         self.label = QLabel(f"Resultado: 0         ")
         self.label.setFont(font)

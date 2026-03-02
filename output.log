@@ -1,1 +1,6 @@
 -------------------------------------- SETUP DONE
+[DISPATCHER] | Handling Perícia Use: Cirurgia
+    [OBJECT] | Usando Perícia: Cirurgia
+     [ROLLS] | d100: 95
+    [OBJECT] | Desastre
+ [INTERFACE] | Setting value: Desastre
