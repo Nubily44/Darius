@@ -1,6 +1,33 @@
 -------------------------------------- SETUP DONE
+[DISPATCHER] | Handling Perícia Use: Força
+    [OBJECT] | Usando Perícia: Força
+     [ROLLS] | d100: 16
+    [OBJECT] | Sucesso Bom
+ [INTERFACE] | Setting value: Bom
+[DISPATCHER] | Handling Perícia Use: Anatomia
+    [OBJECT] | Usando Perícia: Anatomia
+     [ROLLS] | d100: 85
+    [OBJECT] | Falha
+ [INTERFACE] | Setting value: Falha
 [DISPATCHER] | Handling Perícia Use: Cirurgia
     [OBJECT] | Usando Perícia: Cirurgia
-     [ROLLS] | d100: 95
+     [ROLLS] | d100: 58
+    [OBJECT] | Sucesso Normal
+ [INTERFACE] | Setting value: Normal
+[DISPATCHER] | Handling Perícia Use: Escutar
+    [OBJECT] | Usando Perícia: Escutar
+     [ROLLS] | d100: 60
+    [OBJECT] | Sucesso Normal
+ [INTERFACE] | Setting value: Normal
+[DISPATCHER] | Handling Perícia Use: Vigilância
+    [OBJECT] | Usando Perícia: Vigilância
+     [ROLLS] | d100: 99
     [OBJECT] | Desastre
  [INTERFACE] | Setting value: Desastre
+[DISPATCHER] | Handling Esforço Deduct: -1
+    [OBJECT] | Usando Esforço: 8 / 9
+    [OBJECT] | Settando Esforço de 9 para 8 (armor: 0)
+ [INTERFACE] | Setting value: 8
+[DISPATCHER] | Handling Esforço Refresh: 9
+    [OBJECT] | Renovando Esforço: 8 / 9
+    [OBJECT] | Settando Esforço de 8 para 9 (armor: 0)

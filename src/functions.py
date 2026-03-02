@@ -27,6 +27,36 @@ def rolagem_sum(n: int, advantage: int = 1) -> int:
         print(f"     [ROLLS] | d{n}: {dices[-1]}")
     return sum(dices)
 
+def rolagem_expressao(expressao: str) -> int:
+    expressao = expressao.replace(" ", "")
+    
+    # Split keeping + and -
+    tokens = re.findall(r'[+-]?[^+-]+', expressao)
+    
+    total = 0
+    
+    for token in tokens:
+        sinal = 1
+        
+        if token.startswith("+"):
+            token = token[1:]
+        elif token.startswith("-"):
+            sinal = -1
+            token = token[1:]
+        
+        if "d" in token.lower():
+            # Dice case
+            partes = token.lower().split("d")
+            
+            qtd = int(partes[0]) if partes[0] != "" else 1
+            lados = int(partes[1])
+            resultado = rolagem_sum(lados, qtd)
+            total += sinal * resultado
+        else:
+            # Flat number
+            total += sinal * int(token)
+    return total
+
 def Wrapper(func):
     def wrapper(*args, **kwargs):
         arg_list = []
@@ -160,5 +190,7 @@ def extract_ficha_data(sheet: str) -> dict:
 if __name__ == "__main__":
     
     # Example usage
-    print(dice(6, 2))  # Roll a 6-sided die with advantage of 2
-    print(dice(20, 3)) # Roll a 20-sided die with advantage of 3
+    #print(dice(6, 2))  # Roll a 6-sided die with advantage of 2
+    #print(dice(20, 3)) # Roll a 20-sided die with advantage of 3
+    
+    print(rolagem_expressao("2d6 + 3 - 1d4"))  # Roll 2d6, add 3, subtract 1d4

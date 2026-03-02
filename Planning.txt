@@ -22,3 +22,5 @@ Próximos Passos:
 - Integração com Peer to Peer
 
 - Melhorar a Interface visualmente
+
+- Backup Escrita -> Prioridade

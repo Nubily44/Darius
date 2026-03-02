@@ -3,7 +3,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(BASE_DIR.parent))
 from functions import Wrapper
-from functions import dice
+from functions import dice, rolagem_sum, rolagem_expressao
 
 #Sempre criar com quantidade máxima
 class BlocoAtributo():
@@ -38,10 +38,11 @@ class BlocoPericia():
         self.p3 = p3
                 
 class Pericia():
-    def __init__(self, nome, valor):
+    def __init__(self, nome, valor, tipo):
         self.nome = nome
         self.valor = valor
         self.last_roll = None
+        self.tipo = tipo
         
     def getValue(self):
         return self.valor
@@ -78,3 +79,14 @@ class Pericia():
             print("    [OBJECT] | Falha")
             self.last_roll = "Falha"
             return "Falha"
+    
+class Arma():
+    def __init__(self, nome, dano, tipo):
+        self.nome = nome
+        self.dano = dano
+        self.tipo = tipo
+        
+    def rollDano(self):
+        return rolagem_expressao(self.dano)
+    
+    
