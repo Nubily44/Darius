@@ -131,7 +131,6 @@ class PericiaObject(QObject):
         super().__init__(parent)
         self.name = name
         self.container = QVBoxLayout()
-        #self.container.setSpacing(30)
         self.subcontainer = QHBoxLayout()
         self.btn = StyledButton(140, 40, f"{name} ({value}%)", "#055b4e")
         
@@ -167,6 +166,7 @@ class BlocoPericiasObject:
         self.container = QVBoxLayout()
         self.label = QLabel(nome)
         self.label.setFont(font)
+        self.label.setFixedWidth(250)
         self.container.addWidget(self.label, alignment=Qt.AlignCenter)
     
     def addPericia(self, pericia_obj: PericiaObject):
