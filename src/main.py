@@ -17,6 +17,7 @@ sys.path.append(str(Path(__file__).resolve().parent.parent / "contents"))
 
 from sheet_pt3 import sheet
 
+writing = 0
 
 def main():
     
