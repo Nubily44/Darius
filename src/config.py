@@ -1,2 +1,2 @@
-first_time = True
+first_time = False
 writing = False

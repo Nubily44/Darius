@@ -6,7 +6,7 @@ from PySide6.QtWidgets import QApplication
 from objects.personagem import Personagem
 from objects.components import BlocoPericia, Pericia
 from interface import Window
-from functions import Tee, extract_ficha_data, update_state
+from functions import Tee, extract_ficha_data, update_state, update_variable
 from connectors import handle_esforco_deduct, handle_esforco_refresh, handle_vida, handle_sanidade, handle_pericia_use, handle_pericia_use_adv
 
 import os
@@ -24,6 +24,7 @@ def main():
         dados_ficha = extract_ficha_data(sheet)
         for key, value in dados_ficha.items():
             update_state(key, str(value))
+        update_variable("first_time", False, "src/config.py")
             
     else:
         #reading state

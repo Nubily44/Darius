@@ -211,6 +211,19 @@ def update_state(var: str, value: str, file_path: str = "src/state.log") -> None
     with open(file_path, "w", encoding='utf-8') as f:
         f.writelines(lines)
 
+def update_variable(var: str, value, file_path: str):
+    lines = []
+
+    with open(file_path, "r", encoding="utf-8") as f:
+        for line in f:
+            if line.strip().startswith(var):
+                lines.append(f"{var} = {repr(value)}\n")
+            else:
+                lines.append(line)
+
+    with open(file_path, "w", encoding="utf-8") as f:
+        f.writelines(lines)
+
 
 if __name__ == "__main__":
     
