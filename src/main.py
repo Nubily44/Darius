@@ -60,7 +60,7 @@ def main():
     
     
 if __name__ == "__main__":
-    with open("output.log", "w", encoding="utf-8") as f:
+    with open("src/output.log", "w", encoding="utf-8") as f:
         original_stdout = sys.stdout
         original_stderr = sys.stderr
 
