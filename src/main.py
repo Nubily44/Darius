@@ -6,7 +6,7 @@ from PySide6.QtWidgets import QApplication
 from objects.personagem import Personagem
 from objects.components import BlocoPericia, Pericia
 from interface import Window
-from functions import Tee, extract_ficha_data
+from functions import Tee, extract_ficha_data, update_state
 from connectors import handle_esforco_deduct, handle_esforco_refresh, handle_vida, handle_sanidade, handle_pericia_use, handle_pericia_use_adv
 
 import os
@@ -16,15 +16,18 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).resolve().parent.parent / "contents"))
 
 from sheet_pt3 import sheet
-
-writing = 0
+from config import first_time, writing
 
 def main():
     
-    dados_ficha = extract_ficha_data(sheet)
-    #for k, v in dados_ficha.items():
-    #    print(f"{k}: {v}")
-        
+    if first_time:
+        dados_ficha = extract_ficha_data(sheet)
+        for key, value in dados_ficha.items():
+            update_state(key, str(value))
+            
+    else:
+        #reading state
+        pass
     
     app = QApplication(sys.argv)
     Personagem1 = Personagem(vida=dados_ficha["Vida"], armor_vida=dados_ficha["Armadura"], sanidade=dados_ficha["Sanidade"], armor_sanidade=dados_ficha["Armadura_S"], nivel=dados_ficha["Nivel"], classe="Classe")

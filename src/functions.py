@@ -187,6 +187,31 @@ def extract_ficha_data(sheet: str) -> dict:
     sorted_data = sort_ficha_dict(data)
     return sorted_data
 
+def update_state(var: str, value: str, file_path: str = "src/state.log") -> None:
+    lines = []
+    found = False
+
+    with open(file_path, "r", encoding='utf-8') as f:
+        for line in f:
+            if "=" in line:
+                name, current = line.split("=", 1)
+                name = name.strip()
+
+                if name == var:
+                    lines.append(f"{var} = {value}\n")
+                    found = True
+                else:
+                    lines.append(line)
+            else:
+                lines.append(line)
+
+    if not found:
+        lines.append(f"{var} = {value}\n")
+
+    with open(file_path, "w", encoding='utf-8') as f:
+        f.writelines(lines)
+
+
 if __name__ == "__main__":
     
     # Example usage
@@ -194,3 +219,4 @@ if __name__ == "__main__":
     #print(dice(20, 3)) # Roll a 20-sided die with advantage of 3
     
     print(rolagem_expressao("2d6 + 3 - 1d4"))  # Roll 2d6, add 3, subtract 1d4
+    update_state("Vida_Max", "100")
