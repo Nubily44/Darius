@@ -224,6 +224,29 @@ def update_variable(var: str, value, file_path: str):
     with open(file_path, "w", encoding="utf-8") as f:
         f.writelines(lines)
 
+import ast
+
+def read_state(file_path: str = "src/state.log") -> dict:
+    state = {}
+
+    with open(file_path, "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+
+            if not line or line.startswith("#"):
+                continue
+
+            if "=" in line:
+                var, value = line.split("=", 1)
+                var = var.strip()
+                value = value.strip()
+
+                try:
+                    state[var] = ast.literal_eval(value)
+                except Exception:
+                    state[var] = value  # fallback if it isn't a valid literal
+
+    return state
 
 if __name__ == "__main__":
     

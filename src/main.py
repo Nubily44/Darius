@@ -6,7 +6,7 @@ from PySide6.QtWidgets import QApplication
 from objects.personagem import Personagem
 from objects.components import BlocoPericia, Pericia
 from interface import Window
-from functions import Tee, extract_ficha_data, update_state, update_variable
+from functions import Tee, extract_ficha_data, update_state, update_variable, read_state
 from connectors import handle_esforco_deduct, handle_esforco_refresh, handle_vida, handle_sanidade, handle_pericia_use, handle_pericia_use_adv
 
 import os
@@ -27,8 +27,7 @@ def main():
         update_variable("first_time", False, "src/config.py")
             
     else:
-        #reading state
-        pass
+        dados_ficha = read_state()
     
     app = QApplication(sys.argv)
     Personagem1 = Personagem(vida=dados_ficha["Vida"], armor_vida=dados_ficha["Armadura"], sanidade=dados_ficha["Sanidade"], armor_sanidade=dados_ficha["Armadura_S"], nivel=dados_ficha["Nivel"], classe="Classe")
