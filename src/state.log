@@ -1,6 +1,6 @@
 Nivel = 9
-Vida = 65
-Vida_Max = 0
+Vida = 99999
+Vida = 99999
 Sanidade = 75
 Sanidade_Max = 67
 Esforço = 9
