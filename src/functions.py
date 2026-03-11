@@ -216,11 +216,17 @@ def update_variable(var: str, value, file_path: str):
 
     with open(file_path, "r", encoding="utf-8") as f:
         for line in f:
-            if line.strip().startswith(var):
-                lines.append(f"{var} = {repr(value)}\n")
-            else:
-                print("AAAAAAA", line.strip(), var)
-                lines.append(line)
+            stripped = line.strip()
+
+            if "=" in stripped:
+                name, _ = stripped.split("=", 1)
+                name = name.strip()
+
+                if name == var:
+                    lines.append(f"{var} = {repr(value)}\n")
+                    continue
+
+            lines.append(line)
 
     with open(file_path, "w", encoding="utf-8") as f:
         f.writelines(lines)

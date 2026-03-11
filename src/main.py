@@ -24,13 +24,15 @@ def main():
         dados_ficha = extract_ficha_data(sheet)
         for key, value in dados_ficha.items():
             update_state(key, str(value))
+        print("Updating variable: 1")
         update_variable("first_time", False, "src/config.py")
             
     else:
         dados_ficha = read_state()
+        print("Updating variable: 2")
         update_variable("Vida", 99999, "src/state.log")
-        update_variable("Vida", 1, "src/state.log")
-        update_variable("Vida", 4, "src/state.log")
+        #update_variable("Vida", 1, "src/state.log")
+        #update_variable("Vida", 4, "src/state.log")
     
     app = QApplication(sys.argv)
     Personagem1 = Personagem(vida=dados_ficha["Vida"], armor_vida=dados_ficha["Armadura"], sanidade=dados_ficha["Sanidade"], armor_sanidade=dados_ficha["Armadura_S"], nivel=dados_ficha["Nivel"], classe="Classe")
