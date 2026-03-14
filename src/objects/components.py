@@ -2,7 +2,8 @@ import sys
 from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(BASE_DIR.parent))
-from functions import Wrapper
+from functions import Wrapper, update_state
+from config import writing
 from functions import dice, rolagem_sum, rolagem_expressao
 
 #Sempre criar com quantidade máxima
@@ -19,6 +20,9 @@ class BlocoAtributo():
     def setAtributo(self, att):
         print(f"    [OBJECT] | Settando {self.nome} de {self.att} para {att + self.armor} (armor: {self.armor})")
         self.att = att + self.armor
+        if writing:
+            print (f"     [WRITE] | Updating state: Vida to {self.att}")
+            update_state("Vida", self.att)
         
     def setliteralAtributo(self, att):
         self.att = att

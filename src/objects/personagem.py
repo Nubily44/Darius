@@ -3,7 +3,8 @@ from pathlib import Path
 from objects.components import BlocoAtributo, BlocoPericia, Pericia
 BASE_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(BASE_DIR.parent))
-from functions import Wrapper
+from functions import Wrapper, update_state
+from config import writing
 
 class Personagem():
     def __init__(self, vida, armor_vida, sanidade, armor_sanidade, nivel, classe):
