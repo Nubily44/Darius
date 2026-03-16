@@ -30,7 +30,13 @@ def main():
         dados_ficha = read_state()
     
     app = QApplication(sys.argv)
-    Personagem1 = Personagem(vida=dados_ficha["Vida"], armor_vida=dados_ficha["Armadura"], sanidade=dados_ficha["Sanidade"], armor_sanidade=dados_ficha["Armadura_S"], nivel=dados_ficha["Nivel"], classe="Classe")
+    Personagem1 = Personagem(
+        vida=dados_ficha["Vida"], 
+        armor_vida=dados_ficha["Armadura"], 
+        sanidade=dados_ficha["Sanidade"], 
+        armor_sanidade=dados_ficha["Armadura_S"], 
+        nivel=dados_ficha["Nivel"], 
+        classe="Classe")
     
     # Pericias adicionadas via ficha
     

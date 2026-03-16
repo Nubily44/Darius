@@ -109,21 +109,16 @@ def sort_ficha_dict(data: dict) -> dict:
         if key in estado_order:
             return (0, estado_order.index(key))
 
-        # Match BP structure
         match = re.match(r"BP(\d+)(?:_P(\d+))?_(N|V)", key)
         if match:
             bp = int(match.group(1))
             p = match.group(2)
             nv = match.group(3)
-
-            # Block name/value first
             if p is None:
                 return (1, bp, 0, 0 if nv == "N" else 1)
 
-            # Then skills ordered
             return (1, bp, int(p), 0 if nv == "N" else 1)
 
-        # Fallback
         return (2, key)
 
     sorted_keys = sorted(data.keys(), key=sort_key)
@@ -163,21 +158,18 @@ def extract_ficha_data(sheet: str) -> dict:
     skill_pattern = r"([A-Za-zÀ-ÿçÇãõéíúêôÁÉÍÓÚÊÔÃÕ]+):\s*([\d,\.]+)\s*/\s*([\d,\.]+)\s*/\s*([\d,\.]+)"
     skills = re.findall(skill_pattern, sheet)
 
-    # Assign vertically (pairs of blocks)
     skill_index = 0
-    for pair_start in range(0, 6, 2):  # (0-1), (2-3), (4-5)
+    for pair_start in range(0, 6, 2):
         left_block = pair_start + 1
         right_block = pair_start + 2
 
-        for p in range(1, 4):  # 3 skills each
-            # Left column skill
+        for p in range(1, 4):
             name, v1, v2, v3 = skills[skill_index]
             values = [float(v.replace(",", ".")) for v in (v1, v2, v3)]
             data[f"BP{left_block}_P{p}_N"] = name.strip()
             data[f"BP{left_block}_P{p}_V"] = int(max(values))
             skill_index += 1
 
-            # Right column skill
             name, v1, v2, v3 = skills[skill_index]
             values = [float(v.replace(",", ".")) for v in (v1, v2, v3)]
             data[f"BP{right_block}_P{p}_N"] = name.strip()
@@ -251,15 +243,11 @@ def read_state(file_path: str = "src/state.log") -> dict:
                 try:
                     state[var] = ast.literal_eval(value)
                 except Exception:
-                    state[var] = value  # fallback if it isn't a valid literal
+                    state[var] = value
 
     return state
 
 if __name__ == "__main__":
-    
-    # Example usage
-    #print(dice(6, 2))  # Roll a 6-sided die with advantage of 2
-    #print(dice(20, 3)) # Roll a 20-sided die with advantage of 3
     
     print(rolagem_expressao("2d6 + 3 - 1d4"))  # Roll 2d6, add 3, subtract 1d4
     update_state("Vida_Max", "100")
