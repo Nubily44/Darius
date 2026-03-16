@@ -8,7 +8,7 @@ from functions import dice, rolagem_sum, rolagem_expressao
 
 #Sempre criar com quantidade máxima
 class BlocoAtributo():
-    def __init__(self, nome,att, armor=0):
+    def __init__(self, nome, att, attm, armor=0):
         self.nome = nome
         self.att = att
         self.attm = att  # Atributo Máximo

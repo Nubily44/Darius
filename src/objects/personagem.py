@@ -7,10 +7,10 @@ from functions import Wrapper, update_state
 from config import writing
 
 class Personagem():
-    def __init__(self, vida, armor_vida, sanidade, armor_sanidade, nivel, classe):
-        self.BlocoVida = BlocoAtributo("Vida", vida, armor=armor_vida)
-        self.BlocoSanidade = BlocoAtributo("Sanidade", sanidade, armor=armor_sanidade)
-        self.BlocoEsforco = BlocoAtributo("Esforço", nivel)
+    def __init__(self, vida, vida_max, armor_vida, sanidade, sanidade_max, armor_sanidade, esforco, nivel, classe):
+        self.BlocoVida = BlocoAtributo("Vida", vida, vida_max, armor=armor_vida)
+        self.BlocoSanidade = BlocoAtributo("Sanidade", sanidade, sanidade_max, armor=armor_sanidade)
+        self.BlocoEsforco = BlocoAtributo("Esforço", esforco, nivel)
         self.Classe = classe
         
         self.pericias = [] # Array de BlocoPericia

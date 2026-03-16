@@ -31,10 +31,13 @@ def main():
     
     app = QApplication(sys.argv)
     Personagem1 = Personagem(
-        vida=dados_ficha["Vida"], 
+        vida=dados_ficha["Vida"],
+        vida_max=dados_ficha["Vida_Max"],
         armor_vida=dados_ficha["Armadura"], 
-        sanidade=dados_ficha["Sanidade"], 
+        sanidade=dados_ficha["Sanidade"],
+        sanidade_max=dados_ficha["Sanidade_Max"], 
         armor_sanidade=dados_ficha["Armadura_S"], 
+        esforco =dados_ficha["Esforço"],
         nivel=dados_ficha["Nivel"], 
         classe="Classe")
     
