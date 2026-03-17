@@ -55,12 +55,12 @@ class AttributeObject(QObject):
     
     att_signal = Signal(int)
     
-    def __init__(self, name, value, armor, font, smallfont, parent):
+    def __init__(self, name, value, value_max, armor, font, smallfont, parent):
         super().__init__(parent)
         self.container = QVBoxLayout()
         self.container.setSpacing(20)
         
-        self.label = QLabel(f"{name}: {value}")
+        self.label = QLabel(f"{name}: {value} / {value_max}")
         self.label.setFont(font)
         
         self.armor_label = QLabel(f"Armadura: {armor}")
