@@ -217,8 +217,8 @@ class Window(QWidget):
         self.bar = QHBoxLayout()
         self.bar.setContentsMargins(50, 20, 50, 20)
         
-        self.interface_vida = AttributeObject(vida.nome, vida.getAtributo(), vida.getArmor(), self.font, self.smallfont, parent=self)      
-        self.interface_sanidade = AttributeObject(sanidade.nome, sanidade.getAtributo(), sanidade.getArmor(), self.font, self.smallfont, parent=self)
+        self.interface_vida = AttributeObject(vida.nome, vida.getAtributo(), vida.getAtributoMax(), vida.getArmor(), self.font, self.smallfont, parent=self)      
+        self.interface_sanidade = AttributeObject(sanidade.nome, sanidade.getAtributo(), sanidade.getAtributoMax(), sanidade.getArmor(), self.font, self.smallfont, parent=self)
         
         self.bar.addLayout(self.interface_vida.getLayout())
         self.bar.addLayout(self.interface_sanidade.getLayout())

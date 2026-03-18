@@ -11,11 +11,14 @@ class BlocoAtributo():
     def __init__(self, nome, att, attm, armor=0):
         self.nome = nome
         self.att = att
-        self.attm = att  # Atributo Máximo
+        self.attm = attm  # Atributo Máximo
         self.armor = armor
         
     def getAtributo(self):
         return self.att
+    
+    def getAtributoMax(self):
+        return self.attm
     
     def setAtributo(self, att):
         print(f"    [OBJECT] | Settando {self.nome} de {self.att} para {att + self.armor} (armor: {self.armor})")
