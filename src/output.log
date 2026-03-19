@@ -1,1 +1,15 @@
 -------------------------------------- SETUP DONE
+[DISPATCHER] | Handling Esforço Deduct: -1
+    [OBJECT] | Usando Esforço: 6 / 9
+    [OBJECT] | Settando Esforço de 7 para 6 (armor: 0)
+     [WRITE] | Updating state: Esforço to 6
+ [INTERFACE] | Setting value: 6
+[DISPATCHER] | Handling Esforço Deduct: -1
+    [OBJECT] | Usando Esforço: 5 / 9
+    [OBJECT] | Settando Esforço de 6 para 5 (armor: 0)
+     [WRITE] | Updating state: Esforço to 5
+ [INTERFACE] | Setting value: 5
+[DISPATCHER] | Handling Esforço Refresh: 7
+    [OBJECT] | Renovando Esforço: 5 / 9
+    [OBJECT] | Settando Esforço de 5 para 9 (armor: 0)
+     [WRITE] | Updating state: Esforço to 9
