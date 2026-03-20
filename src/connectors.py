@@ -33,7 +33,7 @@ def handle_esforco_refresh(personagem, window, value):
     print(f"[DISPATCHER] | Handling Esforço Refresh: {value}")
     Dispatcher(
         lambda p: p.refreshEsforco(),
-        lambda p: window.interface_esforco.label.setText(f"Esforço: {value}"),
+        lambda p: window.setValue(window.interface_esforco.label, personagem.BlocoEsforco.getAtributoMax()),
         1
     ).execute((personagem))
     

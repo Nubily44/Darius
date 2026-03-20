@@ -8,6 +8,7 @@ from config import writing
 
 class Personagem():
     def __init__(self, vida, vida_max, armor_vida, sanidade, sanidade_max, armor_sanidade, esforco, nivel, classe):
+        print ("Criando personagem com Vida:", vida, "Vida Max:", vida_max, "Armadura Vida:", armor_vida, "Sanidade:", sanidade, "Sanidade Max:", sanidade_max, "Armadura Sanidade:", armor_sanidade, "Esforço:", esforco, "Nível:", nivel, "Classe:", classe)
         self.BlocoVida = BlocoAtributo("Vida", vida, vida_max, armor=armor_vida)
         self.BlocoSanidade = BlocoAtributo("Sanidade", sanidade, sanidade_max, armor=armor_sanidade)
         self.BlocoEsforco = BlocoAtributo("Esforço", esforco, nivel)
