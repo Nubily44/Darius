@@ -60,27 +60,43 @@ class AttributeObject(QObject):
         self.container = QVBoxLayout()
         self.container.setSpacing(20)
         
+        self.subcontainer = QHBoxLayout()
+        
         self.label = QLabel(f"{name}: {value} / {value_max}")
         self.label.setFont(font)
         
         self.armor_label = QLabel(f"Armadura: {armor}")
         self.armor_label.setFont(font)
         
-        self.input = QLineEdit()
-        self.input.setPlaceholderText("Digite o dano sofrido...")
-        self.input.setFixedWidth(150)
-        self.input.setFont(smallfont)
+        self.input_dano = QLineEdit()
+        self.input_dano.setPlaceholderText("Dano...")
+        self.input_dano.setFixedWidth(75)
+        self.input_dano.setFont(smallfont)
         
-        self.input.returnPressed.connect(self._emit)
+        self.input_cura = QLineEdit()
+        self.input_cura.setPlaceholderText("Cura...")
+        self.input_cura.setFixedWidth(75)
+        self.input_cura.setFont(smallfont)
+        
+        self.input_dano.returnPressed.connect(self._emit_dano)
+        self.input_cura.returnPressed.connect(self._emit_cura)
+        
+        self.subcontainer.addWidget(self.input_dano, alignment=Qt.AlignRight)
+        self.subcontainer.addWidget(self.input_cura, alignment=Qt.AlignLeft)
         
         self.container.addWidget(self.label, alignment=Qt.AlignCenter)
         self.container.addWidget(self.armor_label, alignment=Qt.AlignCenter)
-        self.container.addWidget(self.input, alignment=Qt.AlignCenter)
+        self.container.addLayout(self.subcontainer)
 
-    def _emit(self):
-        value = int(self.input.text())
+    def _emit_dano(self):
+        value = int(self.input_dano.text())
         self.att_signal.emit(value)
-        self.input.clear()
+        self.input_dano.clear()
+        
+    def _emit_cura(self):
+        value = int(self.input_cura.text())
+        self.att_signal.emit(-value)
+        self.input_cura.clear()
     
     def getLayout(self):
         return self.container

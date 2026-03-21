@@ -23,6 +23,9 @@ class BlocoAtributo():
     def setAtributo(self, att):
         print(f"    [OBJECT] | Settando {self.nome} de {self.att} para {att + self.armor} (armor: {self.armor})")
         self.att = att + self.armor
+        
+        
+        
         if writing:
             print (f"     [WRITE] | Updating state: {self.nome} to {self.att}")
             update_state(self.nome, self.att)

@@ -1,37 +1,7 @@
-Criando personagem com Vida: 8 Vida Max: 0 Armadura Vida: 13 Sanidade: 75 Sanidade Max: 67 Armadura Sanidade: 5 Esforço: 8 Nível: 9 Classe: Classe
+Criando personagem com Vida: 327 Vida Max: 0 Armadura Vida: 13 Sanidade: 75 Sanidade Max: 67 Armadura Sanidade: 5 Esforço: 9 Nível: 9 Classe: Classe
 -------------------------------------- SETUP DONE
-[DISPATCHER] | Handling Esforço Deduct: -1
-    [OBJECT] | Usando Esforço: 7 / 9
-    [OBJECT] | Settando Esforço de 8 para 7 (armor: 0)
-     [WRITE] | Updating state: Esforço to 7
- [INTERFACE] | Setting value: 7
-[DISPATCHER] | Handling Esforço Refresh: 8
-    [OBJECT] | Renovando Esforço: 7 / 9
-    [OBJECT] | Settando Esforço de 7 para 9 (armor: 0)
-     [WRITE] | Updating state: Esforço to 9
- [INTERFACE] | Setting value: 9
-[DISPATCHER] | Handling Esforço Deduct: -1
-    [OBJECT] | Usando Esforço: 8 / 9
-    [OBJECT] | Settando Esforço de 9 para 8 (armor: 0)
-     [WRITE] | Updating state: Esforço to 8
- [INTERFACE] | Setting value: 8
-[DISPATCHER] | Handling Esforço Deduct: -1
-    [OBJECT] | Usando Esforço: 7 / 9
-    [OBJECT] | Settando Esforço de 8 para 7 (armor: 0)
-     [WRITE] | Updating state: Esforço to 7
- [INTERFACE] | Setting value: 7
-[DISPATCHER] | Handling Esforço Deduct: -1
-    [OBJECT] | Usando Esforço: 6 / 9
-    [OBJECT] | Settando Esforço de 7 para 6 (armor: 0)
-     [WRITE] | Updating state: Esforço to 6
- [INTERFACE] | Setting value: 6
-[DISPATCHER] | Handling Esforço Deduct: -1
-    [OBJECT] | Usando Esforço: 5 / 9
-    [OBJECT] | Settando Esforço de 6 para 5 (armor: 0)
-     [WRITE] | Updating state: Esforço to 5
- [INTERFACE] | Setting value: 5
-[DISPATCHER] | Handling Esforço Refresh: 8
-    [OBJECT] | Renovando Esforço: 5 / 9
-    [OBJECT] | Settando Esforço de 5 para 9 (armor: 0)
-     [WRITE] | Updating state: Esforço to 9
- [INTERFACE] | Setting value: 9
+[DISPATCHER] | Handling Vida: 10
+    [OBJECT] | Set Vida: 317
+    [OBJECT] | Settando Vida de 327 para 330 (armor: 13)
+     [WRITE] | Updating state: Vida to 330
+ [INTERFACE] | Setting value: 330
