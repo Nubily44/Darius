@@ -6,7 +6,7 @@ def handle_vida(personagem, window, value):
     print(f"[DISPATCHER] | Handling Vida: {value}")
     Dispatcher(
         lambda p: p.setVida(value),
-        lambda p: window.setValue(window.interface_vida.label, personagem.getVida().getAtributo()),
+        lambda p: window.setValue(window.interface_vida.label, personagem.getVida().getAtributo(), personagem.getSanidade().getAtributoMax()),
         1
     ).execute((personagem))
 
@@ -15,7 +15,7 @@ def handle_sanidade(personagem, window, value):
     print(f"[DISPATCHER] | Handling Sanidade: {value}")
     Dispatcher(
         lambda p: p.setSanidade(value),
-        lambda p: window.setValue(window.interface_sanidade.label, personagem.getSanidade().getAtributo()),
+        lambda p: window.setValue(window.interface_sanidade.label, personagem.getSanidade().getAtributo(), personagem.getSanidade().getAtributoMax()),
         1
     ).execute((personagem))
 

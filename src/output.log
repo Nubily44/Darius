@@ -1,7 +1,12 @@
-Criando personagem com Vida: 327 Vida Max: 0 Armadura Vida: 13 Sanidade: 75 Sanidade Max: 67 Armadura Sanidade: 5 Esforço: 9 Nível: 9 Classe: Classe
+Criando personagem com Vida: 332 Vida Max: 0 Armadura Vida: 13 Sanidade: 68 Sanidade Max: 67 Armadura Sanidade: 5 Esforço: 9 Nível: 9 Classe: Classe
 -------------------------------------- SETUP DONE
-[DISPATCHER] | Handling Vida: 10
-    [OBJECT] | Set Vida: 317
-    [OBJECT] | Settando Vida de 327 para 330 (armor: 13)
-     [WRITE] | Updating state: Vida to 330
- [INTERFACE] | Setting value: 330
+[DISPATCHER] | Handling Vida: 11
+    [OBJECT] | Set Vida: 321
+    [OBJECT] | Settando Vida de 332 para 334 (armor: 13)
+     [WRITE] | Updating state: Vida to 334
+ [INTERFACE] | Setting value: 334  /  67
+[DISPATCHER] | Handling Vida: 11
+    [OBJECT] | Set Vida: 323
+    [OBJECT] | Settando Vida de 334 para 336 (armor: 13)
+     [WRITE] | Updating state: Vida to 336
+ [INTERFACE] | Setting value: 336  /  67

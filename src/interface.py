@@ -293,9 +293,9 @@ class Window(QWidget):
         self.adjustSize()
     
     @Wrapper
-    def setValue(self, label: QLabel, value):
-        print(" [INTERFACE] | Setting value:", value)
-        label.setText(f"{label.text().split(':')[0]}: {value}")
+    def setValue(self, label: QLabel, value1, value2=None):
+        print(" [INTERFACE] | Setting value:", value1, " / ", value2)
+        label.setText(f"{label.text().split(':')[0]}: {value1} / {value2}" if value2 is not None else f"{label.text().split(':')[0]}: {value1}")
         return
     
     def searchPericia(self, nome):
