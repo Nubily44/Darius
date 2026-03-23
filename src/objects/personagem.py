@@ -29,17 +29,13 @@ class Personagem():
         return self.BlocoVida
     
     def setVida(self, vida):
-        nova = self.getVida().getAtributo() - int(vida)
-        print("    [OBJECT] | Set Vida:", nova)
-        self.BlocoVida.setAtributo(nova)
+        self.BlocoVida.setAtributo(vida)
     
     def getSanidade(self):
         return self.BlocoSanidade
 
     def setSanidade(self, sanidade):
-        nova = self.getSanidade().getAtributo() - int(sanidade)
-        print ("    [OBJECT] | Set Sanidade:", nova)
-        self.BlocoSanidade.setAtributo(nova)
+        self.BlocoSanidade.setAtributo(sanidade)
     
     def useEsforco(self):
         print(f"    [OBJECT] | Usando Esforço: {self.BlocoEsforco.getAtributo()-1} / {self.BlocoEsforco.attm}")

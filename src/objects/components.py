@@ -21,10 +21,19 @@ class BlocoAtributo():
         return self.attm
     
     def setAtributo(self, att):
-        print(f"    [OBJECT] | Settando {self.nome} de {self.att} para {att + self.armor} (armor: {self.armor})")
-        self.att = att + self.armor
         
+        previous = self.att
         
+        if att < 0:
+            print("!")
+            self.att = self.att - att
+        if att > 0 and att <= self.armor:
+            pass
+        if att > self.armor:
+            print("????")
+            self.att = self.att - att + self.armor
+        
+        print(f"    [OBJECT] | Settando {self.nome} de {previous} para {self.att} (armor: {self.armor})")
         
         if writing:
             print (f"     [WRITE] | Updating state: {self.nome} to {self.att}")

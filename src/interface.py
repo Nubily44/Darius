@@ -90,13 +90,19 @@ class AttributeObject(QObject):
 
     def _emit_dano(self):
         value = int(self.input_dano.text())
-        self.att_signal.emit(value)
-        self.input_dano.clear()
+        if value < 0:
+            pass
+        else: 
+            self.att_signal.emit(value)
+            self.input_dano.clear()
         
     def _emit_cura(self):
         value = int(self.input_cura.text())
-        self.att_signal.emit(-value)
-        self.input_cura.clear()
+        if value < 0:
+            pass
+        else:
+            self.att_signal.emit(-value)
+            self.input_cura.clear()
     
     def getLayout(self):
         return self.container
