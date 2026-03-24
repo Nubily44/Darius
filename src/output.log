@@ -1,16 +1,18 @@
-Criando personagem com Vida: 90 Vida Max: 0 Armadura Vida: 13 Sanidade: 68 Sanidade Max: 67 Armadura Sanidade: 5 Esforço: 9 Nível: 9 Classe: Classe
+Criando personagem com Vida: 90 Vida Max: 0 Armadura Vida: 13 Sanidade: 68 Sanidade Max: 67 Armadura Sanidade: 5 Esforço: 3 Nível: 9 Classe: Classe
 -------------------------------------- SETUP DONE
 [DISPATCHER] | Handling Vida: 1
     [OBJECT] | Settando Vida de 90 para 90 (armor: 13)
      [WRITE] | Updating state: Vida to 90
  [INTERFACE] | Setting value: 90  /  0
-[DISPATCHER] | Handling Vida: 14
-????
-    [OBJECT] | Settando Vida de 90 para 89 (armor: 13)
-     [WRITE] | Updating state: Vida to 89
- [INTERFACE] | Setting value: 89  /  0
-[DISPATCHER] | Handling Vida: -1
-!
-    [OBJECT] | Settando Vida de 89 para 90 (armor: 13)
-     [WRITE] | Updating state: Vida to 90
- [INTERFACE] | Setting value: 90  /  0
+[DISPATCHER] | Handling Esforço Deduct: -1
+    [OBJECT] | Settando Esforço de 3 para 2 (literal)
+     [WRITE] | Updating state: Esforço to 2
+ [INTERFACE] | Setting value: 2  /  None
+[DISPATCHER] | Handling Esforço Deduct: -1
+    [OBJECT] | Settando Esforço de 2 para 1 (literal)
+     [WRITE] | Updating state: Esforço to 1
+ [INTERFACE] | Setting value: 1  /  None
+[DISPATCHER] | Handling Esforço Refresh: 3
+    [OBJECT] | Settando Esforço de 1 para 9 (literal)
+     [WRITE] | Updating state: Esforço to 9
+ [INTERFACE] | Setting value: 9  /  None

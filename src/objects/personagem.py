@@ -38,17 +38,15 @@ class Personagem():
         self.BlocoSanidade.setAtributo(sanidade)
     
     def useEsforco(self):
-        print(f"    [OBJECT] | Usando Esforço: {self.BlocoEsforco.getAtributo()-1} / {self.BlocoEsforco.attm}")
         current = self.BlocoEsforco.getAtributo()
         if current > 0:
-            self.BlocoEsforco.setAtributo(current - 1)
+            self.BlocoEsforco.setAtributoLiteral(current - 1)
             return True
         else:
             return False
     
     def refreshEsforco(self):
-        print(f"    [OBJECT] | Renovando Esforço: {self.BlocoEsforco.getAtributo()} / {self.BlocoEsforco.attm}")
-        self.BlocoEsforco.setAtributo(self.BlocoEsforco.attm)
+        self.BlocoEsforco.setAtributoLiteral(self.BlocoEsforco.attm)
     
     def addPericia(self, bloco_pericia):
         for bp in self.pericias:

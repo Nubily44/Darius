@@ -20,6 +20,15 @@ class BlocoAtributo():
     def getAtributoMax(self):
         return self.attm
     
+    def setAtributoLiteral(self, att):
+        previous = self.att
+        self.att = att
+        print(f"    [OBJECT] | Settando {self.nome} de {previous} para {self.att} (literal)")
+        
+        if writing:
+            print (f"     [WRITE] | Updating state: {self.nome} to {self.att}")
+            update_state(self.nome, self.att)
+                
     def setAtributo(self, att):
         
         previous = self.att
