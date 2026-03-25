@@ -231,8 +231,8 @@ class Window(QWidget):
         
         self.font = QFont("Times", 14)
         self.smallfont = QFont("Times", 10)
-         
-        self.total = QVBoxLayout(self)
+        self.absolute = QHBoxLayout(self)
+        self.total1 = QVBoxLayout(self)
         
         
         ######## Vida e Sanidade ########
@@ -245,7 +245,7 @@ class Window(QWidget):
         self.bar.addLayout(self.interface_vida.getLayout())
         self.bar.addLayout(self.interface_sanidade.getLayout())
         
-        self.total.addLayout(self.bar)
+        self.total1.addLayout(self.bar)
         #################################
         
         ############ Esforço ############
@@ -255,7 +255,7 @@ class Window(QWidget):
         
         self.esforco_layout.addLayout(self.interface_esforco.getLayout())
         
-        self.total.addLayout(self.esforco_layout)
+        self.total1.addLayout(self.esforco_layout)
         #################################
         
         ########### Perícias ############
@@ -287,15 +287,19 @@ class Window(QWidget):
         self.pericias_total.addLayout(self.c4)
         self.pericias_total.addLayout(self.c5)
         
-        self.total.addLayout(self.pericias_total)
+        self.total1.addLayout(self.pericias_total)
         
         
         self.botao = StyledButton(200, 60, "Botão", "#000000")
         self.botao.clicked.connect(self.handle_botao)
-        self.total.addWidget(self.botao, alignment=Qt.AlignCenter)
+        self.total1.addWidget(self.botao, alignment=Qt.AlignCenter)
         
         self.botao_save = []
+        self.absolute.addLayout(self.total1)
         
+        self.iterface_utility = AttributeObject("Teste", 0, 100, 0, self.font, self.smallfont, parent=self)
+        
+        self.absolute.addLayout(self.iterface_utility.getLayout())
         self.adjustSize()
     
     @Wrapper
