@@ -114,7 +114,14 @@ class Arma():
         self.dano = dano
         self.tipo = tipo
         
-    def rollDano(self):
+    def rollDano(self, res_pericia):
+        return rolagem_expressao(self.dano.get(res_pericia))
+        
+        
         return rolagem_expressao(self.dano)
     
+if __name__ == "__main__":
+    print(rolagem_expressao("0"))
     
+    arma = Arma("Espada Longa", {"Desastre": "0", "Falha": "0", "Normal": "1D8", "Bom": "1D8+2", "Extremo": "1D8+4", "Crítico": "1D8+6"}, "Corte")
+    print(arma.rollDano("Bom"))
