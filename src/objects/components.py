@@ -125,3 +125,5 @@ if __name__ == "__main__":
     
     arma = Arma("Espada Longa", {"Desastre": "0", "Falha": "0", "Normal": "1D8", "Bom": "1D8+2", "Extremo": "1D8+4", "Crítico": "1D8+6"}, "Corte")
     print(arma.rollDano("Bom"))
+    print(arma.rollDano("Extremo"))
+    print(arma.rollDano("Crítico"))
