@@ -116,9 +116,17 @@ class Arma():
         
     def rollDano(self, res_pericia):
         return rolagem_expressao(self.dano.get(res_pericia))
+
+class Inventario():
+    def __init__(self):
+        self.itens = {}
         
+    def addItem(self, item):
+        self.itens.append(item)
         
-        return rolagem_expressao(self.dano)
+    def removeItem(self, item):
+        if item in self.itens:
+            self.itens.remove(item)
     
 if __name__ == "__main__":
     print(rolagem_expressao("0"))

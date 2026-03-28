@@ -68,3 +68,6 @@ class Personagem():
                 if pericia.nome == nome_pericia:
                     return pericia
         return None
+
+    def ataque (self, arma):
+        print(f"    [OBJECT] | Atacando com {arma.nome} (Dano: {arma.dano}, Tipo: {arma.tipo})")
