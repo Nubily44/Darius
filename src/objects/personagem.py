@@ -1,6 +1,6 @@
 import sys
 from pathlib import Path
-from objects.components import BlocoAtributo, BlocoPericia, Pericia
+from objects.components import BlocoAtributo, BlocoPericia, Pericia, Inventario
 BASE_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(BASE_DIR.parent))
 from functions import Wrapper, update_state
@@ -12,6 +12,7 @@ class Personagem():
         self.BlocoVida = BlocoAtributo("Vida", vida, vida_max, armor=armor_vida)
         self.BlocoSanidade = BlocoAtributo("Sanidade", sanidade, sanidade_max, armor=armor_sanidade)
         self.BlocoEsforco = BlocoAtributo("Esforço", esforco, nivel)
+        self.BlocoInventario = Inventario(10)
         self.Classe = classe
         
         self.pericias = [] # Array de BlocoPericia

@@ -107,26 +107,62 @@ class Pericia():
             print("    [OBJECT] | Falha")
             self.last_roll = "Falha"
             return "Falha"
-    
-class Arma():
-    def __init__(self, nome, dano, tipo):
+
+class Item:
+    def __init__(self, nome, descricao, tamanho, quantidade=1):
         self.nome = nome
+        self.descricao = descricao
+        self.tamanho = tamanho
+        self.quantidade = quantidade
+
+    def __hash__(self):
+        return hash(self.nome)
+
+    def __eq__(self, other):
+        return isinstance(other, Item) and self.nome == other.nome
+    
+class Arma(Item):
+    def __init__(self, nome, dano, tipo):
+        super().__init__(nome, descricao="", tamanho="M")
         self.dano = dano
         self.tipo = tipo
         
     def rollDano(self, res_pericia):
         return rolagem_expressao(self.dano.get(res_pericia))
 
-class Inventario():
-    def __init__(self):
-        self.itens = {}
+
+
+
+class Inventario:
+    def __init__(self, capacidade=10):
+        self.capacidade = capacidade
+        self.items = set()
         
     def addItem(self, item):
-        self.itens.append(item)
+        if len(self.items) < self.capacidade:
+            if item.tamanho == "P":
+                if item in self.items:
+                    inv_item = self.searchItem(item.nome)
+                    inv_item.quantidade += item.quantidade
+                    return True
+            self.items.add(item)            
+            print(f"    [OBJECT] | Adicionado item: {item.nome}")
+            return True
+        else:
+            print("    [OBJECT] | Inventário cheio! Não é possível adicionar:", item.nome)
+            return False
         
-    def removeItem(self, item):
-        if item in self.itens:
-            self.itens.remove(item)
+    def searchItem(self, nome_item):
+        for item in self.items:
+            if item.nome == nome_item:
+                return item
+        return None
+    
+    def listItems(self):
+        print("    [OBJECT] | Itens no Inventário:", [(item.nome, item.quantidade) for item in self.items])
+        return list(self.items)
+    
+        
     
 if __name__ == "__main__":
     print(rolagem_expressao("0"))
@@ -135,3 +171,11 @@ if __name__ == "__main__":
     print(arma.rollDano("Bom"))
     print(arma.rollDano("Extremo"))
     print(arma.rollDano("Crítico"))
+    
+    inv = Inventario(2)
+    item1 = Item("Poção de Cura", "Restaura 2D6+2 de Vida", "P", quantidade=2)
+    inv.addItem(item1)
+    inv.addItem(item1)
+    inv.addItem(arma)
+    
+    inv.listItems()
