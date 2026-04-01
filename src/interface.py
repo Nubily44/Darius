@@ -1,8 +1,9 @@
 import sys
 import random
+import time
 from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit
 from PySide6.QtGui import QIcon, QFont, QColor, QGuiApplication
-from PySide6.QtCore import QSize, Signal, Qt, QObject
+from PySide6.QtCore import QSize, Signal, Qt, QObject, QTimer
 from functions import Wrapper
 
 def random_position(window):
@@ -304,9 +305,27 @@ class Window(QWidget):
     
     @Wrapper
     def setValue(self, label: QLabel, value1, value2=None):
-        print(" [INTERFACE] | Setting value:", value1, " / ", value2)
-        label.setText(f"{label.text().split(':')[0]}: {value1} / {value2}" if value2 is not None else f"{label.text().split(':')[0]}: {value1}")
-        return
+        print(" [INTERFACE] | Setting value:", value1, "/", value2)
+    
+        base = label.text().split(':')[0]
+        dots = [".", "..", "...", "....", "....."]
+        index = 0
+    
+        def animate():
+            nonlocal index
+            label.setText(f"{base}: {dots[index]}")
+            index += 1
+    
+            if index == len(dots):
+                timer.stop()
+                if value2 is not None:
+                    label.setText(f"{base}: {value1} / {value2}")
+                else:
+                    label.setText(f"{base}: {value1}")
+    
+        timer = QTimer()
+        timer.timeout.connect(animate)
+        timer.start(100) 
     
     def searchPericia(self, nome):
         for pericia in self.pericias_array:
