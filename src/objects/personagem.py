@@ -71,4 +71,6 @@ class Personagem():
         return None
 
     def ataque (self, arma):
-        print(f"    [OBJECT] | Atacando com {arma.nome} (Dano: {arma.dano}, Tipo: {arma.tipo})")
+        res_per = self.usePericia(arma.tipo, vantagem=False)
+        return arma.rollDano(res_per)
+        
