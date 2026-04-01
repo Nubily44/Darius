@@ -66,11 +66,10 @@ class BlocoPericia():
         self.p3 = p3
                 
 class Pericia():
-    def __init__(self, nome, valor, tipo):
+    def __init__(self, nome, valor):
         self.nome = nome
         self.valor = valor
         self.last_roll = None
-        self.tipo = tipo
         
     def getValue(self):
         return self.valor
@@ -122,8 +121,8 @@ class Item:
         return isinstance(other, Item) and self.nome == other.nome
     
 class Arma(Item):
-    def __init__(self, nome, dano, tipo):
-        super().__init__(nome, descricao="", tamanho="M")
+    def __init__(self, nome, descricao, dano, tipo):
+        super().__init__(nome, descricao, tamanho="G")
         self.dano = dano
         self.tipo = tipo
         
@@ -167,7 +166,7 @@ class Inventario:
 if __name__ == "__main__":
     print(rolagem_expressao("0"))
     
-    arma = Arma("Espada Longa", {"Desastre": "0", "Falha": "0", "Normal": "1D8", "Bom": "1D8+2", "Extremo": "1D8+4", "Crítico": "1D8+6"}, "Corte")
+    arma = Arma("Espada Longa", "desc", {"Desastre": "0", "Falha": "0", "Normal": "1D8", "Bom": "1D8+2", "Extremo": "1D8+4", "Crítico": "1D8+6"}, "Armas Brancas G")
     print(arma.rollDano("Bom"))
     print(arma.rollDano("Extremo"))
     print(arma.rollDano("Crítico"))

@@ -47,9 +47,9 @@ def main():
         Personagem1.addPericia(
             BlocoPericia(
                 f"{str(dados_ficha[f"BP{i}_N"])} ({str(dados_ficha[f"BP{i}_V"])})",
-                Pericia(dados_ficha[f"BP{i}_P1_N"], dados_ficha[f"BP{i}_P1_V"], tipo="Perícia"),
-                Pericia(dados_ficha[f"BP{i}_P2_N"], dados_ficha[f"BP{i}_P2_V"], tipo="Perícia"),
-                Pericia(dados_ficha[f"BP{i}_P3_N"], dados_ficha[f"BP{i}_P3_V"], tipo="Perícia"),
+                Pericia(dados_ficha[f"BP{i}_P1_N"], dados_ficha[f"BP{i}_P1_V"]),
+                Pericia(dados_ficha[f"BP{i}_P2_N"], dados_ficha[f"BP{i}_P2_V"]),
+                Pericia(dados_ficha[f"BP{i}_P3_N"], dados_ficha[f"BP{i}_P3_V"]),
             )
         )
     

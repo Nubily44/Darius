@@ -1,2 +1,47 @@
 Criando personagem com Vida: 90 Vida Max: 0 Armadura Vida: 13 Sanidade: 68 Sanidade Max: 67 Armadura Sanidade: 5 Esforço: 9 Nível: 9 Classe: Classe
 -------------------------------------- SETUP DONE
+[DISPATCHER] | Handling Perícia Use: Medicina
+    [OBJECT] | Usando Perícia: Medicina
+     [ROLLS] | d100: 18
+    [OBJECT] | Sucesso Bom
+ [INTERFACE] | Setting value: Bom  /  None
+[DISPATCHER] | Handling Perícia Use: Medicina
+    [OBJECT] | Usando Perícia: Medicina
+     [ROLLS] | d100: 41
+    [OBJECT] | Sucesso Normal
+ [INTERFACE] | Setting value: Normal  /  None
+[DISPATCHER] | Handling Perícia Use: Medicina
+    [OBJECT] | Usando Perícia: Medicina
+     [ROLLS] | d100: 16
+    [OBJECT] | Sucesso Bom
+ [INTERFACE] | Setting value: Bom  /  None
+[DISPATCHER] | Handling Perícia Use: Medicina
+    [OBJECT] | Usando Perícia: Medicina
+     [ROLLS] | d100: 87
+    [OBJECT] | Falha
+ [INTERFACE] | Setting value: Falha  /  None
+[DISPATCHER] | Handling Perícia Use: Cirurgia
+    [OBJECT] | Usando Perícia: Cirurgia
+     [ROLLS] | d100: 10
+    [OBJECT] | Sucesso Bom
+ [INTERFACE] | Setting value: Bom  /  None
+[DISPATCHER] | Handling Perícia Use: Cirurgia
+    [OBJECT] | Usando Perícia: Cirurgia
+     [ROLLS] | d100: 78
+    [OBJECT] | Sucesso Normal
+ [INTERFACE] | Setting value: Normal  /  None
+[DISPATCHER] | Handling Perícia Use: Cirurgia
+    [OBJECT] | Usando Perícia: Cirurgia
+     [ROLLS] | d100: 10
+    [OBJECT] | Sucesso Bom
+ [INTERFACE] | Setting value: Bom  /  None
+[DISPATCHER] | Handling Perícia Use: Investigação
+    [OBJECT] | Usando Perícia: Investigação
+     [ROLLS] | d100: 32
+    [OBJECT] | Sucesso Bom
+ [INTERFACE] | Setting value: Bom  /  None
+[DISPATCHER] | Handling Perícia Use: Investigação
+    [OBJECT] | Usando Perícia: Investigação
+     [ROLLS] | d100: 93
+    [OBJECT] | Sucesso Normal
+ [INTERFACE] | Setting value: Normal  /  None
