@@ -1,6 +1,6 @@
 import sys
 from pathlib import Path
-from objects.components import BlocoAtributo, BlocoPericia, Pericia, Inventario, Item, Arma
+from components import BlocoAtributo, BlocoPericia, Pericia, Inventario, Item, Arma
 BASE_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(BASE_DIR.parent))
 from functions import Wrapper, update_state
@@ -70,6 +70,12 @@ class Personagem():
                     return pericia
         return None
 
+    def searchItem(self, nome_item):
+        for item in self.BlocoInventario.itens:
+            if item.nome == nome_item:
+                return item
+        return None
+
     def ataque (self, arma):
         res_per = self.usePericia(arma.tipo, vantagem=False)
         return arma.rollDano(res_per)
@@ -80,3 +86,4 @@ if __name__ == "__main__":
     per = Personagem(vida=10, vida_max=10, armor_vida=2, sanidade=8, sanidade_max=8, armor_sanidade=1, esforco=3, nivel=1, classe="Guerreiro")
     per.addPericia(BlocoPericia("Combate Corpo a Corpo", Pericia("Combate 1", 3), Pericia("", 2), Pericia("Inteligência", 1)))
     per.BlocoInventario.addItem(Arma("Espada Longa", "desc", {"Desastre": "0", "Falha": "0", "Normal": "1D8", "Bom": "1D8+2", "Extremo": "1D8+4", "Crítico": "1D8+6"}, "Armas Brancas G"))
+    per.ataque(per.BlocoInventario.searchItem("Espada Longa"))
