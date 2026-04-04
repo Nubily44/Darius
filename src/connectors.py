@@ -6,7 +6,7 @@ def handle_vida(personagem, window, value):
     print(f"[DISPATCHER] | Handling Vida: {value}")
     Dispatcher(
         lambda p: p.setVida(value),
-        lambda p: window.setValue(window.interface_vida.label, personagem.getVida().getAtributo(), personagem.getVida().getAtributoMax()),
+        lambda p: window.setValue(window.interface_vida.label, personagem.getVida().getAtributo(), personagem.getVida--().getAtributoMax()),
         1
     ).execute((personagem))
 

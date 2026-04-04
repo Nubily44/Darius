@@ -127,6 +127,7 @@ class Arma(Item):
         self.tipo = tipo
         
     def rollDano(self, res_pericia):
+        print(f"    [OBJECT] | Rolando dano de {self.nome} com resultado de perícia: {res_pericia}")
         return rolagem_expressao(self.dano.get(res_pericia))
 
 
