@@ -1,6 +1,6 @@
 import sys
 from pathlib import Path
-from components import BlocoAtributo, BlocoPericia, Pericia, Inventario, Item, Arma
+from objects.components import BlocoAtributo, BlocoPericia, Pericia, Inventario, Item, Arma
 BASE_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(BASE_DIR.parent))
 from functions import Wrapper, update_state
@@ -69,6 +69,12 @@ class Personagem():
                 if pericia.nome == nome_pericia:
                     return pericia
         return None
+    
+    def listPericias(self):
+        pericias_list = []
+        for bloco in self.pericias:
+            pericias_list.extend([bloco.p1.nome, bloco.p2.nome, bloco.p3.nome])
+        return pericias_list
 
     def searchItem(self, nome_item):
         for item in self.BlocoInventario.itens:
@@ -77,9 +83,10 @@ class Personagem():
         return None
 
     def ataque (self, arma):
+        print(f"Arma tipo: {arma.tipo}, {type(arma.tipo)}")
         per = self.searchPericia(arma.tipo)
         print(f"Rolando dano de {arma} com perícia {per.valor}")
-        res_per = self.usePericia(per.valor, 1)
+        res_per = self.usePericia(arma.tipo, 1)
         
         print(f"RES_PER : {res_per}")
         return arma.rollDano(res_per)
@@ -89,5 +96,6 @@ class Personagem():
 if __name__ == "__main__":
     per = Personagem(vida=10, vida_max=10, armor_vida=2, sanidade=8, sanidade_max=8, armor_sanidade=1, esforco=3, nivel=1, classe="Guerreiro")
     per.addPericia(BlocoPericia("Combate Corpo a Corpo", Pericia("Combate 1", 50), Pericia("Armas Brancas G", 80), Pericia("Inteligência", 100)))
+    print(per.listPericias())
     per.BlocoInventario.addItem(Arma("Espada Longa", "desc", {"Desastre": "0", "Falha": "0", "Normal": "1D8", "Bom": "1D8+2", "Extremo": "1D8+4", "Crítico": "1D8+6"}, "Armas Brancas G"))
     per.ataque(per.BlocoInventario.searchItem("Espada Longa"))
