@@ -1,6 +1,6 @@
 import sys
 from pathlib import Path
-from objects.components import BlocoAtributo, BlocoPericia, Pericia, Inventario, Item, Arma
+from components import BlocoAtributo, BlocoPericia, Pericia, Inventario, Item, Arma
 BASE_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(BASE_DIR.parent))
 from functions import Wrapper, update_state
@@ -98,4 +98,4 @@ if __name__ == "__main__":
     per.addPericia(BlocoPericia("Combate Corpo a Corpo", Pericia("Combate 1", 50), Pericia("Armas Brancas G", 80), Pericia("Inteligência", 100)))
     print(per.listPericias())
     per.BlocoInventario.addItem(Arma("Espada Longa", "desc", {"Desastre": "0", "Falha": "0", "Normal": "1D8", "Bom": "1D8+2", "Extremo": "1D8+4", "Crítico": "1D8+6"}, "Armas Brancas G"))
-    per.ataque(per.BlocoInventario.searchItem("Espada Longa"))
+    print(per.ataque(per.BlocoInventario.searchItem("Espada Longa")))
