@@ -83,9 +83,6 @@ class Personagem():
         return None
 
     def ataque (self, arma):
-        print(f"Arma tipo: {arma.tipo}, {type(arma.tipo)}")
-        per = self.searchPericia(arma.tipo)
-        print(f"Rolando dano de {arma} com perícia {per.valor}")
         res_per = self.usePericia(arma.tipo, 1)
         
         print(f"RES_PER : {res_per}")
