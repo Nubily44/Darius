@@ -4,7 +4,7 @@ from pathlib import Path
 from PySide6.QtWidgets import QApplication
 
 from objects.personagem import Personagem
-from objects.components import BlocoPericia, Pericia
+from objects.components import BlocoPericia, Pericia, Arma, Item, Inventario
 from interface import Window
 from functions import Tee, extract_ficha_data, update_state, update_variable, read_state
 from connectors import handle_esforco_deduct, handle_esforco_refresh, handle_vida, handle_sanidade, handle_pericia_use, handle_pericia_use_adv
@@ -52,6 +52,8 @@ def main():
                 Pericia(dados_ficha[f"BP{i}_P3_N"], dados_ficha[f"BP{i}_P3_V"]),
             )
         )
+    
+    #per.BlocoInventario.addItem(Arma("Espada Longa", "desc", {"Desastre": "0", "Falha": "0", "Normal": "1D8", "Bom": "1D8+2", "Extremo": "1D8+4", "Crítico": "1D8+6"}, "Armas Brancas G"))
     
     window = Window(Personagem1.getVida(), Personagem1.getSanidade(), Personagem1.BlocoEsforco.getAtributo(), Personagem1.getPericias())
     window.interface_vida.att_signal.connect(lambda value: handle_vida(Personagem1, window, value))

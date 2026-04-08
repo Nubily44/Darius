@@ -298,7 +298,7 @@ class Window(QWidget):
         self.botao_save = []
         self.absolute.addLayout(self.total1)
         
-        self.iterface_utility = AttributeObject("Teste", 0, 100, 0, self.font, self.smallfont, parent=self)
+        self.iterface_utility = PericiaObject("Teste", 100, self.font, self.smallfont)
         
         self.absolute.addLayout(self.iterface_utility.getLayout())
         self.adjustSize()

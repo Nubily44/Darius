@@ -1,6 +1,6 @@
 import sys
 from pathlib import Path
-from components import BlocoAtributo, BlocoPericia, Pericia, Inventario, Item, Arma
+from objects.components import BlocoAtributo, BlocoPericia, Pericia, Inventario, Item, Arma
 BASE_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(BASE_DIR.parent))
 from functions import Wrapper, update_state
@@ -75,6 +75,15 @@ class Personagem():
         for bloco in self.pericias:
             pericias_list.extend([bloco.p1.nome, bloco.p2.nome, bloco.p3.nome])
         return pericias_list
+
+    def addItem(self, item):
+        self.BlocoInventario.addItem(item)
+        
+    def removeItem(self, nome_item):
+        self.BlocoInventario.removeItem(nome_item)
+        
+    def listItems(self):
+        return [item.nome for item in self.BlocoInventario.itens]
 
     def searchItem(self, nome_item):
         for item in self.BlocoInventario.itens:
