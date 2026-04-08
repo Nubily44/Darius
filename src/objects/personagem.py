@@ -84,9 +84,9 @@ class Personagem():
 
     def ataque (self, arma):
         res_per = self.usePericia(arma.tipo, 1)
-        
-        print(f"RES_PER : {res_per}")
-        return arma.rollDano(res_per)
+        dano = arma.rollDano(res_per)
+        print("    [OBJECT] | Resultado do Ataque com", arma.nome, ":", dano)
+        return dano
     
 
 
