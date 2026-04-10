@@ -298,10 +298,14 @@ class Window(QWidget):
         self.botao_save = []
         self.absolute.addLayout(self.total1)
         
-        self.iterface_utility = PericiaObject("Teste", 100, self.font, self.smallfont)
+        self.interface_utility = QVBoxLayout()
+        self.interface_utility.setAlignment(Qt.AlignTop)
         
-        self.absolute.addLayout(self.iterface_utility.getLayout())
-        self.adjustSize()
+        self.test = PericiaObject("Teste", 100, self.font, self.smallfont)
+        self.interface_utility.addLayout(self.test.getLayout())
+        
+        self.absolute.addLayout(self.interface_utility)
+        #self.adjustSize()
     
     @Wrapper
     def setValue(self, label: QLabel, value1, value2=None):
