@@ -1,6 +1,8 @@
 import sys
 from pathlib import Path
 
+# Happy Birthday to me!
+
 from PySide6.QtWidgets import QApplication
 
 from objects.personagem import Personagem
