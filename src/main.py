@@ -55,9 +55,9 @@ def main():
             )
         )
     
-    #per.BlocoInventario.addItem(Arma("Espada Longa", "desc", {"Desastre": "0", "Falha": "0", "Normal": "1D8", "Bom": "1D8+2", "Extremo": "1D8+4", "Crítico": "1D8+6"}, "Armas Brancas G"))
+    Personagem1.BlocoInventario.addItem(Arma("Espada Longa", "desc", {"Desastre": "0", "Falha": "0", "Normal": "1D8", "Bom": "1D8+2", "Extremo": "1D8+4", "Crítico": "1D8+6"}, "Armas Brancas G"))
     
-    window = Window(Personagem1.getVida(), Personagem1.getSanidade(), Personagem1.BlocoEsforco.getAtributo(), Personagem1.getPericias())
+    window = Window(Personagem1.getVida(), Personagem1.getSanidade(), Personagem1.BlocoEsforco.getAtributo(), Personagem1.getPericias(), Personagem1.BlocoInventario.returnInventory())
     window.interface_vida.att_signal.connect(lambda value: handle_vida(Personagem1, window, value))
     window.interface_sanidade.att_signal.connect(lambda value: handle_sanidade(Personagem1, window, value))
     window.interface_esforco.usb_use_signal.connect(lambda value: handle_esforco_deduct(Personagem1, window, value))

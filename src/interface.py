@@ -301,6 +301,8 @@ class Window(QWidget):
         self.interface_utility = QVBoxLayout()
         self.interface_utility.setAlignment(Qt.AlignTop)
         
+        
+        
         self.test = PericiaObject("Teste", 100, self.font, self.smallfont)
         self.interface_utility.addLayout(self.test.getLayout())
         

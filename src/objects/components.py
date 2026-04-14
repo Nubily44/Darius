@@ -163,6 +163,9 @@ class Inventario:
         print("    [OBJECT] | Itens no Inventário:", [(item.nome, item.quantidade) for item in self.items])
         return list(self.items)
     
+    def returnInventory(self):
+        return self.items
+    
         
     
 if __name__ == "__main__":
