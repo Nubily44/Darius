@@ -226,7 +226,7 @@ class Window(QWidget):
     #set_esforco = Signal()
     #refresh_esforco = Signal()
     
-    def __init__(self, vida, sanidade, esforco, pericias=None):
+    def __init__(self, vida, sanidade, esforco, pericias=None, inventario=None):
         super().__init__()
         self.setWindowTitle("Darius 0.1")
         
@@ -302,9 +302,12 @@ class Window(QWidget):
         self.interface_utility.setAlignment(Qt.AlignTop)
         
         
-        
-        self.test = PericiaObject("Teste", 100, self.font, self.smallfont)
-        self.interface_utility.addLayout(self.test.getLayout())
+        for item in inventario:
+            item_label = QLabel(f"{item.nome}: {item.descricao}")
+            item_label.setFont(self.smallfont)
+            self.interface_utility.addWidget(item_label)
+        #self.test = PericiaObject("Teste", 100, self.font, self.smallfont)
+        #self.interface_utility.addLayout(self.test.getLayout())
         
         self.absolute.addLayout(self.interface_utility)
         #self.adjustSize()
