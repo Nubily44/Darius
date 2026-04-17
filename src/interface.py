@@ -303,9 +303,9 @@ class Window(QWidget):
         
         
         for item in inventario:
-            item_label = QLabel(f"{item.nome}: {item.descricao}")
-            item_label.setFont(self.smallfont)
-            self.interface_utility.addWidget(item_label)
+            item_object = PericiaObject(item.nome, 100, self.font, self.smallfont)
+            self.interface_utility.addLayout(item_object.getLayout())
+            self.interface_utility.addWidget(item_object.label)
         #self.test = PericiaObject("Teste", 100, self.font, self.smallfont)
         #self.interface_utility.addLayout(self.test.getLayout())
         
