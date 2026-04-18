@@ -55,6 +55,8 @@ def main():
             )
         )
     
+    Personagem1.addPericia(BlocoPericia("Combate Corpo a Corpo", Pericia("Força", 90), Pericia("Destreza", 90), Pericia("Inteligência", 90)))
+    
     Personagem1.BlocoInventario.addItem(Arma("Espada Longa", "desc", {"Desastre": "0", "Falha": "0", "Normal": "1D8", "Bom": "1D8+2", "Extremo": "1D8+4", "Crítico": "1D8+6"}, "Armas Brancas G"))
     
     window = Window(Personagem1.getVida(), Personagem1.getSanidade(), Personagem1.BlocoEsforco.getAtributo(), Personagem1.getPericias(), Personagem1.BlocoInventario.returnInventory())

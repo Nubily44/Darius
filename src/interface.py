@@ -302,10 +302,10 @@ class Window(QWidget):
         self.interface_utility.setAlignment(Qt.AlignTop)
         
         
-        for item in inventario:
-            item_object = PericiaObject(item.nome, 100, self.font, self.smallfont)
-            self.interface_utility.addLayout(item_object.getLayout())
-            self.interface_utility.addWidget(item_object.label)
+        #for item in inventario:
+        #    item_object = PericiaObject(item.nome, 100, self.font, self.smallfont)
+        #    self.interface_utility.addLayout(item_object.getLayout())
+        #    self.interface_utility.addWidget(item_object.label)
         #self.test = PericiaObject("Teste", 100, self.font, self.smallfont)
         #self.interface_utility.addLayout(self.test.getLayout())
         
