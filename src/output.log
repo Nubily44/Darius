@@ -1,15 +1,23 @@
 Criando personagem com Vida: 90 Vida Max: 0 Armadura Vida: 13 Sanidade: 68 Sanidade Max: 67 Armadura Sanidade: 5 Esforço: 5 Nível: 9 Classe: Classe
     [OBJECT] | Adicionado item: Espada Longa
 -------------------------------------- SETUP DONE
-[DISPATCHER] | Handling Perícia Use: Combate Direto
-    [OBJECT] | Usando Perícia: Combate Direto
-     [ROLLS] | d100: 89
-    [OBJECT] | Sucesso Normal
- [INTERFACE] | Setting value: Normal / None
-[DISPATCHER] | Handling Perícia Use: Assalto
-    [OBJECT] | Usando Perícia: Assalto
-     [ROLLS] | d100: 59
+[DISPATCHER] | Handling Perícia Use: Duelo de Névoa
+    [OBJECT] | Usando Perícia: Duelo de Névoa
+     [ROLLS] | d100: 67
     [OBJECT] | Sucesso Normal
  [INTERFACE] | Setting value: Normal / None
 [DISPATCHER] | Handling Perícia Use: Duelo de Névoa
- [INTERFACE] | Setting value: None / None
+    [OBJECT] | Usando Perícia: Duelo de Névoa
+     [ROLLS] | d100: 49
+    [OBJECT] | Sucesso Normal
+ [INTERFACE] | Setting value: Normal / None
+[DISPATCHER] | Handling Perícia Use: Duelo de Névoa
+    [OBJECT] | Usando Perícia: Duelo de Névoa
+     [ROLLS] | d100: 18
+    [OBJECT] | Sucesso Bom
+ [INTERFACE] | Setting value: Bom / None
+[DISPATCHER] | Handling Perícia Use: Duelo de Névoa
+    [OBJECT] | Usando Perícia: Duelo de Névoa
+     [ROLLS] | d100: 22
+    [OBJECT] | Sucesso Bom
+ [INTERFACE] | Setting value: Bom / None

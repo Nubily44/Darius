@@ -57,10 +57,11 @@ class Personagem():
         
     def usePericia(self, nome_pericia, vantagem):
         for bloco in self.pericias:
-            for pericia in [bloco.p1, bloco.p2, bloco.p3]:
-                if pericia.nome == nome_pericia:
-                    print("    [OBJECT] | Usando Perícia:", nome_pericia)
-                    return pericia.roll(vantagem)
+            for pericia in [bloco.p1, bloco.p2, bloco.p3, bloco.p4]:
+                if pericia is not None:
+                    if pericia.nome == nome_pericia:
+                        print("    [OBJECT] | Usando Perícia:", nome_pericia)
+                        return pericia.roll(vantagem)
         return None
     
     def searchPericia(self, nome_pericia):
