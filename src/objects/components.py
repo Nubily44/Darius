@@ -59,11 +59,13 @@ class BlocoAtributo():
         
     
 class BlocoPericia():
-    def __init__(self, nome, p1, p2, p3):
+    def __init__(self, nome, tipo, p1, p2, p3, p4=None):
         self.nome = nome
+        self.tipo = tipo
         self.p1 = p1
         self.p2 = p2
         self.p3 = p3
+        self.p4 = p4
                 
 class Pericia():
     def __init__(self, nome, valor):

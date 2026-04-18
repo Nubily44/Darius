@@ -49,13 +49,14 @@ def main():
         Personagem1.addPericia(
             BlocoPericia(
                 f"{str(dados_ficha[f"BP{i}_N"])} ({str(dados_ficha[f"BP{i}_V"])})",
+                "Pericia N",
                 Pericia(dados_ficha[f"BP{i}_P1_N"], dados_ficha[f"BP{i}_P1_V"]),
                 Pericia(dados_ficha[f"BP{i}_P2_N"], dados_ficha[f"BP{i}_P2_V"]),
                 Pericia(dados_ficha[f"BP{i}_P3_N"], dados_ficha[f"BP{i}_P3_V"]),
             )
         )
     
-    Personagem1.addPericia(BlocoPericia("Combate Corpo a Corpo", Pericia("Força", 90), Pericia("Destreza", 90), Pericia("Inteligência", 90)))
+    Personagem1.addPericia(BlocoPericia("Combate Corpo a Corpo", "Pericia C", Pericia("Combate Direto", 90), Pericia("Assalto", 90), Pericia("Artes Marciais", 90), Pericia("Duelo de Névoa", 90)))
     
     Personagem1.BlocoInventario.addItem(Arma("Espada Longa", "desc", {"Desastre": "0", "Falha": "0", "Normal": "1D8", "Bom": "1D8+2", "Extremo": "1D8+4", "Crítico": "1D8+6"}, "Armas Brancas G"))
     

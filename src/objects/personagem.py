@@ -65,7 +65,8 @@ class Personagem():
     
     def searchPericia(self, nome_pericia):
         for bloco in self.pericias:
-            for pericia in [bloco.p1, bloco.p2, bloco.p3]:
+            for pericia in [bloco.p1, bloco.p2, bloco.p3, bloco.p4]:
+                print("    [OBJECT] | Buscando Perícia:", nome_pericia, "Comparando com", pericia.nome)
                 if pericia.nome == nome_pericia:
                     return pericia
         return None

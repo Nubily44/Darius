@@ -150,19 +150,25 @@ class PericiaObject(QObject):
     per_use_signal = Signal(str)
     per_use_adv_signal = Signal(str, int)
     
-    def __init__(self, name, value, font, smallfont, parent=None):
+    def __init__(self, name, value, font, smallfont, type, parent=None):
         super().__init__(parent)
         self.name = name
         self.container = QVBoxLayout()
         self.subcontainer = QHBoxLayout()
-        self.btn = StyledButton(140, 40, f"{name} ({value}%)", "#1F514A")
+        if type == "N":
+            self.btn = StyledButton(140, 40, f"{name} ({value}%)", "#1F514A")
+        if type == "C":
+            self.btn = StyledButton(200, 40, f"{name} ({value}%)", "#1F514A")
         
         self.label = QLabel(f"Resultado: 0         ")
         self.label.setFont(font)
         
         self.input = QLineEdit()
         self.input.setPlaceholderText("Vantagem")
-        self.input.setFixedWidth(50)
+        if type == "N":
+            self.input.setFixedWidth(50)
+        if type == "C":
+            self.input.setFixedWidth(75)
         
         self.btn.clicked.connect(self._emit_use)
         self.input.returnPressed.connect(self._emit_use_adv)
@@ -270,20 +276,29 @@ class Window(QWidget):
         
         self.pericias_array = []
         
+        self.interface_utility = QVBoxLayout()
+        self.interface_utility.setAlignment(Qt.AlignTop)
+        
         for bloco in pericias:
             
             bloco_layout = BlocoPericiasObject(bloco.nome, self.font, self.smallfont).getLayout()
             bloco_layout.setContentsMargins(20, 0, 20, 0)
             
-            for pericia in [bloco.p1, bloco.p2, bloco.p3]:
-                pericia_obj = PericiaObject(pericia.nome, pericia.valor, self.font, self.smallfont)
-                bloco_layout.addLayout(pericia_obj.getLayout())
-                self.pericias_array.append(pericia_obj)
+            for pericia in [bloco.p1, bloco.p2, bloco.p3, bloco.p4]:
+                if pericia is not None:
+                    if bloco.tipo == "Pericia N":
+                        pericia_obj = PericiaObject(pericia.nome, pericia.valor, self.font, self.smallfont, "N")
+                    elif bloco.tipo == "Pericia C":
+                        pericia_obj = PericiaObject(pericia.nome, pericia.valor, self.font, self.smallfont, "C")
+                    bloco_layout.addLayout(pericia_obj.getLayout())
+                    self.pericias_array.append(pericia_obj)
                 
             if len(self.c4.children()) < 3:
                 self.c4.addLayout(bloco_layout)
-            else:
+            elif len(self.c5.children()) < 3:
                 self.c5.addLayout(bloco_layout)
+            else:
+                self.interface_utility.addLayout(bloco_layout)
                 
         self.pericias_total.addLayout(self.c4)
         self.pericias_total.addLayout(self.c5)
@@ -298,8 +313,6 @@ class Window(QWidget):
         self.botao_save = []
         self.absolute.addLayout(self.total1)
         
-        self.interface_utility = QVBoxLayout()
-        self.interface_utility.setAlignment(Qt.AlignTop)
         
         
         #for item in inventario:
