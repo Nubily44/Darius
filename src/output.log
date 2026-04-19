@@ -1,23 +1,38 @@
 Criando personagem com Vida: 90 Vida Max: 0 Armadura Vida: 13 Sanidade: 68 Sanidade Max: 67 Armadura Sanidade: 5 Esforço: 5 Nível: 9 Classe: Classe
     [OBJECT] | Adicionado item: Espada Longa
 -------------------------------------- SETUP DONE
-[DISPATCHER] | Handling Perícia Use: Duelo de Névoa
-    [OBJECT] | Usando Perícia: Duelo de Névoa
-     [ROLLS] | d100: 67
-    [OBJECT] | Sucesso Normal
- [INTERFACE] | Setting value: Normal / None
-[DISPATCHER] | Handling Perícia Use: Duelo de Névoa
-    [OBJECT] | Usando Perícia: Duelo de Névoa
-     [ROLLS] | d100: 49
-    [OBJECT] | Sucesso Normal
- [INTERFACE] | Setting value: Normal / None
-[DISPATCHER] | Handling Perícia Use: Duelo de Névoa
-    [OBJECT] | Usando Perícia: Duelo de Névoa
-     [ROLLS] | d100: 18
+[DISPATCHER] | Handling Perícia Use: Armas de Fogo Ocultistas
+    [OBJECT] | Usando Perícia: Armas de Fogo Ocultistas
+     [ROLLS] | d100: 34
     [OBJECT] | Sucesso Bom
  [INTERFACE] | Setting value: Bom / None
-[DISPATCHER] | Handling Perícia Use: Duelo de Névoa
-    [OBJECT] | Usando Perícia: Duelo de Névoa
-     [ROLLS] | d100: 22
+[DISPATCHER] | Handling Perícia Use: Armas Brancas Ocultistas
+    [OBJECT] | Usando Perícia: Armas Brancas Ocultistas
+     [ROLLS] | d100: 73
+    [OBJECT] | Sucesso Normal
+ [INTERFACE] | Setting value: Normal / None
+[DISPATCHER] | Handling Perícia Use: Armas Brancas XL
+    [OBJECT] | Usando Perícia: Armas Brancas XL
+     [ROLLS] | d100: 12
     [OBJECT] | Sucesso Bom
  [INTERFACE] | Setting value: Bom / None
+[DISPATCHER] | Handling Perícia Use: Armas Brancas G
+    [OBJECT] | Usando Perícia: Armas Brancas G
+     [ROLLS] | d100: 20
+    [OBJECT] | Sucesso Bom
+ [INTERFACE] | Setting value: Bom / None
+[DISPATCHER] | Handling Perícia Use with Advantage: Armas Brancas Ocultistas, Advantage: 11
+    [OBJECT] | Usando Perícia: Armas Brancas Ocultistas
+     [ROLLS] | d100: 29
+     [ROLLS] | d100: 10
+     [ROLLS] | d100: 31
+     [ROLLS] | d100: 83
+     [ROLLS] | d100: 59
+     [ROLLS] | d100: 31
+     [ROLLS] | d100: 78
+     [ROLLS] | d100: 9
+     [ROLLS] | d100: 32
+     [ROLLS] | d100: 82
+     [ROLLS] | d100: 25
+    [OBJECT] | Sucesso Extremo
+ [INTERFACE] | Setting value: Extremo / None

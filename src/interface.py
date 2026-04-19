@@ -276,7 +276,7 @@ class Window(QWidget):
         
         self.pericias_array = []
         
-        self.interface_utility = QVBoxLayout()
+        self.interface_utility = QHBoxLayout()
         self.interface_utility.setAlignment(Qt.AlignTop)
         
         for bloco in pericias:

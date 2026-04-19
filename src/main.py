@@ -57,6 +57,8 @@ def main():
         )
     
     Personagem1.addPericia(BlocoPericia("Combate Corpo a Corpo", "Pericia C", Pericia("Combate Direto", 90), Pericia("Assalto", 90), Pericia("Artes Marciais", 90), Pericia("Duelo de Névoa", 90)))
+    Personagem1.addPericia(BlocoPericia("Armas de Fogo", "Pericia C", Pericia("Armas de Fogo P", 90), Pericia("Armas de Fogo G", 90), Pericia("Armas de Fogo XL", 90), Pericia("Armas de Fogo Ocultistas", 90)))
+    Personagem1.addPericia(BlocoPericia("Armas Brancas", "Pericia C", Pericia("Armas Brancas P", 90), Pericia("Armas Brancas G", 90), Pericia("Armas Brancas XL", 90), Pericia("Armas Brancas Ocultistas", 90)))
     
     Personagem1.BlocoInventario.addItem(Arma("Espada Longa", "desc", {"Desastre": "0", "Falha": "0", "Normal": "1D8", "Bom": "1D8+2", "Extremo": "1D8+4", "Crítico": "1D8+6"}, "Armas Brancas G"))
     
