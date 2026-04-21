@@ -158,7 +158,7 @@ class PericiaObject(QObject):
         if type == "N":
             self.btn = StyledButton(140, 40, f"{name} ({value}%)", "#1F514A")
         if type == "C":
-            self.btn = StyledButton(200, 40, f"{name} ({value}%)", "#1F514A")
+            self.btn = StyledButton(220, 40, f"{name} ({value}%)", "#1F514A")
         
         self.label = QLabel(f"Resultado: 0         ")
         self.label.setFont(font)
