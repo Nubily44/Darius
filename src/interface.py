@@ -305,6 +305,9 @@ class Window(QWidget):
         
         self.total1.addLayout(self.pericias_total)
         
+        for i in inventario:
+            item_object = PericiaObject(i.nome, 100, self.font, self.smallfont, "N")
+            self.interface_utility.addLayout(item_object.getLayout())
         
         self.botao = StyledButton(200, 60, "Botão", "#000000")
         self.botao.clicked.connect(self.handle_botao)
