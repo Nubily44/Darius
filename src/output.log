@@ -1,3 +1,24 @@
 Criando personagem com Vida: 90 Vida Max: 0 Armadura Vida: 13 Sanidade: 68 Sanidade Max: 67 Armadura Sanidade: 5 Esforço: 5 Nível: 9 Classe: Classe
     [OBJECT] | Adicionado item: Espada Longa
+Item: Espada Longa, Tipo: Armas Brancas G, Tamanho: G
 -------------------------------------- SETUP DONE
+[DISPATCHER] | Handling Perícia Use: Espada Longa
+Traceback (most recent call last):
+  File "c:\Users\aline\Desktop\BSCode\Github\Darius\src\main.py", line 72, in <lambda>
+    pericia_obj.per_use_signal.connect(lambda value: handle_pericia_use(Personagem1, window, value))
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\aline\Desktop\BSCode\Github\Darius\src\functions.py", line 80, in wrapper
+    result = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\aline\Desktop\BSCode\Github\Darius\src\connectors.py", line 48, in handle_pericia_use
+    ).execute((personagem))
+      ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\aline\Desktop\BSCode\Github\Darius\src\functions.py", line 80, in wrapper
+    result = func(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\aline\Desktop\BSCode\Github\Darius\src\dispatcher.py", line 28, in execute
+    self.UIfunc(*values)
+  File "C:\Users\aline\Desktop\BSCode\Github\Darius\src\connectors.py", line 46, in <lambda>
+    lambda p: window.setValue(window.searchPericia(value).label, personagem.searchPericia(value).getLastRoll()),
+                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'getLastRoll'

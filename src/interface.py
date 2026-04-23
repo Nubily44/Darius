@@ -152,7 +152,9 @@ class PericiaObject(QObject):
     
     def __init__(self, name, value, font, smallfont, type, parent=None):
         super().__init__(parent)
+        
         self.name = name
+        self.value = value
         self.container = QVBoxLayout()
         self.subcontainer = QHBoxLayout()
         if type == "N":
@@ -182,13 +184,13 @@ class PericiaObject(QObject):
         return self.container
     
     def _emit_use(self):
-        value = self.name
-        self.per_use_signal.emit(value)
+        value_emit = self.name
+        self.per_use_signal.emit(value_emit)
         
     def _emit_use_adv(self):
-        value = self.name
+        value_emit = self.name
         adv = int(self.input.text()) if self.input.text() else 1
-        self.per_use_adv_signal.emit(value, adv)
+        self.per_use_adv_signal.emit(value_emit, adv)
     
 class BlocoPericiasObject:
     def __init__(self, nome, font, smallfont):
@@ -306,8 +308,15 @@ class Window(QWidget):
         self.total1.addLayout(self.pericias_total)
         
         for i in inventario:
-            item_object = PericiaObject(i.nome, 100, self.font, self.smallfont, "N")
-            self.interface_utility.addLayout(item_object.getLayout())
+            print(f"Item: {i.nome}, Tipo: {i.tipo}, Tamanho: {i.tamanho}")
+            if i.tamanho == "G":
+                pass
+                item_object = PericiaObject(i.nome, self.searchPericia(i.tipo).value, self.font, self.smallfont, "C")
+                self.interface_utility.addLayout(item_object.getLayout())
+                self.pericias_array.append(item_object)
+        
+        test = PericiaObject("Teste", 100, self.font, self.smallfont, "N")
+        self.interface_utility.addLayout(test.getLayout())
         
         self.botao = StyledButton(200, 60, "Botão", "#000000")
         self.botao.clicked.connect(self.handle_botao)
