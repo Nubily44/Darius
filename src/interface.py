@@ -150,7 +150,7 @@ class PericiaObject(QObject):
     per_use_signal = Signal(str)
     per_use_adv_signal = Signal(str, int)
     
-    def __init__(self, name, value, font, smallfont, type, parent=None):
+    def __init__(self, name, value, font, smallfont, type, proxy_name=None, parent=None):
         super().__init__(parent)
         
         self.name = name
@@ -160,7 +160,8 @@ class PericiaObject(QObject):
         if type == "N":
             self.btn = StyledButton(140, 40, f"{name} ({value}%)", "#1F514A")
         if type == "C":
-            self.btn = StyledButton(220, 40, f"{name} ({value}%)", "#1F514A")
+            
+            self.btn = StyledButton(220, 40, f"{proxy_name} ({value}%)", "#1F514A")
         
         self.label = QLabel(f"Resultado: 0         ")
         self.label.setFont(font)
@@ -277,7 +278,7 @@ class Window(QWidget):
         self.c5.setContentsMargins(0, 20, 0, 0)
         
         self.pericias_array = []
-        
+        self.total2 = QVBoxLayout()
         self.interface_utility = QHBoxLayout()
         self.interface_utility.setAlignment(Qt.AlignTop)
         
@@ -304,19 +305,16 @@ class Window(QWidget):
                 
         self.pericias_total.addLayout(self.c4)
         self.pericias_total.addLayout(self.c5)
+        self.total2.addLayout(self.interface_utility)
         
         self.total1.addLayout(self.pericias_total)
         
         for i in inventario:
             print(f"Item: {i.nome}, Tipo: {i.tipo}, Tamanho: {i.tamanho}")
             if i.tamanho == "G":
-                pass
-                item_object = PericiaObject(i.nome, self.searchPericia(i.tipo).value, self.font, self.smallfont, "C")
-                self.interface_utility.addLayout(item_object.getLayout())
+                item_object = PericiaObject(i.tipo, self.searchPericia(i.tipo).value, self.font, self.smallfont, "C", i.nome, self)
+                self.total2.addLayout(item_object.getLayout())
                 self.pericias_array.append(item_object)
-        
-        test = PericiaObject("Teste", 100, self.font, self.smallfont, "N")
-        self.interface_utility.addLayout(test.getLayout())
         
         self.botao = StyledButton(200, 60, "Botão", "#000000")
         self.botao.clicked.connect(self.handle_botao)
@@ -324,18 +322,7 @@ class Window(QWidget):
         
         self.botao_save = []
         self.absolute.addLayout(self.total1)
-        
-        
-        
-        #for item in inventario:
-        #    item_object = PericiaObject(item.nome, 100, self.font, self.smallfont)
-        #    self.interface_utility.addLayout(item_object.getLayout())
-        #    self.interface_utility.addWidget(item_object.label)
-        #self.test = PericiaObject("Teste", 100, self.font, self.smallfont)
-        #self.interface_utility.addLayout(self.test.getLayout())
-        
-        self.absolute.addLayout(self.interface_utility)
-        #self.adjustSize()
+        self.absolute.addLayout(self.total2)
     
     @Wrapper
     def setValue(self, label: QLabel, value1, value2=None):
