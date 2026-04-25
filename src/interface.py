@@ -157,12 +157,15 @@ class PericiaObject(QObject):
         self.value = value
         self.container = QVBoxLayout()
         self.subcontainer = QHBoxLayout()
-        if type == "N":
-            self.btn = StyledButton(140, 40, f"{name} ({value}%)", "#1F514A")
-        if type == "C":
-            
-            self.btn = StyledButton(220, 40, f"{proxy_name} ({value}%)", "#1F514A")
-        
+        # Define width based on type
+        width = 140 if type == "N" else 220
+
+        # Define display name
+        display_name = proxy_name if (type == "C" and proxy_name is not None) else name
+
+        # Create button
+        self.btn = StyledButton(width, 40, f"{display_name} ({value}%)", "#1F514A")
+                
         self.label = QLabel(f"Resultado: 0         ")
         self.label.setFont(font)
         
