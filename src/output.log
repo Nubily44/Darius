@@ -1,46 +1,15 @@
-Criando personagem com Vida: 90 Vida Max: 0 Armadura Vida: 13 Sanidade: 68 Sanidade Max: 67 Armadura Sanidade: 5 Esforço: 5 Nível: 9 Classe: Classe
+Criando personagem com Vida: 90 Vida Max: 0 Armadura Vida: 13 Sanidade: 68 Sanidade Max: 67 Armadura Sanidade: 5 Esforço: 7 Nível: 9 Classe: Classe
     [OBJECT] | Adicionado item: Espada Longa
-Item: Espada Longa, Tipo: Armas Brancas G, Tamanho: G
+    [OBJECT] | Adicionado item: Poção de Cura
+    [OBJECT] | Adicionado item: Poção de Sanidade
+    [OBJECT] | Adicionado item: Revólver
+Arma: Revólver, Tipo: Armas de Fogo P, Tamanho: G
+Arma: Espada Longa, Tipo: Armas Brancas G, Tamanho: G
+Item: Poção de Cura, Tamanho: P
+Item: Poção de Sanidade, Tamanho: P
 -------------------------------------- SETUP DONE
-[DISPATCHER] | Handling Esforço Deduct: -1
-    [OBJECT] | Settando Esforço de 5 para 4 (literal)
-     [WRITE] | Updating state: Esforço to 4
- [INTERFACE] | Setting value: 4 / None
-[DISPATCHER] | Handling Esforço Deduct: -1
-    [OBJECT] | Settando Esforço de 4 para 3 (literal)
-     [WRITE] | Updating state: Esforço to 3
- [INTERFACE] | Setting value: 3 / None
-[DISPATCHER] | Handling Esforço Refresh: 5
-    [OBJECT] | Settando Esforço de 3 para 9 (literal)
-     [WRITE] | Updating state: Esforço to 9
- [INTERFACE] | Setting value: 9 / None
-[DISPATCHER] | Handling Esforço Deduct: -1
-    [OBJECT] | Settando Esforço de 9 para 8 (literal)
-     [WRITE] | Updating state: Esforço to 8
- [INTERFACE] | Setting value: 8 / None
-[DISPATCHER] | Handling Esforço Deduct: -1
-    [OBJECT] | Settando Esforço de 8 para 7 (literal)
-     [WRITE] | Updating state: Esforço to 7
- [INTERFACE] | Setting value: 7 / None
-[DISPATCHER] | Handling Vida: 1
-    [OBJECT] | Settando Vida de 90 para 90 (armor: 13)
-     [WRITE] | Updating state: Vida to 90
-Traceback (most recent call last):
-  File "c:\Users\aline\Desktop\BSCode\Github\Darius\src\main.py", line 66, in <lambda>
-    window.interface_vida.att_signal.connect(lambda value: handle_vida(Personagem1, window, value))
-                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\aline\Desktop\BSCode\Github\Darius\src\functions.py", line 80, in wrapper
-    result = func(*args, **kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\aline\Desktop\BSCode\Github\Darius\src\connectors.py", line 11, in handle_vida
-    ).execute((personagem))
-      ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\aline\Desktop\BSCode\Github\Darius\src\functions.py", line 80, in wrapper
-    result = func(*args, **kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\aline\Desktop\BSCode\Github\Darius\src\dispatcher.py", line 28, in execute
-    self.UIfunc(*values)
-  File "C:\Users\aline\Desktop\BSCode\Github\Darius\src\connectors.py", line 9, in <lambda>
-    lambda p: window.setValue(window.interface_vida.label, personagem.getVida().getAtributo(), personagem.getVida--().getAtributoMax()),
-                                                                                                                   ^^^^^^^^^^^^^^^^^
-AttributeError: 'tuple' object has no attribute 'getAtributoMax'
+[DISPATCHER] | Handling Perícia Use: Armas de Fogo P
+    [OBJECT] | Usando Perícia: Armas de Fogo P
+     [ROLLS] | d100: 100
+    [OBJECT] | Desastre
+ [INTERFACE] | Setting value: Desastre / None

@@ -61,6 +61,9 @@ def main():
     Personagem1.addPericia(BlocoPericia("Armas Brancas", "Pericia C", Pericia("Armas Brancas P", 90), Pericia("Armas Brancas G", 90), Pericia("Armas Brancas XL", 90), Pericia("Armas Brancas Ocultistas", 90)))
     
     Personagem1.BlocoInventario.addItem(Arma("Espada Longa", "desc", {"Desastre": "0", "Falha": "0", "Normal": "1D8", "Bom": "1D8+2", "Extremo": "1D8+4", "Crítico": "1D8+6"}, "Armas Brancas G"))
+    Personagem1.BlocoInventario.addItem(Item("Poção de Cura", "Restaura 2D6+2 de Vida", "P", quantidade=2))
+    Personagem1.BlocoInventario.addItem(Item("Poção de Sanidade", "Restaura 2D6+2 de Sanidade", "P", quantidade=2))
+    Personagem1.BlocoInventario.addItem(Arma("Revólver", "desc", {"Desastre": "0", "Falha": "0", "Normal": "1D10", "Bom": "1D10+2", "Extremo": "1D10+4", "Crítico": "1D10+6"}, "Armas de Fogo P"))
     
     window = Window(Personagem1.getVida(), Personagem1.getSanidade(), Personagem1.BlocoEsforco.getAtributo(), Personagem1.getPericias(), Personagem1.BlocoInventario.returnInventory())
     window.interface_vida.att_signal.connect(lambda value: handle_vida(Personagem1, window, value))

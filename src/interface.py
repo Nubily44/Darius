@@ -313,11 +313,13 @@ class Window(QWidget):
         self.total1.addLayout(self.pericias_total)
         
         for i in inventario:
-            print(f"Item: {i.nome}, Tipo: {i.tipo}, Tamanho: {i.tamanho}")
-            if i.tamanho == "G":
+            if getattr(i, "tipo", None):
+                print(f"Arma: {i.nome}, Tipo: {i.tipo}, Tamanho: {i.tamanho}")
                 item_object = PericiaObject(i.tipo, self.searchPericia(i.tipo).value, self.font, self.smallfont, "C", i.nome, self)
                 self.total2.addLayout(item_object.getLayout())
                 self.pericias_array.append(item_object)
+            else:
+                print(f"Item: {i.nome}, Tamanho: {i.tamanho}")
         
         self.botao = StyledButton(200, 60, "Botão", "#000000")
         self.botao.clicked.connect(self.handle_botao)
