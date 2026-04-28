@@ -3,13 +3,8 @@ Criando personagem com Vida: 90 Vida Max: 0 Armadura Vida: 13 Sanidade: 68 Sanid
     [OBJECT] | Adicionado item: Poção de Cura
     [OBJECT] | Adicionado item: Poção de Sanidade
     [OBJECT] | Adicionado item: Revólver
-Arma: Revólver, Tipo: Armas de Fogo P, Tamanho: G
 Arma: Espada Longa, Tipo: Armas Brancas G, Tamanho: G
 Item: Poção de Cura, Tamanho: P
+Arma: Revólver, Tipo: Armas de Fogo P, Tamanho: G
 Item: Poção de Sanidade, Tamanho: P
 -------------------------------------- SETUP DONE
-[DISPATCHER] | Handling Perícia Use: Armas de Fogo P
-    [OBJECT] | Usando Perícia: Armas de Fogo P
-     [ROLLS] | d100: 100
-    [OBJECT] | Desastre
- [INTERFACE] | Setting value: Desastre / None

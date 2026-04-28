@@ -312,15 +312,18 @@ class Window(QWidget):
         
         self.total1.addLayout(self.pericias_total)
         
+        self.armas_layout = QHBoxLayout()
+        
         for i in inventario:
             if getattr(i, "tipo", None):
                 print(f"Arma: {i.nome}, Tipo: {i.tipo}, Tamanho: {i.tamanho}")
                 item_object = PericiaObject(i.tipo, self.searchPericia(i.tipo).value, self.font, self.smallfont, "C", i.nome, self)
-                self.total2.addLayout(item_object.getLayout())
+                self.armas_layout.addLayout(item_object.getLayout())
                 self.pericias_array.append(item_object)
             else:
                 print(f"Item: {i.nome}, Tamanho: {i.tamanho}")
         
+        self.total2.addLayout(self.armas_layout)
         self.botao = StyledButton(200, 60, "Botão", "#000000")
         self.botao.clicked.connect(self.handle_botao)
         self.total1.addWidget(self.botao, alignment=Qt.AlignCenter)
