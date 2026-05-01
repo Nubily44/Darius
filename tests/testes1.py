@@ -353,9 +353,52 @@ class ScaledButtonWindow(QWidget):
         font = self.button.font()
         font.setPointSizeF(self.base_font_size * scale)
         self.button.setFont(font)
-        
+
+import sys
+from PySide6.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton
+
+
+class Window(QWidget):
+    def __init__(self):
+        super().__init__()
+
+        self.setWindowTitle("Dynamic Buttons")
+
+        # Main layout
+        self.layout = QVBoxLayout(self)
+
+        # Button that adds new buttons
+        self.add_btn = QPushButton("Add Button")
+        self.add_btn.clicked.connect(self.add_new_button)
+
+        self.layout.addWidget(self.add_btn)
+
+        # Counter to keep unique labels
+        self.count = 0
+
+    def add_new_button(self):
+        self.count += 1
+
+        new_button = QPushButton(f"Dynamic Button {self.count}")
+
+        # Optional: connect behavior to new buttons
+        new_button.clicked.connect(
+            lambda checked=False, n=self.count: print(f"Clicked button {n}")
+        )
+
+        self.layout.addWidget(new_button)
+
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    window = ScaledButtonWindow()
+
+    window = Window()
     window.show()
+
     sys.exit(app.exec())
+
+#if __name__ == "__main__":
+#    app = QApplication(sys.argv)
+#    window = ScaledButtonWindow()
+#    window.show()
+#    sys.exit(app.exec())
