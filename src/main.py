@@ -72,6 +72,7 @@ def main():
     window.interface_esforco.usb_refresh_signal.connect(lambda value: handle_esforco_refresh(Personagem1, window, value))
     
     for pericia_obj in window.pericias_array:
+        
         pericia_obj.per_use_signal.connect(lambda value: handle_pericia_use(Personagem1, window, value))
         pericia_obj.per_use_adv_signal.connect(lambda value, adv: handle_pericia_use_adv(Personagem1, window, value, adv))
     

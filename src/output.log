@@ -3,8 +3,12 @@ Criando personagem com Vida: 90 Vida Max: 0 Armadura Vida: 13 Sanidade: 68 Sanid
     [OBJECT] | Adicionado item: Poção de Cura
     [OBJECT] | Adicionado item: Poção de Sanidade
     [OBJECT] | Adicionado item: Revólver
+Item: Poção de Sanidade, Tamanho: P
+Arma: Revólver, Tipo: Armas de Fogo P, Tamanho: G
 Arma: Espada Longa, Tipo: Armas Brancas G, Tamanho: G
 Item: Poção de Cura, Tamanho: P
-Arma: Revólver, Tipo: Armas de Fogo P, Tamanho: G
-Item: Poção de Sanidade, Tamanho: P
 -------------------------------------- SETUP DONE
+[DISPATCHER] | Handling Esforço Deduct: -1
+    [OBJECT] | Settando Esforço de 7 para 6 (literal)
+     [WRITE] | Updating state: Esforço to 6
+ [INTERFACE] | Setting value: 6 / None

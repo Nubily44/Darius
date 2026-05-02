@@ -210,6 +210,31 @@ class BlocoPericiasObject:
     def getLayout(self):
         return self.container
 
+class ArmaObject:
+    
+    arma_use_signal = Signal(str)
+    
+    def __init__(self, name, value, font, smallfont, parent=None):
+        self.name = name
+        self.value = value
+        
+        self.container = QVBoxLayout()
+        self.btn = StyledButton(200, 40, f"{name} ({value}%)", "#4A3B1F")
+        self.btn.clicked.connect(self._emit_use)
+        
+    def getLayout(self):
+        return self.container
+    
+    def _emit_use(self):
+        value_emit = self.name
+        self.arma_use_signal.emit(value_emit)
+        
+    def _emit_use_adv(self):
+        value_emit = self.name
+        adv = int(self.input.text()) if self.input.text() else 1
+        self.arma_use_adv_signal.emit(value_emit, adv)
+
+
 class botaoWindow(QWidget):
     def __init__(self):
         super().__init__()
@@ -281,9 +306,11 @@ class Window(QWidget):
         self.c5.setContentsMargins(0, 20, 0, 0)
         
         self.pericias_array = []
+        self.armas_array = []
+        
         self.total2 = QVBoxLayout()
-        self.interface_utility = QHBoxLayout()
-        self.interface_utility.setAlignment(Qt.AlignTop)
+        self.interface_pericias_C = QHBoxLayout()
+        self.interface_pericias_C.setAlignment(Qt.AlignTop)
         
         for bloco in pericias:
             
@@ -304,11 +331,11 @@ class Window(QWidget):
             elif len(self.c5.children()) < 3:
                 self.c5.addLayout(bloco_layout)
             else:
-                self.interface_utility.addLayout(bloco_layout)
+                self.interface_pericias_C.addLayout(bloco_layout)
                 
         self.pericias_total.addLayout(self.c4)
         self.pericias_total.addLayout(self.c5)
-        self.total2.addLayout(self.interface_utility)
+        self.total2.addLayout(self.interface_pericias_C)
         
         self.total1.addLayout(self.pericias_total)
         
@@ -317,10 +344,14 @@ class Window(QWidget):
         for i in inventario:
             if getattr(i, "tipo", None):
                 print(f"Arma: {i.nome}, Tipo: {i.tipo}, Tamanho: {i.tamanho}")
-                item_object = PericiaObject(i.tipo, self.searchPericia(i.tipo).value, self.font, self.smallfont, "C", i.nome, self)
+                
+                item_object = ArmaObject(i.tipo, self.searchPericia(i.tipo).value, self.font, self.smallfont)
                 self.armas_layout.addLayout(item_object.getLayout())
-                self.pericias_array.append(item_object)
+                self.armas_array.append(item_object)
+                
             else:
+                item_object = UsableObject(i.nome, i.quantidade, self.font, self.smallfont, parent=self, maxCount=i.quantidade)
+                self.armas_layout.addLayout(item_object.getLayout())
                 print(f"Item: {i.nome}, Tamanho: {i.tamanho}")
         
         self.total2.addLayout(self.armas_layout)
