@@ -150,7 +150,7 @@ class PericiaObject(QObject):
     per_use_signal = Signal(str)
     per_use_adv_signal = Signal(str, int)
     
-    def __init__(self, name, value, font, smallfont, type, proxy_name=None, parent=None):
+    def __init__(self, name, value, font, smallfont, type, parent=None):
         super().__init__(parent)
         
         self.name = name
@@ -159,12 +159,9 @@ class PericiaObject(QObject):
         self.subcontainer = QHBoxLayout()
         # Define width based on type
         width = 140 if type == "N" else 220
-
-        # Define display name
-        display_name = proxy_name if (type == "C" and proxy_name is not None) else name
-
+    
         # Create button
-        self.btn = StyledButton(width, 40, f"{display_name} ({value}%)", "#1F514A")
+        self.btn = StyledButton(width, 40, f"{name} ({value}%)", "#1F514A")
                 
         self.label = QLabel(f"Resultado: 0         ")
         self.label.setFont(font)
@@ -346,7 +343,7 @@ class Window(QWidget):
                 print(f"Arma: {i.nome}, Tipo: {i.tipo}, Tamanho: {i.tamanho}")
                 
                 item_object = ArmaObject(i.tipo, self.searchPericia(i.tipo).value, self.font, self.smallfont)
-                self.armas_layout.addLayout(item_object.getLayout())
+                #self.armas_layout.addLayout(item_object.getLayout())
                 self.armas_array.append(item_object)
                 
             else:
