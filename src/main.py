@@ -68,6 +68,8 @@ def main():
     window = Window(Personagem1.getVida(), Personagem1.getSanidade(), Personagem1.BlocoEsforco.getAtributo(), Personagem1.getPericias(), Personagem1.BlocoInventario.returnInventory())
     window.interface_vida.att_signal.connect(lambda value: handle_vida(Personagem1, window, value))
     window.interface_sanidade.att_signal.connect(lambda value: handle_sanidade(Personagem1, window, value))
+    
+    # Mudar estrutura para reutilizar conexão com utilizáveis do inventário
     window.interface_esforco.usb_use_signal.connect(lambda value: handle_esforco_deduct(Personagem1, window, value))
     window.interface_esforco.usb_refresh_signal.connect(lambda value: handle_esforco_refresh(Personagem1, window, value))
     
