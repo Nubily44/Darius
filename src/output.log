@@ -7,9 +7,5 @@ Arma: Revólver, Tipo: Armas de Fogo P, Tamanho: G
 Arma: Espada Longa, Tipo: Armas Brancas G, Tamanho: G
 Item: Poção de Sanidade, Tamanho: P
 Item: Poção de Cura, Tamanho: P
+Total de armas: 2
 -------------------------------------- SETUP DONE
-[DISPATCHER] | Handling Perícia Use: Combate Direto
-    [OBJECT] | Usando Perícia: Combate Direto
-     [ROLLS] | d100: 89
-    [OBJECT] | Sucesso Normal
- [INTERFACE] | Setting value: Normal / None

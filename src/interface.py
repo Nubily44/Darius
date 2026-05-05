@@ -157,10 +157,10 @@ class PericiaObject(QObject):
         self.value = value
         self.container = QVBoxLayout()
         self.subcontainer = QHBoxLayout()
-        # Define width based on type
+        
+
         width = 140 if type == "N" else 220
-    
-        # Create button
+        
         self.btn = StyledButton(width, 40, f"{name} ({value}%)", "#1F514A")
                 
         self.label = QLabel(f"Resultado: 0         ")
@@ -212,12 +212,29 @@ class ArmaObject:
     arma_use_signal = Signal(str)
     
     def __init__(self, name, value, font, smallfont, parent=None):
+        
+        self.subcontainer = QHBoxLayout()
+        
         self.name = name
         self.value = value
         
         self.container = QVBoxLayout()
-        self.btn = StyledButton(200, 40, f"{name} ({value}%)", "#4A3B1F")
+        self.btn = StyledButton(200, 40, f"{name} ({value}%)", "#1F514A")
         self.btn.clicked.connect(self._emit_use)
+        
+        self.input = QLineEdit()
+        self.input.setPlaceholderText("Vantagem")
+        self.input.setFixedWidth(50)
+        
+        self.label = QLabel(f"Resultado: 0         ")
+        self.label.setFont(font)
+        
+        self.container.addWidget(self.btn, alignment=Qt.AlignLeft)
+        self.subcontainer.addWidget(self.input)
+        self.subcontainer.addWidget(self.label)
+        self.container.addLayout(self.subcontainer)
+        self.container.addStretch()
+        
         
     def getLayout(self):
         return self.container
@@ -336,22 +353,26 @@ class Window(QWidget):
         
         self.total1.addLayout(self.pericias_total)
         
-        self.armas_layout = QHBoxLayout()
+        self.armas_layout = QVBoxLayout()
         
         for i in inventario:
             if getattr(i, "tipo", None):
                 print(f"Arma: {i.nome}, Tipo: {i.tipo}, Tamanho: {i.tamanho}")
                 
                 item_object = ArmaObject(i.tipo, self.searchPericia(i.tipo).value, self.font, self.smallfont)
-                #self.armas_layout.addLayout(item_object.getLayout())
+                self.armas_layout.addLayout(item_object.getLayout())
                 self.armas_array.append(item_object)
                 
-            else:
+        for i in inventario:
+            if not getattr(i, "tipo", None):
                 item_object = UsableObject(i.nome, i.quantidade, self.font, self.smallfont, parent=self, maxCount=i.quantidade)
                 self.armas_layout.addLayout(item_object.getLayout())
                 print(f"Item: {i.nome}, Tamanho: {i.tamanho}")
         
+        print(f"Total de armas: {len(self.armas_array)}")
+        
         self.total2.addLayout(self.armas_layout)
+        self.total2.addStretch()
         self.botao = StyledButton(200, 60, "Botão", "#000000")
         self.botao.clicked.connect(self.handle_botao)
         self.total1.addWidget(self.botao, alignment=Qt.AlignCenter)
