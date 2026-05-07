@@ -88,12 +88,16 @@ class Personagem():
         return [item.nome for item in self.BlocoInventario.itens]
 
     def searchItem(self, nome_item):
-        for item in self.BlocoInventario.itens:
+        for item in self.BlocoInventario.items:
             if item.nome == nome_item:
                 return item
         return None
 
-    def ataque (self, arma):
+    def Ataque(self, arma_name):
+        arma = self.searchItem(arma_name)
+        if arma is None or not isinstance(arma, Arma):
+            print(f"    [OBJECT] | Arma '{arma_name}' não encontrada ou não é uma arma válida.")
+            return None
         res_per = self.usePericia(arma.tipo, 1)
         dano = arma.rollDano(res_per)
         print("    [OBJECT] | Resultado do Ataque com", arma.nome, ":", dano)
