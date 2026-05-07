@@ -127,6 +127,7 @@ class Arma(Item):
         super().__init__(nome, descricao, tamanho="G")
         self.dano = dano
         self.tipo = tipo
+        self.last_roll = None
         
     def rollDano(self, res_pericia):
         print(f"    [OBJECT] | Rolando dano de {self.nome} com resultado de perícia: {res_pericia}")

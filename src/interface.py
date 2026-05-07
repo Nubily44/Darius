@@ -321,6 +321,7 @@ class Window(QWidget):
         
         self.pericias_array = []
         self.armas_array = []
+        self.items_array = []
         
         self.total2 = QVBoxLayout()
         self.interface_pericias_C = QHBoxLayout()
@@ -353,25 +354,25 @@ class Window(QWidget):
         
         self.total1.addLayout(self.pericias_total)
         
-        self.interface_armas = QVBoxLayout()
+        self.interface_arit = QVBoxLayout()
         
         for i in inventario:
             if getattr(i, "tipo", None):
                 print(f"Arma: {i.nome}, Tipo: {i.tipo}, Tamanho: {i.tamanho}")
                 
-                item_object = ArmaObject(i.tipo, self.searchPericia(i.tipo).value, self.font, self.smallfont, parent=self)
-                self.interface_armas.addLayout(item_object.getLayout())
+                item_object = ArmaObject(i.nome, self.searchPericia(i.tipo).value, self.font, self.smallfont, parent=self)
+                self.interface_arit.addLayout(item_object.getLayout())
                 self.armas_array.append(item_object)
                 
         for i in inventario:
             if not getattr(i, "tipo", None):
                 print(f"Item: {i.nome}, Tamanho: {i.tamanho}")
                 item_object = UsableObject(i.nome, i.quantidade, self.font, self.smallfont, parent=self, maxCount=i.quantidade)
-                self.interface_armas.addLayout(item_object.getLayout())
+                self.interface_arit.addLayout(item_object.getLayout())
         
         print(f"Total de armas: {len(self.armas_array)}")
         
-        self.total2.addLayout(self.interface_armas)
+        self.total2.addLayout(self.interface_arit)
         self.total2.addStretch()
         self.botao = StyledButton(200, 60, "Botão", "#000000")
         self.botao.clicked.connect(self.handle_botao)
@@ -409,6 +410,15 @@ class Window(QWidget):
         for pericia in self.pericias_array:
             if pericia.name == nome:
                 return pericia
+        return None
+
+    def searchItem(self, nome):
+        for i in self.armas_array:
+            if i.name == nome:
+                return i
+        for i in self.items_array:
+            if i.name == nome:
+                return i
         return None
 
     def handle_botao(self):

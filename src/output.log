@@ -3,30 +3,19 @@ Criando personagem com Vida: 90 Vida Max: 0 Armadura Vida: 13 Sanidade: 68 Sanid
     [OBJECT] | Adicionado item: Poção de Cura
     [OBJECT] | Adicionado item: Poção de Sanidade
     [OBJECT] | Adicionado item: Revólver
-Arma: Revólver, Tipo: Armas de Fogo P, Tamanho: G
 Arma: Espada Longa, Tipo: Armas Brancas G, Tamanho: G
+Arma: Revólver, Tipo: Armas de Fogo P, Tamanho: G
 Item: Poção de Sanidade, Tamanho: P
 Item: Poção de Cura, Tamanho: P
 Total de armas: 2
 -------------------------------------- SETUP DONE
-[DISPATCHER] | Handling Arma Use: Armas de Fogo P
-    [OBJECT] | Arma 'Armas de Fogo P' não encontrada ou não é uma arma válida.
-Traceback (most recent call last):
-  File "c:\Users\aline\Desktop\BSCode\Github\Darius\src\main.py", line 83, in <lambda>
-    arma_obj.arma_use_signal.connect(lambda value: handle_arma_use(Personagem1, window, value))
-                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\aline\Desktop\BSCode\Github\Darius\src\functions.py", line 80, in wrapper
-    result = func(*args, **kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\aline\Desktop\BSCode\Github\Darius\src\connectors.py", line 66, in handle_arma_use
-    ).execute((personagem))
-      ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\aline\Desktop\BSCode\Github\Darius\src\functions.py", line 80, in wrapper
-    result = func(*args, **kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\aline\Desktop\BSCode\Github\Darius\src\dispatcher.py", line 28, in execute
-    self.UIfunc(*values)
-  File "C:\Users\aline\Desktop\BSCode\Github\Darius\src\connectors.py", line 64, in <lambda>
-    lambda p: window.setValue(window.searchArma(value).label, personagem.searchArma(value).rollDano(personagem.searchPericia(value))),
-                              ^^^^^^^^^^^^^^^^^
-AttributeError: 'Window' object has no attribute 'searchArma'
+[DISPATCHER] | Handling Arma Use: Espada Longa
+buscando item: Espada Longa
+    [OBJECT] | Usando Perícia: Armas Brancas G
+     [ROLLS] | d100: 41
+    [OBJECT] | Sucesso Bom
+    [OBJECT] | Rolando dano de Espada Longa com resultado de perícia: Bom
+     [ROLLS] | d8: 8
+    [OBJECT] | Resultado do Ataque com Espada Longa : 10
+buscando item: Espada Longa
+ [INTERFACE] | Setting value: 10 / None

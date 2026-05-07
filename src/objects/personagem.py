@@ -88,6 +88,7 @@ class Personagem():
         return [item.nome for item in self.BlocoInventario.itens]
 
     def searchItem(self, nome_item):
+        print("buscando item:", nome_item)
         for item in self.BlocoInventario.items:
             if item.nome == nome_item:
                 return item
@@ -101,6 +102,7 @@ class Personagem():
         res_per = self.usePericia(arma.tipo, 1)
         dano = arma.rollDano(res_per)
         print("    [OBJECT] | Resultado do Ataque com", arma.nome, ":", dano)
+        arma.last_roll = dano
         return dano
     
 
