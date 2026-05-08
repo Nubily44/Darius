@@ -9,7 +9,7 @@ from objects.personagem import Personagem
 from objects.components import BlocoPericia, Pericia, Arma, Item, Inventario
 from interface import Window
 from functions import Tee, extract_ficha_data, update_state, update_variable, read_state
-from connectors import handle_esforco_deduct, handle_esforco_refresh, handle_vida, handle_sanidade, handle_pericia_use, handle_pericia_use_adv, handle_arma_use
+from connectors import handle_esforco_deduct, handle_esforco_refresh, handle_vida, handle_sanidade, handle_pericia_use, handle_pericia_use_adv, handle_arma_use, handle_item_use
 
 import os
 
@@ -79,9 +79,11 @@ def main():
         pericia_obj.per_use_adv_signal.connect(lambda value, adv: handle_pericia_use_adv(Personagem1, window, value, adv))
     
     for arma_obj in window.armas_array:
-        
         arma_obj.arma_use_signal.connect(lambda value: handle_arma_use(Personagem1, window, value))
     
+    for item_obj in window.items_array:
+        item_obj.usb_use_signal.connect(lambda value: handle_item_use(Personagem1, window, value))
+        
     print("-------------------------------------- SETUP DONE")
     window.show()
     sys.exit(app.exec())

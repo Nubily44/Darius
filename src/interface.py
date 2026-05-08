@@ -144,6 +144,44 @@ class UsableObject(QObject):
         value = self.maxCount
         self.usb_refresh_signal.emit(value)
         
+class ItemObject(QObject):
+
+    usb_use_signal = Signal(str)
+    usb_refresh_signal = Signal(str)
+    
+    def __init__(self, name, value, font, smallfont, parent, maxCount):
+        super().__init__(parent)
+        self.container = QHBoxLayout()
+        
+        self.maxCount = maxCount
+        
+        self.name = name
+        
+        self.label = QLabel(f"{name}: {value}")
+        self.label.setFont(font)
+        
+        self.deduct = StyledButton(120, 40, "Gastar", "#994329")
+        self.refresh = StyledButton(120, 40, "Renovar", "#1b9146")
+        
+        self.deduct.clicked.connect(self._emit_deduct)
+        self.refresh.clicked.connect(self._emit_refresh)
+        
+        self.container.addWidget(self.label)
+        self.container.addWidget(self.deduct)
+        self.container.addWidget(self.refresh)
+        
+        
+    def getLayout(self):
+        return self.container
+    
+    def _emit_deduct(self):
+        print("Emitting use signal for item:", self.name)
+        value = self.name
+        self.usb_use_signal.emit(value)
+        
+    def _emit_refresh(self):
+        value = self.maxCount
+        self.usb_refresh_signal.emit(value)
         
 class PericiaObject(QObject):
     
@@ -367,8 +405,9 @@ class Window(QWidget):
         for i in inventario:
             if not getattr(i, "tipo", None):
                 print(f"Item: {i.nome}, Tamanho: {i.tamanho}")
-                item_object = UsableObject(i.nome, i.quantidade, self.font, self.smallfont, parent=self, maxCount=i.quantidade)
+                item_object = ItemObject(i.nome, i.quantidade, self.font, self.smallfont, parent=self, maxCount=i.quantidade)
                 self.interface_arit.addLayout(item_object.getLayout())
+                self.items_array.append(item_object)
         
         print(f"Total de armas: {len(self.armas_array)}")
         

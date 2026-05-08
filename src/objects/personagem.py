@@ -105,6 +105,17 @@ class Personagem():
         arma.last_roll = dano
         return dano
     
+    def UseItem(self, item_name):
+        print("searching for item to use:", item_name)
+        item = self.searchItem(item_name)
+        if not getattr(item, "tipo", None):
+            item.quantidade -= 1
+            print(f"    [OBJECT] | Usando item: {item.nome}, Quantidade restante: {item.quantidade}")
+            
+        else:
+            print(f"    [OBJECT] | Item '{item_name}' não encontrado ou não é um item utilizável.")
+            
+    
 
 
 if __name__ == "__main__":

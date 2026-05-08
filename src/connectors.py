@@ -64,3 +64,12 @@ def handle_arma_use(personagem, window, value):
         lambda p: window.setValue(window.searchItem(value).label, personagem.searchItem(value).last_roll),
         1
     ).execute((personagem))
+    
+@Wrapper
+def handle_item_use(personagem, window, value):
+    print(f"[DISPATCHER] | Handling Item Use: {value}")
+    Dispatcher(
+        lambda p: p.UseItem(value),
+        lambda p: window.setValue(window.searchItem(value).label, personagem.searchItem(value).quantidade),
+        1
+    ).execute((personagem))
