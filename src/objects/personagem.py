@@ -109,7 +109,8 @@ class Personagem():
         print("searching for item to use:", item_name)
         item = self.searchItem(item_name)
         if not getattr(item, "tipo", None):
-            item.quantidade -= 1
+            if item.quantidade > 0:
+                item.quantidade -= 1
             print(f"    [OBJECT] | Usando item: {item.nome}, Quantidade restante: {item.quantidade}")
             
         else:
