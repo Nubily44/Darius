@@ -82,18 +82,18 @@ class Personagem():
         self.BlocoInventario.addItem(item)
         
     def removeItem(self, nome_item):
-        self.BlocoInventario.removeItem(nome_item)
+        print("removendo item:", nome_item)
+        if self.BlocoInventario.searchItem(nome_item) is not None:
+            self.BlocoInventario.removeItem(nome_item)
+        else:   
+            print(f"    [OBJECT] | Item '{nome_item}' não encontrado no inventário.")
         
     def listItems(self):
-        return [item.nome for item in self.BlocoInventario.itens]
+        return self.BlocoInventario.listItems()
 
     def searchItem(self, nome_item):
-        print("buscando item:", nome_item)
-        for item in self.BlocoInventario.items:
-            if item.nome == nome_item:
-                return item
-        return None
-
+        return self.BlocoInventario.searchItem(nome_item)
+    
     def Ataque(self, arma_name):
         arma = self.searchItem(arma_name)
         if arma is None or not isinstance(arma, Arma):
@@ -106,11 +106,11 @@ class Personagem():
         return dano
     
     def UseItem(self, item_name):
-        print("searching for item to use:", item_name)
         item = self.searchItem(item_name)
-        if not getattr(item, "tipo", None):
+        if item and not getattr(item, "tipo", None):
             if item.quantidade > 0:
-                item.quantidade -= 1
+                item.quantidade -= 1 
+            
             print(f"    [OBJECT] | Usando item: {item.nome}, Quantidade restante: {item.quantidade}")
             
         else:

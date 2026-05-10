@@ -1,53 +1,24 @@
-Criando personagem com Vida: 90 Vida Max: 0 Armadura Vida: 13 Sanidade: 68 Sanidade Max: 67 Armadura Sanidade: 5 Esforço: 6 Nível: 9 Classe: Classe
+Criando personagem com Vida: 90 Vida Max: 0 Armadura Vida: 13 Sanidade: 68 Sanidade Max: 67 Armadura Sanidade: 5 Esforço: 0 Nível: 9 Classe: Classe
     [OBJECT] | Adicionado item: Espada Longa
     [OBJECT] | Adicionado item: Poção de Cura
     [OBJECT] | Adicionado item: Poção de Sanidade
     [OBJECT] | Adicionado item: Revólver
-Arma: Revólver, Tipo: Armas de Fogo P, Tamanho: G
 Arma: Espada Longa, Tipo: Armas Brancas G, Tamanho: G
-Item: Poção de Sanidade, Tamanho: P
+Arma: Revólver, Tipo: Armas de Fogo P, Tamanho: G
 Item: Poção de Cura, Tamanho: P
+Item: Poção de Sanidade, Tamanho: P
 Total de armas: 2
 -------------------------------------- SETUP DONE
-Emitting use signal for item: Poção de Sanidade
-[DISPATCHER] | Handling Item Use: Poção de Sanidade
-searching for item to use: Poção de Sanidade
-buscando item: Poção de Sanidade
-    [OBJECT] | Usando item: Poção de Sanidade, Quantidade restante: 1
-buscando item: Poção de Sanidade
+Emitting use signal for item: Poção de Cura
+[DISPATCHER] | Handling Item Use: Poção de Cura
+    [OBJECT] | Usando item: Poção de Cura, Quantidade restante: 1
  [INTERFACE] | Setting value: 1 / None
-Emitting use signal for item: Poção de Sanidade
-[DISPATCHER] | Handling Item Use: Poção de Sanidade
-searching for item to use: Poção de Sanidade
-buscando item: Poção de Sanidade
-    [OBJECT] | Usando item: Poção de Sanidade, Quantidade restante: 0
-buscando item: Poção de Sanidade
+Emitting use signal for item: Poção de Cura
+[DISPATCHER] | Handling Item Use: Poção de Cura
+    [OBJECT] | Usando item: Poção de Cura, Quantidade restante: 0
  [INTERFACE] | Setting value: 0 / None
-Emitting use signal for item: Poção de Sanidade
-[DISPATCHER] | Handling Item Use: Poção de Sanidade
-searching for item to use: Poção de Sanidade
-buscando item: Poção de Sanidade
-    [OBJECT] | Usando item: Poção de Sanidade, Quantidade restante: -1
-buscando item: Poção de Sanidade
- [INTERFACE] | Setting value: -1 / None
-Emitting use signal for item: Poção de Sanidade
-[DISPATCHER] | Handling Item Use: Poção de Sanidade
-searching for item to use: Poção de Sanidade
-buscando item: Poção de Sanidade
-    [OBJECT] | Usando item: Poção de Sanidade, Quantidade restante: -2
-buscando item: Poção de Sanidade
- [INTERFACE] | Setting value: -2 / None
-Emitting use signal for item: Poção de Sanidade
-[DISPATCHER] | Handling Item Use: Poção de Sanidade
-searching for item to use: Poção de Sanidade
-buscando item: Poção de Sanidade
-    [OBJECT] | Usando item: Poção de Sanidade, Quantidade restante: -3
-buscando item: Poção de Sanidade
- [INTERFACE] | Setting value: -3 / None
-Emitting use signal for item: Poção de Sanidade
-[DISPATCHER] | Handling Item Use: Poção de Sanidade
-searching for item to use: Poção de Sanidade
-buscando item: Poção de Sanidade
-    [OBJECT] | Usando item: Poção de Sanidade, Quantidade restante: -4
-buscando item: Poção de Sanidade
- [INTERFACE] | Setting value: -4 / None
+Emitting use signal for item: Poção de Cura
+[DISPATCHER] | Handling Item Use: Poção de Cura
+    [DISPATCHER] | Item 'Poção de Cura' esgotado! Removendo do inventário.
+removendo item: Poção de Cura
+    [OBJECT] | Removido item: Poção de Cura

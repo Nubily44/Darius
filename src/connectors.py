@@ -68,8 +68,17 @@ def handle_arma_use(personagem, window, value):
 @Wrapper
 def handle_item_use(personagem, window, value):
     print(f"[DISPATCHER] | Handling Item Use: {value}")
-    Dispatcher(
-        lambda p: p.UseItem(value),
-        lambda p: window.setValue(window.searchItem(value).label, personagem.searchItem(value).quantidade),
-        1
-    ).execute((personagem))
+    if personagem.searchItem(value).quantidade != 0:
+        Dispatcher(
+            lambda p: p.UseItem(value),
+            lambda p: window.setValue(window.searchItem(value).label, personagem.searchItem(value).quantidade),
+            1
+        ).execute((personagem))
+        
+    else:
+        print(f"    [DISPATCHER] | Item '{value}' esgotado! Removendo do inventário.")
+        Dispatcher(
+            lambda p: p.removeItem(value),
+            lambda p: window.removeItemUI(value),
+            1
+        ).execute((personagem))

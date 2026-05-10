@@ -156,6 +156,16 @@ class Inventario:
             print("    [OBJECT] | Inventário cheio! Não é possível adicionar:", item.nome)
             return False
         
+    def removeItem(self, nome_item):
+        item = self.searchItem(nome_item)
+        if item is not None:
+            if item.tamanho == "P" and item.quantidade > 1:
+                item.quantidade -= 1
+                print(f"    [OBJECT] | Removido um exemplar de: {item.nome}. Quantidade restante: {item.quantidade}")
+            else:
+                self.items.remove(item)
+                print(f"    [OBJECT] | Removido item: {item.nome}")
+        
     def searchItem(self, nome_item):
         for item in self.items:
             if item.nome == nome_item:

@@ -183,6 +183,10 @@ class ItemObject(QObject):
         value = self.maxCount
         self.usb_refresh_signal.emit(value)
         
+    def removeItself(self):
+        self.setParent(None)
+        self.deleteLater()
+        
 class PericiaObject(QObject):
     
     per_use_signal = Signal(str)
@@ -460,8 +464,15 @@ class Window(QWidget):
                 return i
         return None
 
+    def removeItemUI(self, item_name):
+        for i in self.items_array:
+            if i.name == item_name:
+                i.removeItself()
+                self.items_array.remove(i)
+                return
+
     def handle_botao(self):
-        print("...                                         botão")
+        print("...                                                    botão")
         window = botaoWindow()
         window.show()
         self.botao_save.append(window)
