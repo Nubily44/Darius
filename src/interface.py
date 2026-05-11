@@ -161,14 +161,11 @@ class ItemObject(QObject):
         self.label.setFont(font)
         
         self.deduct = StyledButton(120, 40, "Gastar", "#994329")
-        self.refresh = StyledButton(120, 40, "Renovar", "#1b9146")
         
         self.deduct.clicked.connect(self._emit_deduct)
-        self.refresh.clicked.connect(self._emit_refresh)
         
         self.container.addWidget(self.label)
         self.container.addWidget(self.deduct)
-        self.container.addWidget(self.refresh)
         
         
     def getLayout(self):
@@ -179,13 +176,11 @@ class ItemObject(QObject):
         value = self.name
         self.usb_use_signal.emit(value)
         
-    def _emit_refresh(self):
-        value = self.maxCount
-        self.usb_refresh_signal.emit(value)
         
     def removeItself(self):
         self.setParent(None)
-        self.deleteLater()
+        self.label.deleteLater()
+        self.deduct.deleteLater()
         
 class PericiaObject(QObject):
     

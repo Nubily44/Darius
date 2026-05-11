@@ -3,22 +3,22 @@ Criando personagem com Vida: 90 Vida Max: 0 Armadura Vida: 13 Sanidade: 68 Sanid
     [OBJECT] | Adicionado item: Poção de Cura
     [OBJECT] | Adicionado item: Poção de Sanidade
     [OBJECT] | Adicionado item: Revólver
-Arma: Espada Longa, Tipo: Armas Brancas G, Tamanho: G
 Arma: Revólver, Tipo: Armas de Fogo P, Tamanho: G
-Item: Poção de Cura, Tamanho: P
+Arma: Espada Longa, Tipo: Armas Brancas G, Tamanho: G
 Item: Poção de Sanidade, Tamanho: P
+Item: Poção de Cura, Tamanho: P
 Total de armas: 2
 -------------------------------------- SETUP DONE
-Emitting use signal for item: Poção de Cura
-[DISPATCHER] | Handling Item Use: Poção de Cura
-    [OBJECT] | Usando item: Poção de Cura, Quantidade restante: 1
+Emitting use signal for item: Poção de Sanidade
+[DISPATCHER] | Handling Item Use: Poção de Sanidade
+    [OBJECT] | Usando item: Poção de Sanidade, Quantidade restante: 1
  [INTERFACE] | Setting value: 1 / None
-Emitting use signal for item: Poção de Cura
-[DISPATCHER] | Handling Item Use: Poção de Cura
-    [OBJECT] | Usando item: Poção de Cura, Quantidade restante: 0
+Emitting use signal for item: Poção de Sanidade
+[DISPATCHER] | Handling Item Use: Poção de Sanidade
+    [OBJECT] | Usando item: Poção de Sanidade, Quantidade restante: 0
  [INTERFACE] | Setting value: 0 / None
-Emitting use signal for item: Poção de Cura
-[DISPATCHER] | Handling Item Use: Poção de Cura
-    [DISPATCHER] | Item 'Poção de Cura' esgotado! Removendo do inventário.
-removendo item: Poção de Cura
-    [OBJECT] | Removido item: Poção de Cura
+Emitting use signal for item: Poção de Sanidade
+[DISPATCHER] | Handling Item Use: Poção de Sanidade
+    [DISPATCHER] | Item 'Poção de Sanidade' esgotado! Removendo do inventário.
+removendo item: Poção de Sanidade
+    [OBJECT] | Removido item: Poção de Sanidade
