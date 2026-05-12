@@ -3,22 +3,25 @@ Criando personagem com Vida: 90 Vida Max: 0 Armadura Vida: 13 Sanidade: 68 Sanid
     [OBJECT] | Adicionado item: Poção de Cura
     [OBJECT] | Adicionado item: Poção de Sanidade
     [OBJECT] | Adicionado item: Revólver
-Arma: Revólver, Tipo: Armas de Fogo P, Tamanho: G
 Arma: Espada Longa, Tipo: Armas Brancas G, Tamanho: G
-Item: Poção de Sanidade, Tamanho: P
+Arma: Revólver, Tipo: Armas de Fogo P, Tamanho: G
 Item: Poção de Cura, Tamanho: P
+Item: Poção de Sanidade, Tamanho: P
 Total de armas: 2
 -------------------------------------- SETUP DONE
-Emitting use signal for item: Poção de Sanidade
-[DISPATCHER] | Handling Item Use: Poção de Sanidade
-    [OBJECT] | Usando item: Poção de Sanidade, Quantidade restante: 1
- [INTERFACE] | Setting value: 1 / None
-Emitting use signal for item: Poção de Sanidade
-[DISPATCHER] | Handling Item Use: Poção de Sanidade
-    [OBJECT] | Usando item: Poção de Sanidade, Quantidade restante: 0
- [INTERFACE] | Setting value: 0 / None
-Emitting use signal for item: Poção de Sanidade
-[DISPATCHER] | Handling Item Use: Poção de Sanidade
-    [DISPATCHER] | Item 'Poção de Sanidade' esgotado! Removendo do inventário.
-removendo item: Poção de Sanidade
-    [OBJECT] | Removido item: Poção de Sanidade
+[DISPATCHER] | Handling Arma Use: Espada Longa
+    [OBJECT] | Usando Perícia: Armas Brancas G
+     [ROLLS] | d100: 25
+    [OBJECT] | Sucesso Bom
+    [OBJECT] | Rolando dano de Espada Longa com resultado de perícia: Bom
+     [ROLLS] | d8: 6
+    [OBJECT] | Resultado do Ataque com Espada Longa : ('8', '')
+ [INTERFACE] | Setting value: ('8', '') / None
+[DISPATCHER] | Handling Arma Use: Revólver
+    [OBJECT] | Usando Perícia: Armas de Fogo P
+     [ROLLS] | d100: 55
+    [OBJECT] | Sucesso Normal
+    [OBJECT] | Rolando dano de Revólver com resultado de perícia: Normal
+     [ROLLS] | d10: 1
+    [OBJECT] | Resultado do Ataque com Revólver : ('1', '')
+ [INTERFACE] | Setting value: ('1', '') / None
