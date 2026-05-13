@@ -27,15 +27,17 @@ def rolagem_sum(n: int, advantage: int = 1) -> int:
         print(f"     [ROLLS] | d{n}: {dices[-1]}")
     return sum(dices)
 
+
 def rolagem_expressao(expressao: str):
     expressao = expressao.replace(" ", "")
-    
+
     tokens = re.findall(r'[+-]?[^+-]+', expressao)
 
     dano_total = 0
     efeitos = []
 
     for token in tokens:
+        original = token
         sinal = 1
 
         if token.startswith("+"):
@@ -45,14 +47,12 @@ def rolagem_expressao(expressao: str):
             sinal = -1
             token = token[1:]
 
-        # Exemplo: 5*  /  2^
-        efeito_match = re.fullmatch(r'(\d+)([\*\~\-\|\^>#!\?0])', token)
-
-        if efeito_match:
-            efeitos.append(token)
+        # efeitos
+        if re.fullmatch(r'\d+[\*\~\|\^>#!\?-]', token):
+            efeitos.append(original)
             continue
 
-        # Dados
+        # dados
         if "d" in token.lower():
             qtd, lados = token.lower().split("d")
 
@@ -64,10 +64,11 @@ def rolagem_expressao(expressao: str):
             dano_total += sinal * resultado
 
         else:
-            # Número puro
             dano_total += sinal * int(token)
+            
+    print (f"     [ROLLS] | Total da expressão '{expressao}': {dano_total} {' '.join(efeitos)}")
 
-    return str(dano_total), " + ".join(efeitos)
+    return str(dano_total), " ".join(efeitos)
 
 def Wrapper(func):
     def wrapper(*args, **kwargs):
