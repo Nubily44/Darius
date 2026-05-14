@@ -100,10 +100,11 @@ class Personagem():
             print(f"    [OBJECT] | Arma '{arma_name}' não encontrada ou não é uma arma válida.")
             return None
         res_per = self.usePericia(arma.tipo, 1)
-        dano = arma.rollDano(res_per)
+        dano, efeitos = arma.rollDano(res_per)
         print("    [OBJECT] | Resultado do Ataque com", arma.nome, ":", dano)
         arma.last_roll = dano
-        return dano
+        arma.last_eff = efeitos
+        return dano, efeitos
     
     def UseItem(self, item_name):
         item = self.searchItem(item_name)

@@ -5,25 +5,41 @@ Criando personagem com Vida: 90 Vida Max: 0 Armadura Vida: 13 Sanidade: 68 Sanid
     [OBJECT] | Adicionado item: Revólver
 Arma: Revólver, Tipo: Armas de Fogo P, Tamanho: G
 Arma: Espada Longa, Tipo: Armas Brancas G, Tamanho: G
-Item: Poção de Sanidade, Tamanho: P
 Item: Poção de Cura, Tamanho: P
+Item: Poção de Sanidade, Tamanho: P
 Total de armas: 2
 -------------------------------------- SETUP DONE
-[DISPATCHER] | Handling Arma Use: Espada Longa
-    [OBJECT] | Usando Perícia: Armas Brancas G
-     [ROLLS] | d100: 25
-    [OBJECT] | Sucesso Bom
-    [OBJECT] | Rolando dano de Espada Longa com resultado de perícia: Bom
-     [ROLLS] | d8: 8
-     [ROLLS] | Total da expressão '1D8+2': 10 
-    [OBJECT] | Resultado do Ataque com Espada Longa : ('10', '')
- [INTERFACE] | Setting value: ('10', '') / None
 [DISPATCHER] | Handling Arma Use: Revólver
     [OBJECT] | Usando Perícia: Armas de Fogo P
-     [ROLLS] | d100: 89
-    [OBJECT] | Sucesso Normal
-    [OBJECT] | Rolando dano de Revólver com resultado de perícia: Normal
-     [ROLLS] | d10: 2
-     [ROLLS] | Total da expressão '1D10+2*': 2 +2*
-    [OBJECT] | Resultado do Ataque com Revólver : ('2', '+2*')
- [INTERFACE] | Setting value: ('2', '+2*') / None
+     [ROLLS] | d100: 40
+    [OBJECT] | Sucesso Bom
+    [OBJECT] | Rolando dano de Revólver com resultado de perícia: Bom
+     [ROLLS] | d10: 4
+     [ROLLS] | Total da expressão '1D10+2+2*': 6 +2*
+    [OBJECT] | Resultado do Ataque com Revólver : 6
+ [INTERFACE] | Setting value: 6 / +2*
+[DISPATCHER] | Handling Perícia Use: Investigação
+    [OBJECT] | Usando Perícia: Investigação
+     [ROLLS] | d100: 46
+    [OBJECT] | Sucesso Bom
+ [INTERFACE] | Setting value: Bom / None
+[DISPATCHER] | Handling Sanidade: 12
+????
+    [OBJECT] | Settando Sanidade de 68 para 61 (armor: 5)
+     [WRITE] | Updating state: Sanidade to 61
+ [INTERFACE] | Setting value: 61 / 67
+[DISPATCHER] | Handling Sanidade: 12
+????
+    [OBJECT] | Settando Sanidade de 61 para 54 (armor: 5)
+     [WRITE] | Updating state: Sanidade to 54
+ [INTERFACE] | Setting value: 54 / 67
+[DISPATCHER] | Handling Sanidade: 12
+????
+    [OBJECT] | Settando Sanidade de 54 para 47 (armor: 5)
+     [WRITE] | Updating state: Sanidade to 47
+ [INTERFACE] | Setting value: 47 / 67
+[DISPATCHER] | Handling Sanidade: 12
+????
+    [OBJECT] | Settando Sanidade de 47 para 40 (armor: 5)
+     [WRITE] | Updating state: Sanidade to 40
+ [INTERFACE] | Setting value: 40 / 67

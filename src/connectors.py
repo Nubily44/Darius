@@ -61,7 +61,7 @@ def handle_arma_use(personagem, window, value):
     print(f"[DISPATCHER] | Handling Arma Use: {value}")
     Dispatcher(
         lambda p: p.Ataque(value),
-        lambda p: window.setValue(window.searchItem(value).label, personagem.searchItem(value).last_roll),
+        lambda p: window.setValue(window.searchItem(value).label, personagem.searchItem(value).last_roll, personagem.searchItem(value).last_eff),
         1
     ).execute((personagem))
     

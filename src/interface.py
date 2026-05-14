@@ -436,7 +436,10 @@ class Window(QWidget):
             if index == len(dots):
                 timer.stop()
                 if value2 is not None:
-                    label.setText(f"{base}: {value1} / {value2}")
+                    if type(value2) == int:
+                        label.setText(f"{base}: {value1} / {value2}")
+                    else:
+                        
                 else:
                     label.setText(f"{base}: {value1}")
     
