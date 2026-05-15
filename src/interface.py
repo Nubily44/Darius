@@ -439,7 +439,7 @@ class Window(QWidget):
                     if type(value2) == int:
                         label.setText(f"{base}: {value1} / {value2}")
                     else:
-                        
+                        label.setText(f"{base}: {value1} / Efeitos: {value2}")
                 else:
                     label.setText(f"{base}: {value1}")
     
