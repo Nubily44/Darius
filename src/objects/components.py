@@ -180,7 +180,11 @@ class Inventario:
     def returnInventory(self):
         return self.items
     
-        
+
+class Rituais:
+    def __init__(self, nome, efeito):
+        self.nome = nome
+        self.efeito = efeito
     
 if __name__ == "__main__":
     print(rolagem_expressao("0"))
