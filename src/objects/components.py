@@ -185,6 +185,10 @@ class Rituais:
     def __init__(self, nome, efeito):
         self.nome = nome
         self.efeito = efeito
+        
+    def rodarRitual(self):
+        print(f"    [OBJECT] | Rodando ritual: {self.nome} com efeito: {self.efeito}")
+        return rolagem_expressao(self.efeito)
     
 if __name__ == "__main__":
     print(rolagem_expressao("0"))
