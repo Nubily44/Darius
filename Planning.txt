@@ -17,7 +17,7 @@ Próximos Passos:
 
     - Condições de Terreno
 
-- Ajustes da Interface
+- Ajustes da Interface - check
 
 - Integração com Peer to Peer
 

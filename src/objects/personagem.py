@@ -82,7 +82,7 @@ class Personagem():
         self.BlocoInventario.addItem(item)
         
     def removeItem(self, nome_item):
-        print("removendo item:", nome_item)
+        #print("removendo item:", nome_item)
         if self.BlocoInventario.searchItem(nome_item) is not None:
             self.BlocoInventario.removeItem(nome_item)
         else:   

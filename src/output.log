@@ -3,18 +3,4 @@ Criando personagem com Vida: 90 Vida Max: 0 Armadura Vida: 13 Sanidade: 40 Sanid
     [OBJECT] | Adicionado item: Poção de Cura
     [OBJECT] | Adicionado item: Poção de Sanidade
     [OBJECT] | Adicionado item: Revólver
-Arma: Espada Longa, Tipo: Armas Brancas G, Tamanho: G
-Arma: Revólver, Tipo: Armas de Fogo P, Tamanho: G
-Item: Poção de Sanidade, Tamanho: P
-Item: Poção de Cura, Tamanho: P
-Total de armas: 2
 -------------------------------------- SETUP DONE
-[DISPATCHER] | Handling Arma Use: Revólver
-    [OBJECT] | Usando Perícia: Armas de Fogo P
-     [ROLLS] | d100: 20
-    [OBJECT] | Sucesso Bom
-    [OBJECT] | Rolando dano de Revólver com resultado de perícia: Bom
-     [ROLLS] | d10: 8
-     [ROLLS] | Total da expressão '1D10+2+2*': 10 +2*
-    [OBJECT] | Resultado do Ataque com Revólver : 10
- [INTERFACE] | Setting value: 10 / +2*

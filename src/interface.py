@@ -395,7 +395,7 @@ class Window(QWidget):
         
         for i in inventario:
             if getattr(i, "tipo", None):
-                print(f"Arma: {i.nome}, Tipo: {i.tipo}, Tamanho: {i.tamanho}")
+                #print(f"Arma: {i.nome}, Tipo: {i.tipo}, Tamanho: {i.tamanho}")
                 
                 item_object = ArmaObject(i.nome, self.searchPericia(i.tipo).value, self.font, self.smallfont, parent=self)
                 self.interface_arit.addLayout(item_object.getLayout())
@@ -403,12 +403,12 @@ class Window(QWidget):
                 
         for i in inventario:
             if not getattr(i, "tipo", None):
-                print(f"Item: {i.nome}, Tamanho: {i.tamanho}")
+                #print(f"Item: {i.nome}, Tamanho: {i.tamanho}")
                 item_object = ItemObject(i.nome, i.quantidade, self.font, self.smallfont, parent=self, maxCount=i.quantidade)
                 self.interface_arit.addLayout(item_object.getLayout())
                 self.items_array.append(item_object)
         
-        print(f"Total de armas: {len(self.armas_array)}")
+        #print(f"Total de armas: {len(self.armas_array)}")
         
         self.total2.addLayout(self.interface_arit)
         self.total2.addStretch()
@@ -419,6 +419,8 @@ class Window(QWidget):
         self.botao_save = []
         self.absolute.addLayout(self.total1)
         self.absolute.addLayout(self.total2)
+
+        self.move(200, 200)
     
     @Wrapper
     def setValue(self, label: QLabel, value1, value2=None):
