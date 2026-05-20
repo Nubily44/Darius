@@ -215,6 +215,85 @@ def update_state(var: str, value: str, file_path: str = "src/state.log") -> None
 
     with open(file_path, "w", encoding='utf-8') as f:
         f.writelines(lines)
+        
+
+def extract_ficha_combat(sheet: str):
+    result = {}
+
+    lines = sheet.splitlines()
+
+    bp_index = 0
+    skill_index = 0
+    weapon_index = 0
+
+    current_bp = None
+
+    i = 0
+    while i < len(lines):
+        line = lines[i].strip()
+
+        # -------------------------
+        # 1. BLOCO PERÍCIA
+        # -------------------------
+        bp_match = re.match(r'(.+?)\s*\((\d+)\):', line)
+        if bp_match:
+            bp_index += 1
+            skill_index = 0
+
+            name = bp_match.group(1).strip()
+            value = int(bp_match.group(2))
+
+            result[f"BPC{bp_index}_N"] = name
+            result[f"BPC{bp_index}_V"] = value
+
+            current_bp = bp_index
+            i += 1
+            continue
+
+        # -------------------------
+        # 2. PERÍCIAS
+        # -------------------------
+        skill_match = re.match(r'(?:\(lvl>\d+\)\s*)?(.+?):\s*(\d+)', line)
+        if skill_match and current_bp is not None:
+            skill_index += 1
+
+            name = skill_match.group(1).strip()
+            value = int(skill_match.group(2))
+
+            result[f"BPC{current_bp}_P{skill_index}_N"] = name
+            result[f"BPC{current_bp}_P{skill_index}_V"] = value
+
+            i += 1
+            continue
+
+        # -------------------------
+        # 3. WEAPONS
+        # -------------------------
+        if "Dano normal:" in line:
+            # weapon name is previous non-empty line
+            j = i - 1
+            while j >= 0 and not lines[j].strip():
+                j -= 1
+
+            weapon_name = lines[j].strip()
+
+            d1 = line.split("Dano normal:")[1].strip()
+            d2 = lines[i+1].split("Dano bom:")[1].strip()
+            d3 = lines[i+2].split("Dano extremo:")[1].strip()
+
+            weapon_index += 1
+
+            result[f"W{weapon_index}_N"] = weapon_name
+            result[f"W{weapon_index}_D1"] = d1
+            result[f"W{weapon_index}_D2"] = d2
+            result[f"W{weapon_index}_D3"] = d3
+
+            i += 3
+            continue
+
+        i += 1
+
+    return result
 
 def update_variable(var: str, value, file_path: str):
     lines = []

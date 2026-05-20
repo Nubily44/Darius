@@ -1,4 +1,4 @@
-sheet = """
+sheet_c = """
 ------------------------------------------ Combate ------------------------------------------ ( ( Pt 2 ) )
 
                                                              Corpo a corpo (285):
@@ -102,8 +102,6 @@ W4_D3
 """
 import re
 
-import warnings
-
 
 import re
 
@@ -190,5 +188,3 @@ def main():
     di = parse_sheet(sheet)
     for k, v in di.items():
         print(k, "=", v)
-        
-main()

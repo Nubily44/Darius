@@ -8,7 +8,7 @@ from PySide6.QtWidgets import QApplication
 from objects.personagem import Personagem
 from objects.components import BlocoPericia, Pericia, Arma, Item, Inventario
 from interface import Window
-from functions import Tee, extract_ficha_data, update_state, update_variable, read_state
+from functions import Tee, extract_ficha_data, extract_ficha_combat, update_state, update_variable, read_state
 from connectors import handle_esforco_deduct, handle_esforco_refresh, handle_vida, handle_sanidade, handle_pericia_use, handle_pericia_use_adv, handle_arma_use, handle_item_use
 
 import os
@@ -18,6 +18,7 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).resolve().parent.parent / "contents"))
 
 from sheet_pt3 import sheet
+from sheet_pt2 import sheet_c
 from config import first_time, writing
 
 def main():
@@ -26,8 +27,12 @@ def main():
         dados_ficha = extract_ficha_data(sheet)
         for key, value in dados_ficha.items():
             update_state(key, str(value))
+        dados_combate = extract_ficha_combat(sheet_c)
+        for key, value in dados_combate.items():
+            update_state(key, str(value))
         update_variable("first_time", False, "src/config.py")
-            
+        
+        
     else:
         dados_ficha = read_state()
     
