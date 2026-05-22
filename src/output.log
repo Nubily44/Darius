@@ -7,3 +7,18 @@ BPC3_N: Armas Brancas, BPC3_V: 335
     [OBJECT] | Adicionado item: Poção de Sanidade
     [OBJECT] | Adicionado item: Revólver
 -------------------------------------- SETUP DONE
+[DISPATCHER] | Handling Perícia Use: Combate Direto
+    [OBJECT] | Usando Perícia: Combate Direto
+     [ROLLS] | d100: 25
+    [OBJECT] | Sucesso Bom
+ [INTERFACE] | Setting value: Bom / None
+[DISPATCHER] | Handling Perícia Use: Combate Direto
+    [OBJECT] | Usando Perícia: Combate Direto
+     [ROLLS] | d100: 45
+    [OBJECT] | Sucesso Bom
+ [INTERFACE] | Setting value: Bom / None
+[DISPATCHER] | Handling Perícia Use: Combate Direto
+    [OBJECT] | Usando Perícia: Combate Direto
+     [ROLLS] | d100: 71
+    [OBJECT] | Sucesso Normal
+ [INTERFACE] | Setting value: Normal / None
