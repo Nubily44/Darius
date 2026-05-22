@@ -1,4 +1,7 @@
 Criando personagem com Vida: 65 Vida Max: 0 Armadura Vida: 13 Sanidade: 75 Sanidade Max: 67 Armadura Sanidade: 5 Esforço: 9 Nível: 9 Classe: Classe
+BPC1_N: Corpo a corpo, BPC1_V: 285
+BPC2_N: Armas de Fogo, BPC2_V: 235
+BPC3_N: Armas Brancas, BPC3_V: 335
     [OBJECT] | Adicionado item: Espada Longa
     [OBJECT] | Adicionado item: Poção de Cura
     [OBJECT] | Adicionado item: Poção de Sanidade

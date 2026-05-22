@@ -61,12 +61,9 @@ def main():
             )
         )
     
-    for i in range(1, 5):
-        Personagem1.addPericia(
-            BlocoPericia(
-                pass
-            )
-        )
+    for i in range(1, 4):
+        print(f"BPC{i}_N: {dados_ficha[f'BPC{i}_N']}, BPC{i}_V: {dados_ficha[f'BPC{i}_V']}")
+    
     Personagem1.addPericia(BlocoPericia("Combate Corpo a Corpo", "Pericia C", Pericia("Combate Direto", 90), Pericia("Assalto", 90), Pericia("Artes Marciais", 90), Pericia("Duelo de Névoa", 90)))
     Personagem1.addPericia(BlocoPericia("Armas de Fogo", "Pericia C", Pericia("Armas de Fogo P", 90), Pericia("Armas de Fogo G", 90), Pericia("Armas de Fogo XL", 90), Pericia("Armas de Fogo Ocultistas", 90)))
     Personagem1.addPericia(BlocoPericia("Armas Brancas", "Pericia C", Pericia("Armas Brancas P", 90), Pericia("Armas Brancas G", 90), Pericia("Armas Brancas XL", 90), Pericia("Armas Brancas Ocultistas", 90)))
